@@ -2,12 +2,18 @@
 @section('title', 'Login')
 @section('content')
 <div class="row">
-    <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-6">
+  <div class="col-2"></div>
+    <div class="col-8">
       <div class="login-brand">
-        <h1 style="color: #000000">LH 44</h1>
+        <h1 style="color: #000000">CV. PANCA KARYA MANUNGGAL</h1>
       </div>
 
       <div class="card card-primary">
+        <div class="row">
+          <div class="col-6">
+             <img class="img-fluid" src="{{asset('images/login.jpg')}}" alt="Responsive image">
+          </div>
+          <div class="col-6">
         <div class="card-header"><h4>Login</h4></div>
         <div class="card-body">
           <form method="POST" action="{{ route('login') }}" >
@@ -53,7 +59,10 @@
               Belum punya akun? <a href="{{route('register')}}">Register Sekarang!</a>
           </div>
         </div>
+        </div>
+        </div>
       </div>
     </div>
   </div>
+    <div class="col-2"></div>
 @endsection
