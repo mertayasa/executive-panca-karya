@@ -11,12 +11,30 @@
           <li class="nav-item dropdown active">
             <a href="#" class="nav-link"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
           </li>
-          <li class="nav-item dropdown active">
-            <a href="#" class="nav-link"><i class="fas fa-sign-in-alt"></i><span>Pemasukan</span></a>
+          <li>
+            <a href="#" class="nav-link"><i class="fas fa-user"></i><span>Users</span></a>
           </li>
-           <li class="nav-item dropdown active">
-            <a href="#" class="nav-link"><i class="fas fa-sign-out-alt"></i><span>Pengeluaran</span></a>
-          <li class="nav-item dropdown">
+          <li>
+            <a href="{{route('customer.index')}}" class="nav-link"><i class="fas fa-portrait"></i><span>Pelanggan</span></a>
+          </li>
+          <li>
+            <a href="#" class="nav-link"><i class="fas fa-money-check-alt"></i><span>Pembayaran Piutang</span></a>
+          </li>
+          <li>
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-sign-in-alt"></i><span>Pendapatan</span></a>
+            <ul class="dropdown-menu">
+              <li><a class="nav-link" href="{{route('income_type.index')}}">Jenis Pendapatan</a></li>
+              <li><a class="nav-link" href="layout-transparent.html">Data Pendapatan</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-sign-out-alt"></i><span>Pengeluaran</span></a>
+            <ul class="dropdown-menu">
+              <li><a class="nav-link" href="{{route('expenditure_type.index')}}">Jenis Pengeluaran</a></li>
+              <li><a class="nav-link" href="layout-transparent.html">Data Pengeluaran</a></li>
+            </ul>
+          </li>
+           <li>
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-folder-open"></i><span>Laporan</span></a>
             <ul class="dropdown-menu">
               <li><a class="nav-link" href="layout-default.html">Pemasukan</a></li>

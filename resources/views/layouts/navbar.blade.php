@@ -12,7 +12,7 @@
       <div class="d-sm-none d-lg-inline-block">Hi, {{Auth::user()->name}}</div></a>
       <div class="dropdown-menu dropdown-menu-right">
         <div class="dropdown-title">Logged in 5 min ago</div>
-        <a href="features-profile.html" class="dropdown-item has-icon">
+        <a href="{{route('profile.edit')}}" class="dropdown-item has-icon">
           <i class="far fa-user"></i> Profile
         </a>
         <a href="features-activities.html" class="dropdown-item has-icon">
