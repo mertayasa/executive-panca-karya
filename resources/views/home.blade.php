@@ -2,6 +2,9 @@
 
 @section('content')
 <section class="section">
+    <div class="section-header">
+        <h1>Dashboard</h1>
+    </div>
     <div class="row">
       <div class="col-lg-4 col-md-4 col-sm-12">
         <div class="card card-statistic-2">
@@ -157,7 +160,7 @@
           </div>
         </div>
       </div>
-      
+
       <div class="col-4 col-md-12">
         <div class="card gradient-bottom">
           <div class="card-header">
