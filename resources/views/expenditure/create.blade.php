@@ -3,25 +3,24 @@
 @section('content')
 <section class="section">
     <div class="section-header">
-        <h1>Pendapatan</h1>
+        <h1>Pengeluaran</h1>
     </div>
     <div class="row">
       <div class="col-12">
         <div class="card">
           <div class="card-header d-flex justify-content-between">
-            <h4>Edit Data Pendapatan</h4>
+            <h4>Tambah Pengeluaran</h4>
           </div>
           <div class="card-body">
             @include('layouts.flash')
-            {{-- @include('layouts.error_message') --}}
-            {!! Form::model($income, ['route' => ['income.update', $income->id], 'method' => 'patch']) !!}
-            @include('income.form')
+            {!! Form::open(['route' => 'expenditure.store']) !!}
+            @include('expenditure.form')
             <br>
             <div class="row ">
               <div class="col-4"></div>
                 <div class="col-4 text-center">
                    <button class="btn btn-primary ml-10" type="submit">Simpan</button>
-                    <a href="{{route('income.index')}}" class="btn btn-danger">Kembali</a>
+                    <a href="{{route('expenditure.index')}}" class="btn btn-danger">Kembali</a>
                 </div>
                 <div class="col-4"></div>
             </div>

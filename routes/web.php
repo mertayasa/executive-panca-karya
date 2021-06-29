@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ExpenditureTypeController;
+use App\Http\Controllers\ExpenditureController;
 use App\Http\Controllers\IncomeTypeController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\UserController;
@@ -74,6 +75,16 @@ Route::group(['prefix' => 'income', 'as' => 'income.'], function () {
     Route::patch('update/{income}', [IncomeController::class, 'update'])->name('update');
     Route::delete('destroy/{income}', [IncomeController::class, 'destroy'])->name('destroy');
     Route::get('datatable', [IncomeController::class, 'datatable'])->name('datatable');
+});
+
+Route::group(['prefix' => 'expenditure', 'as' => 'expenditure.'], function () {
+    Route::get('/', [ExpenditureController::class, 'index'])->name('index');
+    Route::get('create', [ExpenditureController::class, 'create'])->name('create');
+    Route::post('store', [ExpenditureController::class, 'store'])->name('store');
+    Route::get('edit/{expenditure}', [ExpenditureController::class, 'edit'])->name('edit');
+    Route::patch('update/{expenditure}', [ExpenditureController::class, 'update'])->name('update');
+    Route::delete('destroy/{expenditure}', [ExpenditureController::class, 'destroy'])->name('destroy');
+    Route::get('datatable', [ExpenditureController::class, 'datatable'])->name('datatable');
 });
 
 

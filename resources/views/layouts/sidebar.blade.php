@@ -31,7 +31,7 @@
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-sign-out-alt"></i><span>Pengeluaran</span></a>
             <ul class="dropdown-menu">
               <li><a class="nav-link" href="{{route('expenditure_type.index')}}">Jenis Pengeluaran</a></li>
-              <li><a class="nav-link" href="layout-transparent.html">Data Pengeluaran</a></li>
+              <li><a class="nav-link" href="{{route('expenditure.index')}}">Data Pengeluaran</a></li>
             </ul>
           </li>
            <li>
