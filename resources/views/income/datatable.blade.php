@@ -2,12 +2,10 @@
     <thead>
         <tr>
             <th>No</th>
-            <th>Nama</th>
-            <th>Alamat</th>
-            <th>No. Telp</th>
-            <th>Tempat Lahir</th>
-            <th>Tgl. Lahir</th>
-            <th>Jenis Kelamin</th>
+            <th>Jenis Pendapatan</th>
+            <th>Tanggal </th>
+            <th>Total</th>
+            <th>Keterangan</th>
             <th>Status</th>
             <th>Aksi</th>
         </tr>
@@ -19,7 +17,7 @@
 
 <script>
     let table
-    let url = "{{ route('customer.datatable') }}"
+    let url = "{{ route('income.datatable') }}"
 
     datatable(url)
 
@@ -37,23 +35,8 @@
                     searchable: false
                 },
                 {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'address',
-                    name: 'address',
-                    orderable: false
-                },
-                {
-                    data: 'no_telp',
-                    name: 'no_telp',
-                    orderable: false
-                },
-                {
-                    data: 'place_of_birth',
-                    name: 'place_of_birth',
-                    orderable: false
+                    data: 'income_type.name',
+                    name: 'income_type.name'
                 },
                 {
                     data: 'date',
@@ -61,8 +44,13 @@
                     orderable: false
                 },
                 {
-                    data: 'gender',
-                    name: 'gender'
+                    data: 'total',
+                    name: 'total',
+                    orderable: false
+                },
+                {
+                    data: 'ket',
+                    name: 'ket'
                 },
                 {
                     data: 'status',

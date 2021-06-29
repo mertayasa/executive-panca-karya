@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ExpenditureTypeController;
 use App\Http\Controllers\IncomeTypeController;
+use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -64,5 +65,16 @@ Route::group(['prefix' => 'income_type', 'as' => 'income_type.'], function () {
     Route::delete('destroy/{income_type}', [IncomeTypeController::class, 'destroy'])->name('destroy');
     Route::get('datatable', [IncomeTypeController::class, 'datatable'])->name('datatable');
 });
+
+Route::group(['prefix' => 'income', 'as' => 'income.'], function () {
+    Route::get('/', [IncomeController::class, 'index'])->name('index');
+    Route::get('create', [IncomeController::class, 'create'])->name('create');
+    Route::post('store', [IncomeController::class, 'store'])->name('store');
+    Route::get('edit/{income}', [IncomeController::class, 'edit'])->name('edit');
+    Route::patch('update/{income}', [IncomeController::class, 'update'])->name('update');
+    Route::delete('destroy/{income}', [IncomeController::class, 'destroy'])->name('destroy');
+    Route::get('datatable', [IncomeController::class, 'datatable'])->name('datatable');
+});
+
 
 });

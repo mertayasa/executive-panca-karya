@@ -9,7 +9,7 @@
       </div>
       <ul class="sidebar-menu">
           <li class="nav-item dropdown active">
-            <a href="#" class="nav-link"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
+            <a href="{{'/'}}" class="nav-link"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
           </li>
           <li>
             <a href="#" class="nav-link"><i class="fas fa-user"></i><span>Users</span></a>
@@ -18,13 +18,13 @@
             <a href="{{route('customer.index')}}" class="nav-link"><i class="fas fa-portrait"></i><span>Pelanggan</span></a>
           </li>
           <li>
-            <a href="#" class="nav-link"><i class="fas fa-money-check-alt"></i><span>Pembayaran Piutang</span></a>
+            <a href="#" class="nav-link"><i class="fas fa-money-check-alt"></i><span>Data Piutang</span></a>
           </li>
           <li>
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-sign-in-alt"></i><span>Pendapatan</span></a>
             <ul class="dropdown-menu">
               <li><a class="nav-link" href="{{route('income_type.index')}}">Jenis Pendapatan</a></li>
-              <li><a class="nav-link" href="layout-transparent.html">Data Pendapatan</a></li>
+              <li><a class="nav-link" href="{{route('income.index')}}">Data Pendapatan</a></li>
             </ul>
           </li>
           <li>
@@ -37,7 +37,7 @@
            <li>
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-folder-open"></i><span>Laporan</span></a>
             <ul class="dropdown-menu">
-              <li><a class="nav-link" href="layout-default.html">Pemasukan</a></li>
+              <li><a class="nav-link" href="layout-default.html">Pendapatan</a></li>
               <li><a class="nav-link" href="layout-transparent.html">Pengeluaran</a></li>
             </ul>
           </li>
