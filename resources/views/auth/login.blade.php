@@ -10,10 +10,10 @@
 
       <div class="card card-primary">
         <div class="row">
-          <div class="col-6">
+          <div class="col-sm-6">
              <img class="img-fluid" src="{{asset('images/login.jpg')}}" alt="Responsive image">
           </div>
-          <div class="col-6">
+          <div class="col-sm-6">
         <div class="card-header"><h4>Login</h4></div>
         <div class="card-body">
           <form method="POST" action="{{ route('login') }}" >
