@@ -46,11 +46,22 @@ class ExpenditureController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
+            $base_64_foto = json_decode($request['note'], true);
+            $upload_image = uploadFile($base_64_foto);
+
+            if($upload_image == 0){
+                return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
+            }
+
+            $data['note'] = $upload_image;
+
+
         $expenditure = new Expenditure;
-        $expenditure->id_types   = $request->id_types;
-        $expenditure->date       = $request->date;
-        $expenditure->amount     = $request->amount;
-        $expenditure->note       = $request->note;
+        $expenditure->id_types   = $data['id_types'];
+        $expenditure->date       = $data['date'];
+        $expenditure->amount     = $data['amount'];
+        $expenditure->note       = $data['note'];
 
         $expenditure->save();
 
@@ -90,13 +101,24 @@ class ExpenditureController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $update = Expenditure::find($id);
-        $update->id_types   = $request->id_types;
-        $update->date   = $request->date;
-        $update->amount  = $request->amount;
-        $update->note    = $request->note;
+        $data = $request->all();
+            $base_64_foto = json_decode($request['note'], true);
+            $upload_image = uploadFile($base_64_foto);
 
-        $update->save();
+            if($upload_image == 0){
+                return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
+            }
+
+            $data['note'] = $upload_image;
+
+
+        $expenditure = Expenditure::find($id);
+        $expenditure->id_types   = $data['id_types'];
+        $expenditure->date       = $data['date'];
+        $expenditure->amount     = $data['amount'];
+        $expenditure->note       = $data['note'];
+
+        $expenditure->save();
 
         return redirect('/expenditure')->with('info', 'Data Pengeluaran Berhasil Diedit');
     }

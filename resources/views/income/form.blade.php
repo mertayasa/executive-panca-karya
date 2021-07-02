@@ -10,8 +10,8 @@
     <div class="col-2"></div>
     <div class="col-12  col-md-8">
         {!! Form::label('expenseType', 'Jenis Pendapatan ', ['class' => 'mb-1']) !!}
-      
-      {!! Form::select('id_types', $income_type, null, ['class' => 'form-control', 'id' => 'expanseType', 'onchange' => 'getIncome(this.value)']) !!}
+
+      {!! Form::select('id_types', $income_type, null, ['class' => 'form-control', 'id' => 'expanseType']) !!}
     </div>
      <div class="col-2"></div>
 </div>

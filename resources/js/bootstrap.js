@@ -16,6 +16,14 @@ try {
     require('jquery.nicescroll')
     require('select2')
     // require('toastr')
+    require('filepond');
+    // require('select2')
+    require('filepond-plugin-image-preview');
+    require('filepond-plugin-file-validate-size');
+    require('filepond-plugin-file-validate-type');
+    require('filepond-plugin-image-resize');
+    require('filepond-plugin-image-validate-size');
+    require('filepond-plugin-file-encode');
 } catch (e) {}
 
 /**

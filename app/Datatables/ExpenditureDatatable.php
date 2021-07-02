@@ -10,6 +10,9 @@ class ExpenditureDataTable
     static public function set($expenditure)
     {
         return Datatables::of($expenditure)
+            ->editColumn('note', function($expenditure){
+                return '<img src="'.asset('images/uploaded/'.$expenditure->note).'" alt="" width="100px">';
+               })
             ->addColumn('action', function ($expenditure) {
                 return
                 '<div class="btn-group">' .
@@ -21,6 +24,6 @@ class ExpenditureDataTable
                     //         <a class="dropdown-item" href="#">Pembayaran Piutang</a>
                     //     </div>' .
                 '</div>';
-            })->addIndexColumn()->rawColumns(['action'])->make(true);
+            })->addIndexColumn()->rawColumns(['action','note'])->make(true);
     }
 }
