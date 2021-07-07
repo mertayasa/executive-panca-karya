@@ -10,8 +10,8 @@
         <div class="card">
           <div class="card-header d-flex justify-content-between">
             <h4>Data Pendapatan</h4>
-            <a href="{{route('income.create')}}" class="btn btn-primary">Tambah Pendapatan</a>
           </div>
+          <a href="{{route('income.create')}}" class="btn btn-primary">Tambah Pendapatan</a>
           <div class="col-12">
               @include('layouts.flash')
           </div>

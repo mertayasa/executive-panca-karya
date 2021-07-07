@@ -6,7 +6,10 @@ use App\Http\Controllers\ExpenditureTypeController;
 use App\Http\Controllers\ExpenditureController;
 use App\Http\Controllers\IncomeTypeController;
 use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\IncomeReportController;
 use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -85,6 +88,21 @@ Route::group(['prefix' => 'expenditure', 'as' => 'expenditure.'], function () {
     Route::patch('update/{expenditure}', [ExpenditureController::class, 'update'])->name('update');
     Route::delete('destroy/{expenditure}', [ExpenditureController::class, 'destroy'])->name('destroy');
     Route::get('datatable', [ExpenditureController::class, 'datatable'])->name('datatable');
+});
+
+Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
+    Route::get('/', [StaffController::class, 'index'])->name('index');
+    Route::get('create', [StaffController::class, 'create'])->name('create');
+    Route::post('store', [StaffController::class, 'store'])->name('store');
+    Route::get('edit/{staff}', [StaffController::class, 'edit'])->name('edit');
+    Route::patch('update/{staff}', [StaffController::class, 'update'])->name('update');
+    Route::delete('destroy/{staff}', [StaffController::class, 'destroy'])->name('destroy');
+    Route::get('datatable', [StaffController::class, 'datatable'])->name('datatable');
+});
+
+Route::group(['prefix' => 'income_report', 'as' => 'income_report.'], function () {
+    Route::get('/', [IncomeReportController::class, 'index'])->name('index');
+    Route::get('create', [IncomeReportController::class, 'create'])->name('create');
 });
 
 
