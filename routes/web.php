@@ -8,6 +8,7 @@ use App\Http\Controllers\IncomeTypeController;
 use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\IncomeReportController;
+use App\Http\Controllers\ExpenditureReportController;
 use App\Http\Controllers\UserController;
 
 
@@ -103,6 +104,11 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
 Route::group(['prefix' => 'income_report', 'as' => 'income_report.'], function () {
     Route::get('/', [IncomeReportController::class, 'index'])->name('index');
     Route::get('create', [IncomeReportController::class, 'create'])->name('create');
+});
+
+Route::group(['prefix' => 'expenditure_report', 'as' => 'expenditure_report.'], function () {
+    Route::get('/', [ExpenditureReportController::class, 'index'])->name('index');
+    Route::get('create', [ExpenditureReportController::class, 'create'])->name('create');
 });
 
 

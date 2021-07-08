@@ -38,7 +38,7 @@
             <a  class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-folder-open"></i><span>Laporan</span></a>
             <ul class="dropdown-menu">
               <li><a class="nav-link" href="{{route('income_report.index')}}">Pendapatan</a></li>
-              <li><a class="nav-link" href="#">Pengeluaran</a></li>
+              <li><a class="nav-link" href="{{route('expenditure_report.index')}}">Pengeluaran</a></li>
             </ul>
           </li>
         </ul>
