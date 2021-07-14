@@ -10,6 +10,7 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\IncomeReportController;
 use App\Http\Controllers\ExpenditureReportController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AccoutsReceivableController;
 
 
 /*
@@ -109,6 +110,16 @@ Route::group(['prefix' => 'income_report', 'as' => 'income_report.'], function (
 Route::group(['prefix' => 'expenditure_report', 'as' => 'expenditure_report.'], function () {
     Route::get('/', [ExpenditureReportController::class, 'index'])->name('index');
     Route::get('create', [ExpenditureReportController::class, 'create'])->name('create');
+});
+
+Route::group(['prefix' => 'accounts_receivable', 'as' => 'accounts_receivable.'], function () {
+    Route::get('/', [AccoutsReceivableController::class, 'index'])->name('index');
+    Route::get('create', [AccoutsReceivableController::class, 'create'])->name('create');
+    Route::post('store', [AccoutsReceivableController::class, 'store'])->name('store');
+    Route::get('edit/{accounts_receivable}', [AccoutsReceivableController::class, 'edit'])->name('edit');
+    Route::patch('update/{accounts_receivable}', [AccoutsReceivableController::class, 'update'])->name('update');
+    Route::delete('destroy/{accounts_receivable}', [AccoutsReceivableController::class, 'destroy'])->name('destroy');
+    Route::get('datatable', [AccoutsReceivableController::class, 'datatable'])->name('datatable');
 });
 
 

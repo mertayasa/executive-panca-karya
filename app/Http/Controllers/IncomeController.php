@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Income;
 use App\Models\IncomeType;
+use App\Models\AccountsReceivable;
 use Illuminate\Http\Request;
 use App\Datatables\IncomeDatatable;
 
@@ -59,6 +60,27 @@ class IncomeController extends Controller
         $income->status = $request->status;
 
         $income->save();
+
+        // if($request->status == '0'){
+        // $income = new Income;
+        // $income->id_types   = $request->id_types;
+        // $income->date   = $request->date;
+        // $income->total  = $request->total;
+        // $income->ket    = $request->ket;
+        // $income->status = $request->status;
+        // $income->save();
+        // }else{
+        // $accounts_receiveables = new AccountsReceivable;
+        // $accounts_receiveables->column_name = $request->data;
+        // $accounts_receivables->id_cust = $request->id_cust;
+        // $accounts_receivables->id_incomeType = $request->id_incomeType;
+        // $accounts_receivables->date = $request->date;
+        // $accounts_receivables->total = $request->total;
+        // $accounts_receivables->pay = $request->pay;
+        // $accounts_receivables->remaining_receive = $request->remaining_receive;
+        // $accounts_receiveables->save ();
+// }
+
         
 
         return redirect('/income')->with('success', 'Data Pendapatan Berhasil Ditambahkan');
