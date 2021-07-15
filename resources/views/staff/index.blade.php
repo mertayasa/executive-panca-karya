@@ -10,8 +10,8 @@
         <div class="card">
           <div class="card-header d-flex justify-content-between">
             <h4>Data Staff</h4>
+            <a href="{{route('staff.create')}}" class="btn btn-primary">Tambah Staff</a>
           </div>
-          <a href="{{route('staff.create')}}" class="btn btn-primary">Tambah Staff</a>
           <div class="col-12">
               @include('layouts.flash')
           </div>

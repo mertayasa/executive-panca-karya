@@ -16,13 +16,11 @@
             {!! Form::open(['route' => 'income.store']) !!}
             @include('income.form')
             <br>
-            <div class="row ">
-              <div class="col-4"></div>
-                <div class="col-4 text-center">
-                   <button class="btn btn-primary ml-10" type="submit">Simpan</button>
-                    <a href="{{route('income.index')}}" class="btn btn-danger">Kembali</a>
+            <div class="row px-0">
+                <div class="col-8 m-auto px-0">
+                  <button class="btn btn-primary mr-3" type="submit">Simpan</button>
+                  <a href="{{route('income.index')}}" class="btn btn-danger">Kembali</a>
                 </div>
-                <div class="col-4"></div>
             </div>
             {!! Form::close() !!}
           </div>

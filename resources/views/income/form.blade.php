@@ -1,43 +1,51 @@
-<div class="row">
-    <div class="col-2"></div>
-     <div class="col-12 col-md-8">
-        {!! Form::label('expenseDate', 'Tanggal', ['class' => 'mb-1']) !!}
-        {!! Form::date('date', null, ['class' => 'form-control', 'id' => 'expenseDate']) !!}
+<div class="row px-0">
+    <div class="col-12 col-md-8 m-auto px-0">
+        {!! Form::label('customerId', 'Pelanggan ', ['class' => 'mb-1']) !!}
+        {!! Form::select('id_customer', $customers, null, ['class' => 'form-control', 'id' => 'customerId', 'disabled' => isset($income) ? true : false]) !!}
     </div>
-     <div class="col-2"></div>
 </div>
-<div class="row mt-3">
-    <div class="col-2"></div>
-    <div class="col-12  col-md-8">
-        {!! Form::label('expenseType', 'Jenis Pendapatan ', ['class' => 'mb-1']) !!}
+<div class="row px-0 mt-3">
+    <div class="col-12 col-md-8 m-auto px-0">
+        {!! Form::label('incomeDate', 'Tanggal', ['class' => 'mb-1']) !!}
+        {!! Form::date('date', null, ['class' => 'form-control', 'id' => 'incomeDate', 'disabled' => isset($income) ? true : false]) !!}
+    </div>
+</div>
+<div class="row px-0 mt-3">
+    <div class="col-12  col-md-8 m-auto px-0">
+        {!! Form::label('incomeType', 'Jenis Pendapatan ', ['class' => 'mb-1']) !!}
+        {!! Form::select('id_income_type', $income_type, null, ['class' => 'form-control', 'id' => 'incomeType']) !!}
+    </div>
+</div>
+<div class="row px-0 mt-3">
+    <div class="col-12  col-md-8 m-auto px-0">
+        {!! Form::label('incomerTotal', 'Total ', ['class' => 'mb-1']) !!}
+        {!! Form::number('total', null, ['class' => 'form-control', 'id' => 'incomerTotal']) !!}
+    </div>
+</div>
+<div class="row px-0 mt-3">
+    <div class="col-12  col-md-8 m-auto px-0">
+        {!! Form::label('incomeStatus', 'Status', ['class' => 'mb-1']) !!}
+        {!! Form::select('status', [1 => 'Lunas', 0 => 'Utang'], null, ['class' => 'form-control', 'id' => 'incomeStatus', 'disabled' => isset($income) ? true : false]) !!}
+    </div>
+</div>
+<div class="row px-0 mt-3">
+    <div class="col-12  col-md-8 m-auto px-0">
+        {!! Form::label('incomeKet', 'Keterangan ', ['class' => 'mb-1']) !!}
+        {!! Form::textarea('ket', null, ['class' => 'form-control', 'id' => 'incomeKet', 'style' => 'height:150px']) !!}
+    </div>
+</div>
 
-      {!! Form::select('id_types', $income_type, null, ['class' => 'form-control', 'id' => 'expanseType']) !!}
-    </div>
-     <div class="col-2"></div>
-</div>
-<div class="row mt-3">
-    <div class="col-2"></div>
-    <div class="col-12  col-md-8">
-        {!! Form::label('expenseTotal', 'Total ', ['class' => 'mb-1']) !!}
-        {!! Form::text('total', null, ['class' => 'form-control', 'id' => 'expenseTotal']) !!}
-    </div>
-     <div class="col-2"></div>
-</div>
-<div class="row mt-3">
-    <div class="col-2"></div>
-    <div class="col-12  col-md-8">
-        {!! Form::label('expenseKet', 'Keterangan ', ['class' => 'mb-1']) !!}
-        {!! Form::text('ket', null, ['class' => 'form-control', 'id' => 'expenseKet']) !!}
-    </div>
-     <div class="col-2"></div>
-</div>
-<div class="row mt-3">
-    <div class="col-2"></div>
-    <div class="col-12  col-md-8">
-         {!! Form::label('expenseStatus', 'Status', ['class' => 'mb-1']) !!}
-        {!! Form::select('status', [0 => 'Lunas', 1 => 'Utang'], null, ['class' => 'form-control', 'id' => 'expenseStatus']) !!}
-    </div>
-     <div class="col-2"></div>
-</div>
+@push('scripts')
+    <script>
+        Date.prototype.toDateInputValue = (function() {
+            var local = new Date(this);
+            local.setMinutes(this.getMinutes() - this.getTimezoneOffset());
+            return local.toJSON().slice(0,10);
+        });
+        @if(str_contains(Route::currentRouteName(), 'create'))
+            const incomeDate = document.getElementById('incomeDate').value = new Date().toDateInputValue()
+        @endif
+    </script>
+@endpush
 
 

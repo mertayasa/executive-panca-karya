@@ -9,6 +9,11 @@
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="{{asset('stisla-assets/css/components.css')}}">
   <link rel="stylesheet" href="{{asset('stisla-assets/css/style.css')}}">
+  <style>
+    .main-content{
+      overflow-x: hidden !important;
+    }
+  </style>
   @stack('styles')
 </head>
 

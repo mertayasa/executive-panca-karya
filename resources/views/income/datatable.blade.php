@@ -1,13 +1,14 @@
-<table class="table table-hover table-bordered" width="100%" id="expenseDatatable">
+<table class="table table-hover table-bordered" width="100%" id="incomeDatatable">
     <thead>
         <tr>
             <th>No</th>
+            <th>Pelanggan</th>
             <th>Jenis Pendapatan</th>
             <th>Tanggal </th>
             <th>Total</th>
             <th>Keterangan</th>
-            <th>Status</th>
             <th>Aksi</th>
+            <th></th>
         </tr>
     </thead>
     <tbody></tbody>
@@ -23,7 +24,7 @@
 
     function datatable(url) {
 
-        table = $('#expenseDatatable').DataTable({
+        table = $('#incomeDatatable').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
@@ -33,6 +34,10 @@
                     name: 'no',
                     orderable: false,
                     searchable: false
+                },
+                {
+                    data: 'customer.name',
+                    name: 'customer.name'
                 },
                 {
                     data: 'income_type.name',
@@ -53,18 +58,20 @@
                     name: 'ket'
                 },
                 {
-                    data: 'status',
-                    name: 'status'
-                },
-                {
                     data: 'action',
                     name: 'action',
                     orderable: false,
                     searchable: false
+                },
+                {
+                    data: 'updated_at',
+                    name: 'updated_at',
+                    searchable: false,
+                    visible: false,
                 }
             ],
             order: [
-                [1, "desc"]
+                [7, "desc"]
             ],
             columnDefs: [
                 // { width: 300, targets: 1 },
@@ -74,7 +81,7 @@
                 },
                 {
                     responsivePriority: 1,
-                    targets: 1
+                    targets: 6
                 },
             ],
             language: {

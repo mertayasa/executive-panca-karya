@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
@@ -17,4 +18,12 @@ function uploadFile($base_64_foto){
     }
 
     return $safeName;
+}
+
+function formatPrice($value){
+    return 'Rp '. number_format($value,0,',','.');
+}
+
+function indonesianDate($date){
+    return Carbon::parse($date)->isoFormat('LL');
 }

@@ -7,138 +7,127 @@ use App\Models\IncomeType;
 use App\Models\AccountsReceivable;
 use Illuminate\Http\Request;
 use App\Datatables\IncomeDatatable;
+use App\DataTables\IncomeReceivableDataTable;
+use App\Models\Customer;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
-
-class IncomeController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+class IncomeController extends Controller{
+    public function index(){
          return view('income.index');
     }
 
  
-    public function datatable()
-    {
-        $income = Income::all();
+    public function datatable(){
+        $income = Income::where('status', 1)->get();
 
         return IncomeDataTable::set($income);
     }
+ 
+    public function datatableReceivable(){
+        $income = Income::where('status', 0)->get();
 
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-         $income_type = IncomeType::pluck('name', 'id');
-
-          return view('income.create', compact('income_type'));
+        return IncomeReceivableDataTable::set($income);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-       
-        $income = new Income;
-        $income->id_types   = $request->id_types;
-        $income->date   = $request->date;
-        $income->total  = $request->total;
-        $income->ket    = $request->ket;
-        $income->status = $request->status;
-
-        $income->save();
-
-        // if($request->status == '0'){
-        // $income = new Income;
-        // $income->id_types   = $request->id_types;
-        // $income->date   = $request->date;
-        // $income->total  = $request->total;
-        // $income->ket    = $request->ket;
-        // $income->status = $request->status;
-        // $income->save();
-        // }else{
-        // $accounts_receiveables = new AccountsReceivable;
-        // $accounts_receiveables->column_name = $request->data;
-        // $accounts_receivables->id_cust = $request->id_cust;
-        // $accounts_receivables->id_incomeType = $request->id_incomeType;
-        // $accounts_receivables->date = $request->date;
-        // $accounts_receivables->total = $request->total;
-        // $accounts_receivables->pay = $request->pay;
-        // $accounts_receivables->remaining_receive = $request->remaining_receive;
-        // $accounts_receiveables->save ();
-// }
-
+    public function create(){
+        $customers = Customer::pluck('name', 'id');
+        $income_type = IncomeType::pluck('name', 'id');
         
+        if($customers->count() < 1){
+            return redirect()->route('customer.index')->with('error', 'Anda belum memiliki pelanggan, silahkan tambah pelanggan terlebih dahulu !');
+        }
+
+        if($income_type->count() < 1){
+            return redirect()->route('income_type.index')->with('error', 'Anda belum memiliki data jenis pendapatan, silahkan tambah jenis pendapatan terlebih dahulu !');
+        }
+
+        return view('income.create', compact('income_type', 'customers'));
+    }
+
+    public function store(Request $request){
+        try{
+            $income = new Income;
+            $income->id_income_type   = $request->id_income_type;
+            $income->id_customer   = $request->id_customer;
+            $income->date   = $request->date;
+            $income->total  = $request->total;
+            $income->ket    = $request->ket;
+            $income->status = $request->status;
+            $income->save();
+    
+            if($request->status == '0'){
+                $accounts_receiveables = new AccountsReceivable;
+                $accounts_receiveables->id_income = $income->id;
+                $accounts_receiveables->pay = 0;
+                $accounts_receiveables->remaining_receive = $request->total;
+                $accounts_receiveables->save();
+            }
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal menyimpan data pendapatan, periksa lagi data anda !');
+        }
 
         return redirect('/income')->with('success', 'Data Pendapatan Berhasil Ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Income  $income
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Income $income)
-    {
+    public function show(Income $income){
         return view('income.show', compact('income'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Income  $income
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Income $income)
-    {
-        $income_type = IncomeType::pluck('name', 'id');
-        return view('income.edit', compact('income' , 'income_type'));
+    public function edit(Income $income){
+        $customers = [$income->customer->id => $income->customer->name];
+        $income_type = [$income->income_type->id => $income->income_type->name];
+
+        return view('income.edit', compact('income' , 'income_type', 'customers'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Income  $income
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        $update = Income::find($id);
-        $update->id_types   = $request->id_types;
-        $update->date   = $request->date;
-        $update->total  = $request->total;
-        $update->ket    = $request->ket;
-        $update->status = $request->status;
+    public function update(Request $request, Income $income){
+        try{
+            $income->id_income_type   = $request->id_income_type;
+            $income->total  = $request->total;
+            $income->ket    = $request->ket;
+            $income->save();
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal mengubah data pendapatan, mohon periksa lagi data anda !');
+        }
 
-
-        $update->save();
-
-        return redirect('/income')->with('info', 'Data Pendapatan Berhasil Diedit');
+        return redirect()->route('income.index')->with('success', 'Berhasil mengubah data pendapatan');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Income  $income
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Income $income)
-    {
+    public function halfPay(Request $request, Income $income){
+        try{
+            $remaining = $income->remaining_receive - $request->pay;
+            
+            if($remaining < 0){
+                return redirect()->back()->withInput()->with('error', 'Gagal menyimpan pembayaran piutang, jumlah pembayaran melebihi jumlah piutang !');
+            }
+
+            $income->account_receivable->pay = $request->pay;
+            $income->account_receivable->remaining_receive = $remaining;
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal menyimpan pembayaran piutang, mohon periksa lagi data anda !');
+        }
+
+        return redirect()->route('income.index')->with('success', 'Berhasil menyimpan pembayaran piutang');
+    }
+
+    public function fullPay(Income $income){
+        try{
+            $income->status = 1;
+            $income->save();
+            $income->account_receivable->delete();
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return response(['code' => 0, 'message' => 'Gagal melunasi hutang']);
+        }
+
+        return response(['code' => 1, 'message' => 'Berhasil melunasi hutang']);
+    }
+
+    public function destroy(Income $income){
         //
     }
 }

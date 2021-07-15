@@ -2002,9 +2002,9 @@ h6 .badge {
     box-shadow: 0 2px 6px #acb5f6;
     background-color: #202020;
     border-color: #202020;
-    width: 200px;
-    border-radius: 15px;
-    margin-left: 20px;
+    /* width: 200px; */
+    /* border-radius: 15px; */
+    /* margin-left: 20px; */
 }
 
 

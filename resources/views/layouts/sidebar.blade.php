@@ -8,7 +8,7 @@
         <a href="index.html">PKM</a>
       </div>
       <ul class="sidebar-menu">
-          <li class="nav-item dropdown active">
+          <li class="nav-item dropdown">
             <a href="{{'/'}}" class="nav-link"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
           </li>
           <li>
@@ -20,7 +20,7 @@
           <li>
             <a href="#" class="nav-link"><i class="fas fa-money-check-alt"></i><span>Data Piutang</span></a>
           </li>
-          <li>
+          <li class="nav-item dropdown {{Request::is('*income*') ? 'active' : ''}}">
             <a  class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-sign-in-alt"></i><span>Pendapatan</span></a>
             <ul class="dropdown-menu">
               <li><a class="nav-link" href="{{route('income_type.index')}}">Jenis Pendapatan</a></li>

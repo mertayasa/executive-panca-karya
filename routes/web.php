@@ -79,7 +79,9 @@ Route::group(['prefix' => 'income', 'as' => 'income.'], function () {
     Route::get('edit/{income}', [IncomeController::class, 'edit'])->name('edit');
     Route::patch('update/{income}', [IncomeController::class, 'update'])->name('update');
     Route::delete('destroy/{income}', [IncomeController::class, 'destroy'])->name('destroy');
+    Route::patch('full-pay/{income}', [IncomeController::class, 'fullPay'])->name('full_pay');
     Route::get('datatable', [IncomeController::class, 'datatable'])->name('datatable');
+    Route::get('datatable-receivable', [IncomeController::class, 'datatableReceivable'])->name('datatable_receivable');
 });
 
 Route::group(['prefix' => 'expenditure', 'as' => 'expenditure.'], function () {

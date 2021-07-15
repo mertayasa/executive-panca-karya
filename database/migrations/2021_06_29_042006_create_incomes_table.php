@@ -15,14 +15,16 @@ class CreateIncomesTable extends Migration
     {
         Schema::create('incomes', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('id_types');
+            $table->unsignedInteger('id_income_type');
+            $table->unsignedInteger('id_customer');
             $table->date('date');
             $table->string('total');
             $table->text('ket');
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
 
-             $table->foreign('id_types')->references('id')->on('income_types')->onDelete('cascade')->onUpdate('cascade');
+             $table->foreign('id_income_type')->references('id')->on('income_types')->onDelete('cascade')->onUpdate('cascade');
+             $table->foreign('id_customer')->references('id')->on('customers')->onDelete('cascade')->onUpdate('cascade');
 
         });
     }
