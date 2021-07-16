@@ -62,7 +62,7 @@ Route::group(['prefix' => 'expenditure_type', 'as' => 'expenditure_type.'], func
     Route::get('datatable', [ExpenditureTypeController::class, 'datatable'])->name('datatable');
 });
 
-Route::group(['prefix' => 'income_type', 'as' => 'income_type.'], function () {
+Route::group(['prefix' => 'income-type', 'as' => 'income_type.'], function () {
     Route::get('/', [IncomeTypeController::class, 'index'])->name('index');
     Route::get('create', [IncomeTypeController::class, 'create'])->name('create');
     Route::post('store', [IncomeTypeController::class, 'store'])->name('store');
@@ -79,6 +79,8 @@ Route::group(['prefix' => 'income', 'as' => 'income.'], function () {
     Route::get('edit/{income}', [IncomeController::class, 'edit'])->name('edit');
     Route::patch('update/{income}', [IncomeController::class, 'update'])->name('update');
     Route::delete('destroy/{income}', [IncomeController::class, 'destroy'])->name('destroy');
+    Route::get('receivable-pay/{income}', [IncomeController::class, 'showFormReceivable'])->name('form_receivable');
+    Route::patch('receivable-pay/{income}', [IncomeController::class, 'payReceivable'])->name('pay_receivable');
     Route::patch('full-pay/{income}', [IncomeController::class, 'fullPay'])->name('full_pay');
     Route::get('datatable', [IncomeController::class, 'datatable'])->name('datatable');
     Route::get('datatable-receivable', [IncomeController::class, 'datatableReceivable'])->name('datatable_receivable');

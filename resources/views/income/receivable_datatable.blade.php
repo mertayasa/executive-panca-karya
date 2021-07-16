@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th>No</th>
+            <th>Pelanggan</th>
             <th>Jenis Pendapatan</th>
             <th>Tanggal </th>
             <th>Total Piutang</th>
@@ -55,12 +56,12 @@
                     orderable: false
                 },
                 {
-                    data: 'account_receivable.pay',
-                    name: 'account_receivable.pay'
+                    data: 'paid',
+                    name: 'paid'
                 },
                 {
-                    data: 'account_receivable.remaining_receive',
-                    name: 'account_receivable.remaining_receive'
+                    data: 'receivable_remain',
+                    name: 'receivable_remain'
                 },
                 {
                     data: 'ket',

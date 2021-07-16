@@ -9,12 +9,15 @@ use Illuminate\Http\Request;
 use App\Datatables\IncomeDatatable;
 use App\DataTables\IncomeReceivableDataTable;
 use App\Models\Customer;
+use App\Models\ReceivableLog;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
 class IncomeController extends Controller{
     public function index(){
-         return view('income.index');
+        $income = Income::where('status', 0)->get();
+        // dd($income[0]->receivable_log);
+        return view('income.index');
     }
 
  
@@ -48,21 +51,23 @@ class IncomeController extends Controller{
     public function store(Request $request){
         try{
             $income = new Income;
-            $income->id_income_type   = $request->id_income_type;
-            $income->id_customer   = $request->id_customer;
-            $income->date   = $request->date;
-            $income->total  = $request->total;
-            $income->ket    = $request->ket;
+            $income->id_income_type = $request->id_income_type;
+            $income->id_customer = $request->id_customer;
+            $income->date = $request->date;
+            $income->total = $request->total;
+            $income->receivable_remain = $request->status == '0' ? $request->total : 0;
+            $income->ket = $request->ket;
             $income->status = $request->status;
             $income->save();
     
             if($request->status == '0'){
-                $accounts_receiveables = new AccountsReceivable;
+                $accounts_receiveables = new ReceivableLog;
                 $accounts_receiveables->id_income = $income->id;
                 $accounts_receiveables->pay = 0;
-                $accounts_receiveables->remaining_receive = $request->total;
+                $accounts_receiveables->remain = $request->total;
                 $accounts_receiveables->save();
             }
+
         }catch(Exception $e){
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Gagal menyimpan data pendapatan, periksa lagi data anda !');
@@ -116,15 +121,27 @@ class IncomeController extends Controller{
 
     public function fullPay(Income $income){
         try{
+            $income->receivable_remain = 0;
             $income->status = 1;
             $income->save();
-            $income->account_receivable->delete();
+
+            $accounts_receiveables = new ReceivableLog;
+            $accounts_receiveables->id_income = $income->id;
+            $accounts_receiveables->pay = $income->receivable_log[0]->remain ?? $income->receivable_log->remain;
+            $accounts_receiveables->remain = 0;
+            $accounts_receiveables->save();
         }catch(Exception $e){
             Log::info($e->getMessage());
             return response(['code' => 0, 'message' => 'Gagal melunasi hutang']);
         }
 
         return response(['code' => 1, 'message' => 'Berhasil melunasi hutang']);
+    }
+
+    // showFormReceivable
+    // payReceivable
+    public function showFormReceivable(Income $income){
+        return view('income.form_pay_receivable', compact('income'));
     }
 
     public function destroy(Income $income){

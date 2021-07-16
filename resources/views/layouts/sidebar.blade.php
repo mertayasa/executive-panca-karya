@@ -23,8 +23,8 @@
           <li class="nav-item dropdown {{Request::is('*income*') ? 'active' : ''}}">
             <a  class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-sign-in-alt"></i><span>Pendapatan</span></a>
             <ul class="dropdown-menu">
-              <li><a class="nav-link" href="{{route('income_type.index')}}">Jenis Pendapatan</a></li>
-              <li><a class="nav-link" href="{{route('income.index')}}">Data Pendapatan</a></li>
+              <li class="nav-item {{Request::is('*income-type*') ? 'active' : ''}}"><a href="{{route('income_type.index')}}">Jenis Pendapatan</a></li>
+              <li class="nav-item {{Request::is('*income*') && !Request::is('*income-type*') ? 'active' : ''}}"><a href="{{route('income.index')}}">Data Pendapatan</a></li>
             </ul>
           </li>
           <li>

@@ -10,11 +10,11 @@ class IncomeReceivableDataTable{
             ->editColumn('total', function($income){
                 return formatPrice($income->total);
             })
-            ->editColumn('account_receivable.pay', function($income){
-                return formatPrice($income->account_receivable->pay);
+            ->addColumn('paid', function($income){
+                return formatPrice($income->total - $income->receivable_remain);
             })
-            ->editColumn('account_receivable.remaining_receive', function($income){
-                return formatPrice($income->account_receivable->remaining_receive);
+            ->editColumn('receivable_remain', function($income){
+                return formatPrice($income->receivable_remain);
             })
             ->editColumn('date', function($income){
                 return indonesianDate($income->date);
@@ -28,7 +28,7 @@ class IncomeReceivableDataTable{
             })
             ->addColumn('action', function ($income) {
                 $customer_name = $income->customer->name;
-                $remaining = formatPrice($income->account_receivable->remaining_receive);
+                $remaining = formatPrice($income->receivable_remain);
                 $full_pay = "'".route('income.full_pay', $income->id)."', '$customer_name', '$remaining'";
                 return '<div class="btn-group">' .
                     // '<a href="' . route('income.edit', $income->id) . '" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px" ><i class="menu-icon fa fa-pencil-alt"></i></a>' .
@@ -36,7 +36,7 @@ class IncomeReceivableDataTable{
                     '<a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Options"> <i class="fas fa-filter"></i></a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href="#" onclick="fullPay('. $full_pay .')">Lunasi</a>
-                            <a class="dropdown-item" href="#">Bayar Piutang</a>
+                            <a class="dropdown-item" href="'. route('income.form_receivable', $income->id) .'">Bayar Piutang</a>
                         </div>' .
                 '</div>';
             })->addIndexColumn()->rawColumns(['action'])->make(true);

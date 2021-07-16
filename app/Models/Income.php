@@ -15,11 +15,12 @@ class Income extends Model
         'date',
         'total',
         'ket',
+        'receivable_remain',
         'status'
     ];
 
     public $with = [
-        'income_type', 'account_receivable', 'customer'
+        'income_type', 'customer', 'receivable_log'
     ];
 
 
@@ -31,17 +32,21 @@ class Income extends Model
         return $this->belongsTo('App\Models\Customer', 'id_customer');
     }
 
-    public function account_receivable(){
-        return $this->hasOne('App\Models\AccountsReceivable', 'id_income');
+    public function receivable_log(){
+        return $this->hasMany('App\Models\ReceivableLog', 'id_income');
     }
 
-    public function getTotalAttribute(){
-        if($this->status == 0){
-            return $this->account_receivable->pay;
-        }
+    // public function account_receivable(){
+    //     return $this->hasOne('App\Models\AccountsReceivable', 'id_income');
+    // }
 
-        return $this->attributes['total'];
-    }
+    // public function getTotalAttribute(){
+    //     if($this->status == 0){
+    //         return $this->account_receivable->pay;
+    //     }
+
+    //     return $this->attributes['total'];
+    // }
 
 }
 
