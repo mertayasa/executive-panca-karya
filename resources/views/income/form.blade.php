@@ -1,37 +1,32 @@
-<div class="row px-0">
-    <div class="col-12 col-md-8 m-auto px-0">
+<div class="row">
+    <div class="col-12 col-md-6 m-auto ">
         {!! Form::label('customerId', 'Pelanggan ', ['class' => 'mb-1']) !!}
-        {!! Form::select('id_customer', $customers, null, ['class' => 'form-control', 'id' => 'customerId', 'disabled' => isset($income) ? true : false]) !!}
+        {!! Form::select('id_customer', $customers, null, ['class' => 'form-control', 'id' => 'customerId', 'disabled' => isset($income) || isset($disabled) ? true : false]) !!}
     </div>
-</div>
-<div class="row px-0 mt-3">
-    <div class="col-12 col-md-8 m-auto px-0">
+    <div class="col-12 col-md-6 m-auto ">
         {!! Form::label('incomeDate', 'Tanggal', ['class' => 'mb-1']) !!}
-        {!! Form::date('date', null, ['class' => 'form-control', 'id' => 'incomeDate', 'disabled' => isset($income) ? true : false]) !!}
+        {!! Form::date('date', null, ['class' => 'form-control', 'id' => 'incomeDate', 'disabled' => isset($income) || isset($disabled) ? true : false]) !!}
     </div>
 </div>
-<div class="row px-0 mt-3">
-    <div class="col-12  col-md-8 m-auto px-0">
+
+<div class="row mt-3">
+    <div class="col-12  col-md-6 m-auto">
         {!! Form::label('incomeType', 'Jenis Pendapatan ', ['class' => 'mb-1']) !!}
-        {!! Form::select('id_income_type', $income_type, null, ['class' => 'form-control', 'id' => 'incomeType']) !!}
+        {!! Form::select('id_income_type', $income_type, null, ['class' => 'form-control', 'id' => 'incomeType', 'disabled' => isset($disabled) ? true : false ]) !!}
     </div>
-</div>
-<div class="row px-0 mt-3">
-    <div class="col-12  col-md-8 m-auto px-0">
+    <div class="col-12  col-md-6 m-auto">
         {!! Form::label('incomerTotal', 'Total ', ['class' => 'mb-1']) !!}
-        {!! Form::number('total', null, ['class' => 'form-control', 'id' => 'incomerTotal']) !!}
+        {!! Form::number('total', null, ['class' => 'form-control', 'id' => 'incomerTotal', 'disabled' => isset($disabled) ? true : false]) !!}
     </div>
 </div>
-<div class="row px-0 mt-3">
-    <div class="col-12  col-md-8 m-auto px-0">
+<div class="row mt-3">
+    <div class="col-12  col-md-6 order-md-2">
         {!! Form::label('incomeStatus', 'Status', ['class' => 'mb-1']) !!}
-        {!! Form::select('status', [1 => 'Lunas', 0 => 'Utang'], null, ['class' => 'form-control', 'id' => 'incomeStatus', 'disabled' => isset($income) ? true : false]) !!}
+        {!! Form::select('status', [1 => 'Lunas', 0 => 'Utang'], null, ['class' => 'form-control', 'id' => 'incomeStatus', 'disabled' => isset($income) || isset($disabled) ? true : false]) !!}
     </div>
-</div>
-<div class="row px-0 mt-3">
-    <div class="col-12  col-md-8 m-auto px-0">
+    <div class="col-12  col-md-6 order-md-1">
         {!! Form::label('incomeKet', 'Keterangan ', ['class' => 'mb-1']) !!}
-        {!! Form::textarea('ket', null, ['class' => 'form-control', 'id' => 'incomeKet', 'style' => 'height:150px']) !!}
+        {!! Form::textarea('ket', null, ['class' => 'form-control', 'id' => 'incomeKet', 'style' => 'height:150px', 'disabled' => isset($disabled) ? true : false]) !!}
     </div>
 </div>
 

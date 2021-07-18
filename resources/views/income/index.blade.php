@@ -17,20 +17,21 @@
           </div>
           <div class="card-body">
               {{-- @include('income.datatable') --}}
+              {{-- @dump($active) --}}
               <div class="bs-example">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a href="#incomeFix" class="nav-link active" data-toggle="tab">Pendapatan Lunas</a>
+                        <a href="#incomeFix" class="nav-link {{!Session::get('active') ? 'active' : ''}}" data-toggle="tab">Pendapatan Lunas</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#incomeNotFix" class="nav-link" data-toggle="tab">Piutang</a>
+                        <a href="#incomeNotFix" class="nav-link {{Session::get('active') == 'incomeNotFix' ? 'active' : ''}}" data-toggle="tab">Piutang</a>
                     </li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane fade show active" id="incomeFix">
+                    <div class="tab-pane fade {{!Session::get('active') ? 'active show' : ''}}" id="incomeFix">
                         @include('income.datatable')
                     </div>
-                    <div class="tab-pane fade" id="incomeNotFix">
+                    <div class="tab-pane fade {{Session::get('active') == 'incomeNotFix' ? 'active show' : ''}}" id="incomeNotFix">
                         @include('income.receivable_datatable')
                     </div>
                 </div>

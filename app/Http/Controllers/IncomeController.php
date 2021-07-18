@@ -11,11 +11,13 @@ use App\DataTables\IncomeReceivableDataTable;
 use App\Models\Customer;
 use App\Models\ReceivableLog;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class IncomeController extends Controller{
     public function index(){
-        $income = Income::where('status', 0)->get();
+        // $income = Income::all();
+        // dd($income);
         // dd($income[0]->receivable_log);
         return view('income.index');
     }
@@ -57,6 +59,8 @@ class IncomeController extends Controller{
             $income->total = $request->total;
             $income->receivable_remain = $request->status == '0' ? $request->total : 0;
             $income->ket = $request->ket;
+            $income->created_by = Auth::id();
+            $income->updated_by = Auth::id();
             $income->status = $request->status;
             $income->save();
     
@@ -73,7 +77,7 @@ class IncomeController extends Controller{
             return redirect()->back()->withInput()->with('error', 'Gagal menyimpan data pendapatan, periksa lagi data anda !');
         }
 
-        return redirect('/income')->with('success', 'Data Pendapatan Berhasil Ditambahkan');
+        return redirect()->route('income.index')->with('success', 'Data Pendapatan Berhasil Ditambahkan');
     }
 
     public function show(Income $income){
@@ -92,6 +96,7 @@ class IncomeController extends Controller{
             $income->id_income_type   = $request->id_income_type;
             $income->total  = $request->total;
             $income->ket    = $request->ket;
+            $income->updated_by = Auth::id();
             $income->save();
         }catch(Exception $e){
             Log::info($e->getMessage());
@@ -101,35 +106,17 @@ class IncomeController extends Controller{
         return redirect()->route('income.index')->with('success', 'Berhasil mengubah data pendapatan');
     }
 
-    public function halfPay(Request $request, Income $income){
-        try{
-            $remaining = $income->remaining_receive - $request->pay;
-            
-            if($remaining < 0){
-                return redirect()->back()->withInput()->with('error', 'Gagal menyimpan pembayaran piutang, jumlah pembayaran melebihi jumlah piutang !');
-            }
-
-            $income->account_receivable->pay = $request->pay;
-            $income->account_receivable->remaining_receive = $remaining;
-        }catch(Exception $e){
-            Log::info($e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Gagal menyimpan pembayaran piutang, mohon periksa lagi data anda !');
-        }
-
-        return redirect()->route('income.index')->with('success', 'Berhasil menyimpan pembayaran piutang');
-    }
-
     public function fullPay(Income $income){
         try{
             $income->receivable_remain = 0;
             $income->status = 1;
+            $income->updated_by = Auth::id();
             $income->save();
 
-            $accounts_receiveables = new ReceivableLog;
-            $accounts_receiveables->id_income = $income->id;
-            $accounts_receiveables->pay = $income->receivable_log[0]->remain ?? $income->receivable_log->remain;
-            $accounts_receiveables->remain = 0;
-            $accounts_receiveables->save();
+            $pay = $income->receivable_log[0]->remain ?? $income->receivable_log->remain;
+            $remain = 0;
+
+            $this->storeReceivableLog($income, $remain, $pay);
         }catch(Exception $e){
             Log::info($e->getMessage());
             return response(['code' => 0, 'message' => 'Gagal melunasi hutang']);
@@ -138,10 +125,46 @@ class IncomeController extends Controller{
         return response(['code' => 1, 'message' => 'Berhasil melunasi hutang']);
     }
 
-    // showFormReceivable
-    // payReceivable
     public function showFormReceivable(Income $income){
-        return view('income.form_pay_receivable', compact('income'));
+        $customers = [$income->customer->id => $income->customer->name];
+        $income_type = [$income->income_type->id => $income->income_type->name];
+
+        return view('income.form_pay_receivable', compact('income', 'customers', 'income_type'));
+    }
+
+    public function payReceivable(Request $request, Income $income){
+        try{
+            if(!isset($request->pay) || $request->pay > $income->receivable_remain){
+                return redirect()->back()->withInput()->with('error', 'Jumlah pembayaran melebihi jumlah piutang yang harus dibayar');
+            }
+
+            $remain = $income->receivable_remain - $request->pay;
+            $income->receivable_remain = $remain;
+            $income->updated_by = Auth::id();
+            
+            if($remain == 0){
+                $income->status = 1;
+            }
+
+            $income->save();
+
+            $this->storeReceivableLog($income, $remain, $request->pay);
+
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data pembayaran piutang');
+        }
+
+        return redirect()->route('income.index')->with(['success' => 'Berhasil menyimpan pembayaran piutang', 'active' => 'incomeNotFix' ]);
+
+    }
+
+    public function storeReceivableLog($income, $remain, $pay){
+        $accounts_receiveables = new ReceivableLog;
+        $accounts_receiveables->id_income = $income->id;
+        $accounts_receiveables->pay = $pay;
+        $accounts_receiveables->remain = $remain;
+        $accounts_receiveables->save();
     }
 
     public function destroy(Income $income){

@@ -16,11 +16,13 @@ class Income extends Model
         'total',
         'ket',
         'receivable_remain',
-        'status'
+        'status',
+        'created_by',
+        'updated_by',
     ];
 
     public $with = [
-        'income_type', 'customer', 'receivable_log'
+        'income_type', 'customer', 'receivable_log', 'created_by', 'updated_by'
     ];
 
 
@@ -30,6 +32,14 @@ class Income extends Model
 
     public function customer(){
         return $this->belongsTo('App\Models\Customer', 'id_customer');
+    }
+
+    public function created_by(){
+        return $this->belongsTo('App\Models\User', 'created_by');
+    }
+
+    public function updated_by(){
+        return $this->belongsTo('App\Models\User', 'updated_by');
     }
 
     public function receivable_log(){
