@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -44,6 +45,12 @@ class Income extends Model
 
     public function receivable_log(){
         return $this->hasMany('App\Models\ReceivableLog', 'id_income');
+    }
+
+    public function getMonthlyAttribute(){
+        $date = Carbon::parse($this->attributes['date'])->locale('id');
+        $date->settings(['formatFunction' => 'translatedFormat']);
+        return $date->format('F Y');
     }
 
     // public function account_receivable(){

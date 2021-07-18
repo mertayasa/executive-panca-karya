@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\IncomeReport;
 use App\Models\Income;
 use App\Models\IncomeType;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class IncomeReportController extends Controller
@@ -14,10 +15,15 @@ class IncomeReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-         $income = Income::all();
-         return view('income_report.index', compact('income'));
+    public function index(){
+        //  $durations = Order::selectRaw('DISTINCT year(date) year')->orderBy('year', 'DESC')->pluck('year', 'year');
+        // echo $date->format('l, j F Y ; h:i a');
+
+        $income = Income::all();
+        $anual = Income::selectRaw('DISTINCT year(date) year')->orderBy('year', 'DESC')->pluck('year', 'year');
+        $monthly = Income::orderBy('date', 'DESC')->get()->pluck('monthly', 'monthly')->unique();
+        dd($monthly);
+        return view('income_report.index', compact('income'));
     }
 
     /**
