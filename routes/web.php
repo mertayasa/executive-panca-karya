@@ -36,7 +36,7 @@ Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
     Route::get('edit', [UserController::class, 'edit'])->name('edit');
@@ -52,7 +52,7 @@ Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {
     Route::get('datatable', [CustomerController::class, 'datatable'])->name('datatable');
 });
 
-Route::group(['prefix' => 'expenditure_type', 'as' => 'expenditure_type.'], function () {
+Route::group(['prefix' => 'expenditure-type', 'as' => 'expenditure_type.'], function () {
     Route::get('/', [ExpenditureTypeController::class, 'index'])->name('index');
     Route::get('create', [ExpenditureTypeController::class, 'create'])->name('create');
     Route::post('store', [ExpenditureTypeController::class, 'store'])->name('store');
