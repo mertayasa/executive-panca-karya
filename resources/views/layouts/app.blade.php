@@ -9,6 +9,7 @@
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
   <link rel="stylesheet" href="{{asset('stisla-assets/css/components.css')}}">
   <link rel="stylesheet" href="{{asset('stisla-assets/css/style.css')}}">
+  <link rel="stylesheet" href="{{asset('stisla-assets/datatables/datatables.css')}}">
   <style>
     .main-content{
       overflow-x: hidden !important;
@@ -44,7 +45,7 @@
   </div>
 
   <script src="{{asset('js/app.js')}}" ></script>
-
+  <script src="{{asset('stisla-assets/datatables/datatables.js')}}"></script>
   <script>
     function deleteModel(deleteUrl, tableId){
         Swal.fire({
