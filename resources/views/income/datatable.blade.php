@@ -7,8 +7,10 @@
             <th>Tanggal </th>
             <th>Total</th>
             <th>Keterangan</th>
-            <th>Aksi</th>
             <th></th>
+            @if(getRoleName() == 'staff')
+                <th>Aksi</th>
+            @endif
         </tr>
     </thead>
     <tbody></tbody>
@@ -24,54 +26,63 @@
 
     function datatable(url) {
 
+        let responsivePriority = 4
+        let columns = [
+            {
+                data: 'DT_RowIndex',
+                name: 'no',
+                orderable: false,
+                searchable: false
+            },
+            {
+                data: 'customer.name',
+                name: 'customer.name'
+            },
+            {
+                data: 'income_type.name',
+                name: 'income_type.name'
+            },
+            {
+                data: 'date',
+                name: 'date',
+                orderable: false
+            },
+            {
+                data: 'total',
+                name: 'total',
+                orderable: false
+            },
+            {
+                data: 'ket',
+                name: 'ket'
+            },
+            {
+                data: 'updated_at',
+                name: 'updated_at',
+                searchable: false,
+                visible: false,
+            }
+        ]
+
+        @if(getRoleName() == 'staff')
+            responsivePriority = 7
+            columns.push({
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                })
+            
+        @endif
+
         table = $('#incomeDatatable').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
             ajax: url,
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'no',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'customer.name',
-                    name: 'customer.name'
-                },
-                {
-                    data: 'income_type.name',
-                    name: 'income_type.name'
-                },
-                {
-                    data: 'date',
-                    name: 'date',
-                    orderable: false
-                },
-                {
-                    data: 'total',
-                    name: 'total',
-                    orderable: false
-                },
-                {
-                    data: 'ket',
-                    name: 'ket'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'updated_at',
-                    name: 'updated_at',
-                    searchable: false,
-                    visible: false,
-                }
-            ],
+            columns: columns,
             order: [
-                [7, "desc"]
+                [6, "desc"]
             ],
             columnDefs: [
                 // { width: 300, targets: 1 },
@@ -81,7 +92,7 @@
                 },
                 {
                     responsivePriority: 1,
-                    targets: 6
+                    targets: responsivePriority
                 },
             ],
             language: {

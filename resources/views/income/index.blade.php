@@ -10,14 +10,17 @@
         <div class="card">
           <div class="card-header d-flex justify-content-between">
             <h4>Data Pendapatan</h4>
-            <a href="{{route('income.create')}}" class="btn btn-primary">Tambah Pendapatan</a>
+            <div class="right">
+              <button class="btn btn-warning btn-icon icon-left mr-3"><i class="fas fa-print"></i> Print Excel</button>
+              @if (getRoleName() == 'staff')
+                <a href="{{route('income.create')}}" class="btn btn-primary">Tambah Pendapatan</a>
+              @endif
+            </div>
           </div>
           <div class="col-12">
               @include('layouts.flash')
           </div>
           <div class="card-body">
-              {{-- @include('income.datatable') --}}
-              {{-- @dump($active) --}}
               <div class="bs-example">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
@@ -29,10 +32,14 @@
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade {{!Session::get('active') ? 'active show' : ''}}" id="incomeFix">
-                        @include('income.datatable')
+                      @include('income.filter_datatable', ['tableId' => 'incomeDatatable'])
+                      <hr>
+                      @include('income.datatable')
                     </div>
                     <div class="tab-pane fade {{Session::get('active') == 'incomeNotFix' ? 'active show' : ''}}" id="incomeNotFix">
-                        @include('income.receivable_datatable')
+                      @include('income.filter_datatable', ['tableId' => 'incomeReceivable'])
+                      <hr>
+                      @include('income.receivable_datatable')
                     </div>
                 </div>
               </div>
@@ -50,6 +57,23 @@
           $.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
       });
     })
+
+    function updateTable(tableid){
+      const filterCustomer = document.getElementsByClassName('filter-customer')
+      const filterIncomeType = document.getElementsByClassName('filter-income-type')
+      const filterMonth = document.getElementsByClassName('filter-month')
+
+      if(tableid == 'incomeDatatable'){
+        const param = `${filterCustomer[0].value}+${filterIncomeType[0].value}+${filterMonth[0].value}`
+        $('#' + tableid).DataTable().ajax.url(url + `/${param}`).load();
+      }
+
+      if(tableid == 'incomeReceivable'){
+        const param = `${filterCustomer[1].value}+${filterIncomeType[1].value}+${filterMonth[1].value}`
+        $('#' + tableid).DataTable().ajax.url(url + `/${param}`).load();
+      }
+      
+    }
 
     function fullPay(url, customerName, remaining){
       Swal.fire({

@@ -10,7 +10,9 @@
         <div class="card">
           <div class="card-header d-flex justify-content-between">
             <h4>Data Pelanggan</h4>
-            <a href="{{route('customer.create')}}" class="btn btn-primary">Tambah Pelanggan</a>
+            @if (getRoleName() == 'staff')
+              <a href="{{route('customer.create')}}" class="btn btn-primary">Tambah Pelanggan</a>
+            @endif
           </div>
           <div class="col-12">
               @include('layouts.flash')

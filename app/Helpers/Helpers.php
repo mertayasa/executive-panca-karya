@@ -20,6 +20,14 @@ function uploadFile($base_64_foto){
     return $safeName;
 }
 
+function getGender($gender){
+    return $gender == 0 ? 'Laki-Laki' : 'Perempuan';
+}
+
+function getRoleName(){
+    return Auth::user()->level == 0 ? 'staff' : 'pimpinan';
+}
+
 function formatPrice($value){
     return 'Rp '. number_format($value,0,',','.');
 }

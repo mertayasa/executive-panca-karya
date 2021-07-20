@@ -53,6 +53,11 @@ class Income extends Model
         return $date->format('F Y');
     }
 
+    public function getMonthlyRawAttribute(){
+        $date = Carbon::parse($this->attributes['date']);
+        return $date->format('m-Y');
+    }
+
     // public function account_receivable(){
     //     return $this->hasOne('App\Models\AccountsReceivable', 'id_income');
     // }

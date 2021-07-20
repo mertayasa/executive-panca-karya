@@ -10,6 +10,12 @@ class ExpenditureDataTable
     static public function set($expenditure)
     {
         return Datatables::of($expenditure)
+            ->editColumn('amount', function($expenditure){
+                return formatPrice($expenditure->amount);
+            })
+            ->editColumn('date', function($expenditure){
+                return indonesianDate($expenditure->date);
+            })
             ->editColumn('note', function($expenditure){
                 return '<img src="'.asset('images/uploaded/'.$expenditure->note).'" alt="" width="100px">';
                })

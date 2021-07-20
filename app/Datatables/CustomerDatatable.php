@@ -10,6 +10,9 @@ class CustomerDataTable
     static public function set($customer)
     {
         return Datatables::of($customer)
+            ->editColumn('gender', function($customer){
+                return getGender($customer->gender);
+            })
             ->addColumn('action', function ($customer) {
                 return
                 '<div class="btn-group">' .

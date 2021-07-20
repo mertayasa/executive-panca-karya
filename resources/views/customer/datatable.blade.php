@@ -9,7 +9,9 @@
             <th>Tgl. Lahir</th>
             <th>Jenis Kelamin</th>
             <th>Status</th>
-            <th>Aksi</th>
+            @if (getRoleName() == 'staff')
+                <th>Aksi</th>
+            @endif
         </tr>
     </thead>
     <tbody></tbody>
@@ -25,12 +27,7 @@
 
     function datatable(url) {
 
-        table = $('#expenseDatatable').DataTable({
-            processing: true,
-            serverSide: true,
-            responsive: true,
-            ajax: url,
-            columns: [{
+        let columns = [{
                     data: 'DT_RowIndex',
                     name: 'no',
                     orderable: false,
@@ -67,14 +64,24 @@
                 {
                     data: 'status',
                     name: 'status'
-                },
-                {
+                }
+            ]
+
+        @if(getRoleName() == 'staff')
+            columns.push({
                     data: 'action',
                     name: 'action',
                     orderable: false,
                     searchable: false
-                }
-            ],
+                })
+        @endif
+
+        table = $('#expenseDatatable').DataTable({
+            processing: true,
+            serverSide: true,
+            responsive: true,
+            ajax: url,
+            columns: columns,
             order: [
                 [1, "desc"]
             ],

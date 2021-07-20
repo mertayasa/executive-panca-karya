@@ -1,13 +1,13 @@
-<table class="table table-hover table-bordered" width="100%" id="expenseDatatable">
+<table class="table table-hover table-bordered" width="100%" id="incomeReportDatatable">
     <thead>
         <tr>
             <th>No</th>
+            <th>Pelanggan</th>
             <th>Jenis Pendapatan</th>
             <th>Tanggal </th>
             <th>Total</th>
             <th>Keterangan</th>
-            <th>Status</th>
-            <th>Aksi</th>
+            <th></th>
         </tr>
     </thead>
     <tbody></tbody>
@@ -17,13 +17,13 @@
 
 <script>
     let table
-    let url = "{{ route('income.datatable') }}"
+    let url = "{{ route('income_report.datatable') }}"
 
     datatable(url)
 
     function datatable(url) {
 
-        table = $('#expenseDatatable').DataTable({
+        table = $('#incomeReportDatatable').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
@@ -35,8 +35,14 @@
                     searchable: false
                 },
                 {
+                    data: 'customer.name',
+                    name: 'customer.name',
+                    orderable: false
+                },
+                {
                     data: 'income_type.name',
-                    name: 'income_type.name'
+                    name: 'income_type.name',
+                    orderable: false
                 },
                 {
                     data: 'date',
@@ -50,21 +56,18 @@
                 },
                 {
                     data: 'ket',
-                    name: 'ket'
+                    name: 'ket',
+                    orderable: false
                 },
                 {
-                    data: 'status',
-                    name: 'status'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
+                    data: 'updated_at',
+                    name: 'updated_at',
+                    searchable: false,
+                    visible: false,
                 }
             ],
             order: [
-                [1, "desc"]
+                [6, "desc"]
             ],
             columnDefs: [
                 // { width: 300, targets: 1 },
@@ -74,7 +77,7 @@
                 },
                 {
                     responsivePriority: 1,
-                    targets: 1
+                    targets: 5
                 },
             ],
             language: {

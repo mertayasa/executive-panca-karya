@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Staff extends Model
-{
+class Staff extends Model{
+
     use HasFactory;
 
     public $with = [
@@ -14,7 +14,7 @@ class Staff extends Model
     ];
 
 
-      public function getNameAttribute(){
+    public function getNameAttribute(){
         return $this->user->name;
     }
 
@@ -22,8 +22,7 @@ class Staff extends Model
         return $this->user->email;
     }
 
-    public function user()
-    {
+    public function user(){
         return $this->belongsTo('App\Models\User', 'id_user');
     }
     

@@ -10,29 +10,73 @@ use App\Datatables\IncomeDatatable;
 use App\DataTables\IncomeReceivableDataTable;
 use App\Models\Customer;
 use App\Models\ReceivableLog;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class IncomeController extends Controller{
     public function index(){
-        // $income = Income::all();
-        // dd($income);
-        // dd($income[0]->receivable_log);
-        return view('income.index');
+        $income = Income::latest()->get();
+        $anual = Income::selectRaw('DISTINCT year(date) year')->orderBy('year', 'DESC')->pluck('year', 'year');
+        $monthly = Income::orderBy('date', 'DESC')->get()->pluck('monthly', 'monthly_raw')->unique();
+
+        $totals = Income::whereMonth('date', Carbon::now())->sum('total');
+        $customers = Customer::pluck('name', 'id');
+        $income_types = IncomeType::pluck('name', 'id');
+        $month_selected = $totals >= 0 ? $income[0]->raw_month : null; 
+
+        return view('income.index', compact('anual', 'monthly', 'totals', 'month_selected', 'income_types', 'customers'));
     }
 
  
-    public function datatable(){
-        $income = Income::where('status', 1)->get();
+    public function datatable($filter = null){
+        $rawQuery = Income::where('status', 1);
+        
+        if($filter == null){
+            $income = $rawQuery->get();
+        }else{
+            $income = $this->filterDatatable($rawQuery, $filter);
+        }
 
         return IncomeDataTable::set($income);
     }
  
-    public function datatableReceivable(){
-        $income = Income::where('status', 0)->get();
+    public function datatableReceivable($filter = null){
+        $rawQuery = Income::where('status', 0);
+
+        if($filter == null){
+            $income = $rawQuery->get();
+        }else{
+            $income = $this->filterDatatable($rawQuery, $filter);
+        }
 
         return IncomeReceivableDataTable::set($income);
+    }
+
+    public function filterDatatable($rawQuery, $filter){
+        $exploded = explode('+', $filter);
+        $filter_cust = $exploded[0];
+        $filter_income_type = $exploded[1];
+        
+        $filter_month = $exploded[2];
+
+        if($filter_month){
+            $month = explode( '-', $filter_month)[0];
+            $year = explode( '-', $filter_month)[1];
+    
+            $rawQuery->whereMonth('date', $month)->whereYear('date', $year);
+        }
+
+        if($filter_cust){
+            $rawQuery->where('id_customer', $filter_cust);
+        }
+        
+        if($filter_income_type){
+            $rawQuery->where('id_income_type', $filter_income_type);
+        }
+
+        return $rawQuery->get();
     }
 
     public function create(){

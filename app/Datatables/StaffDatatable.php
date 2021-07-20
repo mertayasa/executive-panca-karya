@@ -10,6 +10,12 @@ class StaffDataTable
     static public function set($staff)
     {
         return Datatables::of($staff)
+            ->editColumn('date', function($staff){
+                return indonesianDate($staff->date);
+            })
+            ->editColumn('gender', function($staff){
+                return getGender($staff->gender);
+            })
             ->addColumn('action', function ($staff) {
                 return
                 '<div class="btn-group">' .

@@ -6,7 +6,9 @@
             <th>Tanggal </th>
             <th>Jumlah Pengeluaran</th>
             <th>Nota</th>
-            <th>Aksi</th>
+            @if(getRoleName() == 'staff')
+                <th>Aksi</th>
+            @endif
         </tr>
     </thead>
     <tbody></tbody>
@@ -22,44 +24,53 @@
 
     function datatable(url) {
 
+        responsivePriority = 3
+
+        let columns = [
+            {
+                data: 'DT_RowIndex',
+                name: 'no',
+                orderable: false,
+                searchable: false
+            },
+            {
+                data: 'expenditure_type.name',
+                name: 'expenditure_type.name'
+            },
+            {
+                data: 'date',
+                name: 'date',
+                orderable: false
+            },
+            {
+                data: 'amount',
+                name: 'amount',
+                orderable: false
+            },
+            {
+                data: 'note',
+                name: 'note'
+            }
+        ]
+
+        @if(getRoleName() == 'staff')
+            responsivePriority = 5
+            columnsRec.push({
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                })
+        @endif
+
         table = $('#expenseDatatable').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
             ajax: url,
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'no',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'expenditure_type.name',
-                    name: 'expenditure_type.name'
-                },
-                {
-                    data: 'date',
-                    name: 'date',
-                    orderable: false
-                },
-                {
-                    data: 'amount',
-                    name: 'amount',
-                    orderable: false
-                },
-                {
-                    data: 'note',
-                    name: 'note'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                }
-            ],
+            columns: columns,
             order: [
-                [1, "desc"]
+                [2, "desc"]
             ],
             columnDefs: [
                 // { width: 300, targets: 1 },
@@ -69,7 +80,7 @@
                 },
                 {
                     responsivePriority: 1,
-                    targets: 1
+                    targets: responsivePriority
                 },
             ],
             language: {

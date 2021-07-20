@@ -17,13 +17,11 @@
             {!! Form::model($staff, ['route' => ['staff.update', $staff->id], 'method' => 'patch']) !!}
             @include('staff.form')
             <br>
-            <div class="row ">
-              <div class="col-4"></div>
-                <div class="col-4 text-center">
-                   <button class="btn btn-primary ml-10" type="submit">Simpan</button>
-                    <a href="{{route('staff.index')}}" class="btn btn-danger">Kembali</a>
-                </div>
-                <div class="col-4"></div>
+            <div class="row">
+              <div class="col-12">
+                <button class="btn btn-primary mr-3" type="submit">Simpan</button>
+                <a href="{{route('staff.index')}}" class="btn btn-danger">Kembali</a>
+              </div>
             </div>
             {!! Form::close() !!}
           </div>

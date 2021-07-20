@@ -3,7 +3,9 @@
         <tr>
             <th>No</th>
             <th>Jenis Pendapatan</th>
-            <th>Aksi</th>
+            @if(getRoleName() == 'staff')
+                <th>Aksi</th>
+            @endif
         </tr>
     </thead>
     <tbody></tbody>
@@ -19,28 +21,34 @@
 
     function datatable(url) {
 
+        let columns = [
+            {
+                data: 'DT_RowIndex',
+                name: 'no',
+                orderable: false,
+                searchable: false
+            },
+            {
+                data: 'name',
+                name: 'name'
+            }
+        ]
+
+        @if(getRoleName() == 'staff')
+            columns.push({
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                })
+        @endif
+
         table = $('#expenseDatatable').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
             ajax: url,
-            columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'no',
-                    orderable: false,
-                    searchable: false
-                },
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                }
-            ],
+            columns: columns,
             order: [
                 [1, "desc"]
             ],

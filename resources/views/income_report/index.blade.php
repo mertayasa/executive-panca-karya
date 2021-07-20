@@ -12,7 +12,14 @@
               @include('layouts.flash')
           </div>
           <div class="card-body">
-            <button class="btn btn-warning btn-icon icon-left float-right"><i class="fas fa-print"></i> Print Report</button>
+            <div class="row align-items-center">
+              <div class="col-12 col-md-4">
+                {!! Form::select('filter_month', $monthly, $month_selected, ['class' => 'form-control', 'onchange' => 'updateTable(this.value)']) !!}
+              </div>
+              <div class="col-12 col-md-6 mt-3 mt-md-0">
+                <button class="btn btn-warning btn-icon icon-left float-right float-md-left py-1 py-md-2"><i class="fas fa-print"></i> Print Excel</button>
+              </div>
+            </div>
         <section class="section mt-lg-5">
           <div class="section-body">
             <div class="invoice">
@@ -29,22 +36,7 @@
                 <div class="row mt-4">
                   <div class="col-md-12">
                     <div class="table-responsive">
-                      <table class="table table-md">
-                        <tr>
-                          <th data-width="40">No</th>
-                          <th>Tanggal</th>
-                          <th class="text-center">Keterangan</th>
-                          <th class="text-center">Total</th>
-                        </tr>
-                         @foreach ($income as $i)
-                        <tr>
-                          <td>{{$loop->iteration}}</td>
-                          <td>{{ $i-> date }}</td>
-                          <td class="text-center">{{ $i-> id_types }}</td>
-                          <td class="text-center">{{ $i-> total }}</td>
-                        </tr>
-                        @endforeach
-                      </table>
+                      @include('income_report.datatable_income')
                     </div>
                     <hr>
                     <div class="row mt-4">
@@ -54,7 +46,7 @@
                       <div class="col-lg-4 text-right">
                         <div class="invoice-detail-item">
                           <div class="invoice-detail-name">Subtotal</div>
-                          <div class="invoice-detail-value">Rp. 1000</div>
+                          <div class="invoice-detail-value">{{formatPrice($totals)}}</div>
                         </div>
                       </div>
                     </div>
@@ -72,3 +64,12 @@
     </div>
   </section>
 @endsection
+
+@push('scripts')
+    <script>
+      function updateTable(date){
+        url = "{{ route('income_report.datatable') }}"
+        $('#incomeReportDatatable').DataTable().ajax.url(url + `/${date}`).load();
+      }
+    </script>
+@endpush
