@@ -55,7 +55,7 @@
 
         @if(getRoleName() == 'staff')
             responsivePriority = 5
-            columnsRec.push({
+            columns.push({
                     data: 'action',
                     name: 'action',
                     orderable: false,
