@@ -46,7 +46,6 @@ class IncomeController extends Controller{
         //     array_push($asd, $query->total_receivable);
         // }
     }
-
  
     public function datatable($filter = null){
         $rawQuery = Income::where('status', 1);
@@ -58,34 +57,6 @@ class IncomeController extends Controller{
         }
 
         return IncomeDataTable::set($income);
-    }
- 
-    public function datatableReceivable($filter = null){
-        // $rawQuery = Income::where('status', 0);
-
-        // if($filter == null){
-        //     $income = $rawQuery->get();
-        // }else{
-        //     $income = $this->filterDatatable($rawQuery, $filter);
-        // }
-
-        $receivable = Customer::get()->where('total_receivable', '>', 0);
-
-        return IncomeReceivableDataTable::set($receivable);
-    }
- 
-    public function datatableReceivableDetail($id_customer, $filter = null){
-        $rawQuery = Income::where('status', 0)->where('id_customer', $id_customer);
-
-        if($filter == null){
-            $receivable = $rawQuery->get();
-        }else{
-            $receivable = $this->filterDatatable($rawQuery, $filter);
-        }
-
-        // $receivable = Customer::get()->where('total_receivable', '>', 0);
-
-        return IncomeReceivableDataTableDetail::set($receivable);
     }
 
     public function filterDatatable($rawQuery, $filter){
@@ -199,6 +170,51 @@ class IncomeController extends Controller{
         return redirect()->route('income.index')->with('success', 'Berhasil mengubah data pendapatan');
     }
 
+
+    // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+    // ─████████████████───██████████████─██████████████─██████████████─██████████─██████──██████─██████████████─██████████████───██████─────────██████████████─
+    // ─██░░░░░░░░░░░░██───██░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░██─██░░██──██░░██─██░░░░░░░░░░██─██░░░░░░░░░░██───██░░██─────────██░░░░░░░░░░██─
+    // ─██░░████████░░██───██░░██████████─██░░██████████─██░░██████████─████░░████─██░░██──██░░██─██░░██████░░██─██░░██████░░██───██░░██─────────██░░██████████─
+    // ─██░░██────██░░██───██░░██─────────██░░██─────────██░░██───────────██░░██───██░░██──██░░██─██░░██──██░░██─██░░██──██░░██───██░░██─────────██░░██─────────
+    // ─██░░████████░░██───██░░██████████─██░░██─────────██░░██████████───██░░██───██░░██──██░░██─██░░██████░░██─██░░██████░░████─██░░██─────────██░░██████████─
+    // ─██░░░░░░░░░░░░██───██░░░░░░░░░░██─██░░██─────────██░░░░░░░░░░██───██░░██───██░░██──██░░██─██░░░░░░░░░░██─██░░░░░░░░░░░░██─██░░██─────────██░░░░░░░░░░██─
+    // ─██░░██████░░████───██░░██████████─██░░██─────────██░░██████████───██░░██───██░░██──██░░██─██░░██████░░██─██░░████████░░██─██░░██─────────██░░██████████─
+    // ─██░░██──██░░██─────██░░██─────────██░░██─────────██░░██───────────██░░██───██░░░░██░░░░██─██░░██──██░░██─██░░██────██░░██─██░░██─────────██░░██─────────
+    // ─██░░██──██░░██████─██░░██████████─██░░██████████─██░░██████████─████░░████─████░░░░░░████─██░░██──██░░██─██░░████████░░██─██░░██████████─██░░██████████─
+    // ─██░░██──██░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░██───████░░████───██░░██──██░░██─██░░░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─
+    // ─██████──██████████─██████████████─██████████████─██████████████─██████████─────██████─────██████──██████─████████████████─██████████████─██████████████─
+    // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+     
+    public function datatableReceivable($filter = null){
+        // $rawQuery = Income::where('status', 0);
+
+        // if($filter == null){
+        //     $income = $rawQuery->get();
+        // }else{
+        //     $income = $this->filterDatatable($rawQuery, $filter);
+        // }
+
+        $receivable = Customer::get()->where('total_receivable', '>', 0);
+
+        return IncomeReceivableDataTable::set($receivable);
+    }
+ 
+    public function datatableReceivableDetail($id_customer, $filter = null){
+        $rawQuery = Income::where('status', 0)->where('id_customer', $id_customer);
+
+        if($filter == null){
+            $receivable = $rawQuery->get();
+        }else{
+            $receivable = $this->filterDatatable($rawQuery, $filter);
+        }
+
+        // $receivable = Customer::get()->where('total_receivable', '>', 0);
+
+        return IncomeReceivableDataTableDetail::set($receivable);
+    }
+
     public function fullPay(Customer $customer){
         try{
             $incomes = Income::where('id_customer', $customer->id)->get();
@@ -243,11 +259,7 @@ class IncomeController extends Controller{
     }
 
     public function showFormReceivable(Customer $customer){
-        // dd($customer->total_receivable);
         $incomes = Income::where('status', 0)->where('id_customer', $customer->id)->get();
-        // dd($incomes);
-        // $customers = [$income->customer->id => $income->customer->name];
-        // $income_type = [$income->income_type->id => $income->income_type->name];
 
         return view('income.receivable.form_pay_receivable', compact('incomes', 'customer'));
     }
@@ -255,7 +267,8 @@ class IncomeController extends Controller{
     public function payReceivable(Request $request, Income $income){
         try{
             if(!isset($request->pay) || $request->pay > $income->receivable_remain){
-                return redirect()->back()->withInput()->with('error', 'Jumlah pembayaran melebihi jumlah piutang yang harus dibayar');
+                return response(['code' => 0, 'message' => 'Jumlah pembayaran melebihi jumlah piutang yang harus dibayar']);
+                // return redirect()->back()->withInput()->with('error', 'Jumlah pembayaran melebihi jumlah piutang yang harus dibayar');
             }
 
             $remain = $income->receivable_remain - $request->pay;
@@ -272,10 +285,12 @@ class IncomeController extends Controller{
 
         }catch(Exception $e){
             Log::info($e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data pembayaran piutang');
+            return response(['code' => 0, 'message' => 'Gagal membayar piutang']);
+            // return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data pembayaran piutang');
         }
 
-        return redirect()->route('income.index')->with(['success' => 'Berhasil menyimpan pembayaran piutang', 'active' => 'incomeNotFix' ]);
+        return response(['code' => 1, 'message' => 'Berhasil membayar piutang']);
+        // return redirect()->route('income.index')->with(['success' => 'Berhasil menyimpan pembayaran piutang', 'active' => 'incomeNotFix' ]);
 
     }
 

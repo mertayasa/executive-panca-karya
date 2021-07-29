@@ -57,13 +57,46 @@
       </div>
     </div>
   </section>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Bayar Piutang</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {!! Form::hidden('income_id', null, ['id' => 'incomeId']) !!}
+
+          {!! Form::label('customerName', 'Pelanggan', []) !!}
+          {!! Form::text('customer_name', null, ['class' => 'form-control', 'id' => 'customerName', 'disabled' => true]) !!}
+
+          {!! Form::label('receivableRemain', 'Sisa Piutang', ['class' => 'mt-2']) !!}
+          {!! Form::text('receivable_remain', null, ['class' => 'form-control', 'id' => 'receivableRemain', 'disabled' => true]) !!}
+
+          {!! Form::label('payAmount', 'Jumlah Bayar', ['class' => 'mt-2']) !!}
+          {!! Form::text('amount', null, ['class' => 'form-control', 'id' => 'payAmount', 'onkeyup' => 'validatePayAmount(this.value)']) !!}
+          <span class="text-danger d-none" id="errorPayAmountSpan">Jumlah pembayaran melebihi jumlah piutang yang harus dibayar</span>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id="receivableSubmitBtn" onclick="payReceivable()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
+
 @push('scripts')
   <script>
+    let payReceivableUrl
+
     function fullPay(url, customerName, remaining){
       Swal.fire({
           title: "Warning",
-          // backdrop:false,
           text: `Yakin melunasi hutang ${customerName} senilai ${remaining} ?`,
           icon: 'warning',
           showCancelButton: true,
@@ -88,7 +121,6 @@
                     showToast(data.code, `Gagal melunasi hutang ${customerName} senilai ${remaining}`)
                   }
 
-                  $('#incomeDatatable').DataTable().ajax.reload()
                   $('#incomeReceivable').DataTable().ajax.reload()
                 }
             })
@@ -105,6 +137,53 @@
         toastr.error(`Gagal melunasi ${text}`)
         window.location.reload()
       }
+    }
+
+    function populateModal(url, customer_name, remaining, income_id){
+      payReceivableUrl = url
+      const customerName = document.getElementById('customerName').value = customer_name
+      const receivableRemain = document.getElementById('receivableRemain').value = remaining
+    }
+
+    function validatePayAmount(amount){
+      const receivableRemain = document.getElementById('receivableRemain').value
+      const errorPayAmountSpan = document.getElementById('errorPayAmountSpan')
+      const receivableSubmitBtn = document.getElementById('receivableSubmitBtn')
+
+      if(parseInt(amount) > parseInt(receivableRemain)){
+        errorPayAmountSpan.classList.remove('d-none')
+        receivableSubmitBtn.setAttribute('disabled', true)
+      }else{
+        errorPayAmountSpan.classList.add('d-none')
+        receivableSubmitBtn.removeAttribute('disabled')
+      }
+
+    }
+
+    function payReceivable(){
+      const payAmount = document.getElementById('payAmount').value
+      const customerName = document.getElementById('customerName').value
+
+      $.ajax({
+          url:payReceivableUrl,
+          method:'patch',
+          data:{
+            "_token": "{{ csrf_token() }}",
+            "pay": payAmount
+          },
+          dataType:'json',
+          success:function(data){
+            if(data.code == 1){
+              showToast(data.code, data.message)
+            }else{
+              showToast(data.code, data.message)
+            }
+
+            $('#incomeReceivable').DataTable().ajax.reload()
+            $('#exampleModal').modal('hide');
+          }
+      })
+
     }
   </script>
 @endpush

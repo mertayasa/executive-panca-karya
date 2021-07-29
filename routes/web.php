@@ -94,7 +94,7 @@ Route::group(['prefix' => 'income', 'as' => 'income.'], function () {
         Route::patch('update/{income}', [IncomeController::class, 'update'])->name('update');
         Route::delete('destroy/{income}', [IncomeController::class, 'destroy'])->name('destroy');
         Route::get('receivable-pay/{customer}', [IncomeController::class, 'showFormReceivable'])->name('form_receivable');
-        Route::patch('receivable-pay/{customer}', [IncomeController::class, 'payReceivable'])->name('pay_receivable');
+        Route::patch('receivable-pay/{income}', [IncomeController::class, 'payReceivable'])->name('pay_receivable');
         Route::patch('full-pay/{customer}', [IncomeController::class, 'fullPay'])->name('full_pay');
         Route::patch('single-full-pay/{income}', [IncomeController::class, 'singleFullPay'])->name('single_full_pay');
     });
