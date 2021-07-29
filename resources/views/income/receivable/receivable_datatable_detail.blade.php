@@ -1,15 +1,17 @@
-<table class="table table-hover table-bordered" width="100%" id="incomeDatatable">
+<table class="table table-hover table-bordered" width="100%" id="incomeReceivable">
     <thead>
         <tr>
             <th>No</th>
             <th>Pelanggan</th>
+            <th>Penerima</th>
             <th>Jenis Pendapatan</th>
             <th>Tanggal </th>
-            <th>Total</th>
-            <th>Penerima</th>
+            <th>Total Piutang</th>
+            <th>Sudah Dibayar</th>
+            <th>Sisa</th>
             <th>Keterangan</th>
             <th></th>
-            @if(getRoleName() == 'staff')
+            @if (getRoleName() == 'staff')
                 <th>Aksi</th>
             @endif
         </tr>
@@ -20,15 +22,16 @@
 @push('scripts')
 
 <script>
-    let table
-    let url = "{{ route('income.datatable') }}"
+    let table_receivable
+    let url_receivable = "{{ route('income.datatable_receivable_detail', $customer->id) }}"
 
-    datatable(url)
+    datatableReceivable(url_receivable)
 
-    function datatable(url) {
+    function datatableReceivable(url) {
 
-        let responsivePriority = 4
-        let columns = [
+        let responsivePriorityRec = 4
+
+        let columnsRec = [
             {
                 data: 'DT_RowIndex',
                 name: 'no',
@@ -38,6 +41,10 @@
             {
                 data: 'customer.name',
                 name: 'customer.name'
+            },
+            {
+                data: 'receiver_name',
+                name: 'receiver_name'
             },
             {
                 data: 'income_type.name',
@@ -54,8 +61,12 @@
                 orderable: false
             },
             {
-                data: 'receiver_name',
-                name: 'receiver_name'
+                data: 'paid',
+                name: 'paid'
+            },
+            {
+                data: 'receivable_remain',
+                name: 'receivable_remain'
             },
             {
                 data: 'ket',
@@ -70,24 +81,23 @@
         ]
 
         @if(getRoleName() == 'staff')
-            responsivePriority = 8
-            columns.push({
+            responsivePriority = 9
+            columnsRec.push({
                     data: 'action',
                     name: 'action',
                     orderable: false,
                     searchable: false
                 })
-            
         @endif
 
-        table = $('#incomeDatatable').DataTable({
+        table_receivable = $('#incomeReceivable').DataTable({
             processing: true,
             serverSide: true,
             responsive: true,
             ajax: url,
-            columns: columns,
+            columns: columnsRec,
             order: [
-                [6, "desc"]
+                [8, "desc"]
             ],
             columnDefs: [
                 // { width: 300, targets: 1 },
@@ -97,7 +107,7 @@
                 },
                 {
                     responsivePriority: 1,
-                    targets: responsivePriority
+                    targets: 8
                 },
             ],
             language: {

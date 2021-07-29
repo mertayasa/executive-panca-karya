@@ -3552,6 +3552,7 @@ table.dataTable tbody td.selected a {
 } */
 
 
+html.swal2-shown,body.swal2-shown { overflow-y: hidden !important; height: auto!important;}
 @charset "UTF-8";
 /*!
  * Bootstrap v4.6.0 (https://getbootstrap.com/)

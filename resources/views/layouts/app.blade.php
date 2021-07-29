@@ -10,18 +10,22 @@
   <link rel="stylesheet" href="{{asset('stisla-assets/css/components.css')}}">
   <link rel="stylesheet" href="{{asset('stisla-assets/css/style.css')}}">
   <link rel="stylesheet" href="{{asset('stisla-assets/datatables/datatables.css')}}">
+  @stack('styles')
   <style>
     .main-content{
       overflow-x: hidden !important;
     }
   </style>
-  @stack('styles')
 </head>
 
 <body>
   <div id="app">
     <div class="main-wrapper">
       <div class="navbar-bg"></div>
+
+      <style>
+        html.swal2-shown,body.swal2-shown { overflow-y: hidden !important; height: auto!important;}
+      </style>
 
       @include('layouts.navbar')
       

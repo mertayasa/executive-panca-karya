@@ -58,6 +58,10 @@ class Income extends Model
         return $date->format('m-Y');
     }
 
+    // public function getPaidAttribute(){
+    //     return $this->attributes['total'] - $this->attributes['receivable_remain'];
+    // }
+
     // public function account_receivable(){
     //     return $this->hasOne('App\Models\AccountsReceivable', 'id_income');
     // }

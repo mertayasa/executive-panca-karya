@@ -21,28 +21,28 @@
               @include('layouts.flash')
           </div>
           <div class="card-body">
-              <div class="bs-example">
-                <ul class="nav nav-tabs">
+              {{-- <div class="bs-example"> --}}
+                {{-- <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a href="#incomeFix" class="nav-link {{!Session::get('active') ? 'active' : ''}}" data-toggle="tab">Pendapatan Lunas</a>
                     </li>
                     <li class="nav-item">
                         <a href="#incomeNotFix" class="nav-link {{Session::get('active') == 'incomeNotFix' ? 'active' : ''}}" data-toggle="tab">Piutang</a>
                     </li>
-                </ul>
-                <div class="tab-content">
-                    <div class="tab-pane fade {{!Session::get('active') ? 'active show' : ''}}" id="incomeFix">
+                </ul> --}}
+                {{-- <div class="tab-content">
+                    <div class="tab-pane fade {{!Session::get('active') ? 'active show' : ''}}" id="incomeFix"> --}}
                       @include('income.filter_datatable', ['tableId' => 'incomeDatatable'])
                       <hr>
                       @include('income.datatable')
-                    </div>
-                    <div class="tab-pane fade {{Session::get('active') == 'incomeNotFix' ? 'active show' : ''}}" id="incomeNotFix">
-                      @include('income.filter_datatable', ['tableId' => 'incomeReceivable'])
+                    {{-- </div>
+                    <div class="tab-pane fade {{Session::get('active') == 'incomeNotFix' ? 'active show' : ''}}" id="incomeNotFix"> --}}
+                      {{-- @include('income.filter_datatable', ['tableId' => 'incomeReceivable'])
                       <hr>
-                      @include('income.receivable_datatable')
-                    </div>
-                </div>
-              </div>
+                      @include('income.receivable_datatable') --}}
+                    {{-- </div> --}}
+                {{-- </div>
+              </div> --}}
           </div>
         </div>
       </div>
@@ -52,73 +52,13 @@
 
 @push('scripts')
   <script>
-    $(document).ready(function() {
-      $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
-          $.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
-      });
-    })
-
     function updateTable(tableid){
       const filterCustomer = document.getElementsByClassName('filter-customer')
       const filterIncomeType = document.getElementsByClassName('filter-income-type')
       const filterMonth = document.getElementsByClassName('filter-month')
 
-      if(tableid == 'incomeDatatable'){
-        const param = `${filterCustomer[0].value}+${filterIncomeType[0].value}+${filterMonth[0].value}`
-        $('#' + tableid).DataTable().ajax.url(url + `/${param}`).load();
-      }
-
-      if(tableid == 'incomeReceivable'){
-        const param = `${filterCustomer[1].value}+${filterIncomeType[1].value}+${filterMonth[1].value}`
-        $('#' + tableid).DataTable().ajax.url(url + `/${param}`).load();
-      }
-      
-    }
-
-    function fullPay(url, customerName, remaining){
-      Swal.fire({
-          title: "Warning",
-          text: `Yakin melunasi hutang ${customerName} senilai ${remaining} ?`,
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonColor: '#169b6b',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Ya',
-          cancelButtonText: 'Tidak'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            $.ajax({
-                url:url,
-                method:'patch',
-                data:{"_token": "{{ csrf_token() }}"},
-                dataType:'json',
-                beforeSend:function(){
-                    // console.log('begin update')
-                },
-                success:function(data){
-                  if(data.code == 1){
-                    showToast(data.code, `Berhasil melunasi hutang ${customerName} senilai ${remaining}`)
-                  }else{
-                    showToast(data.code, `Gagal melunasi hutang ${customerName} senilai ${remaining}`)
-                  }
-
-                  $('#incomeDatatable').DataTable().ajax.reload()
-                  $('#incomeReceivable').DataTable().ajax.reload()
-                }
-            })
-          }
-        })
-    }
-
-    function showToast(code, text){
-      if(code = 1){
-        toastr.success(`${text}`)
-      }
-
-      if(code = 0){
-        toastr.error(`Gagal mengubah ${text}`)
-        window.location.reload()
-      }
+      const param = `${filterCustomer[0].value}+${filterIncomeType[0].value}+${filterMonth[0].value}`
+      $('#' + tableid).DataTable().ajax.url(url + `/${param}`).load();
     }
   </script>
 @endpush

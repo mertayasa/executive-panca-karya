@@ -93,6 +93,26 @@ Route::group(['prefix' => 'income', 'as' => 'income.'], function () {
         Route::get('edit/{income}', [IncomeController::class, 'edit'])->name('edit');
         Route::patch('update/{income}', [IncomeController::class, 'update'])->name('update');
         Route::delete('destroy/{income}', [IncomeController::class, 'destroy'])->name('destroy');
+        Route::get('receivable-pay/{customer}', [IncomeController::class, 'showFormReceivable'])->name('form_receivable');
+        Route::patch('receivable-pay/{customer}', [IncomeController::class, 'payReceivable'])->name('pay_receivable');
+        Route::patch('full-pay/{customer}', [IncomeController::class, 'fullPay'])->name('full_pay');
+        Route::patch('single-full-pay/{income}', [IncomeController::class, 'singleFullPay'])->name('single_full_pay');
+    });
+    
+    Route::get('datatable/{param?}', [IncomeController::class, 'datatable'])->name('datatable');
+    Route::get('datatable-receivable/{param?}', [IncomeController::class, 'datatableReceivable'])->name('datatable_receivable');
+    Route::get('datatable-receivable-detail/{id_customer}/{param?}', [IncomeController::class, 'datatableReceivableDetail'])->name('datatable_receivable_detail');
+});
+
+Route::group(['prefix' => 'receivable', 'as' => 'receivable.'], function () {
+    Route::get('/', [IncomeController::class, 'index'])->name('index');
+
+    Route::middleware('role:staff')->group(function () {
+        Route::get('create', [IncomeController::class, 'create'])->name('create');
+        Route::post('store', [IncomeController::class, 'store'])->name('store');
+        Route::get('edit/{income}', [IncomeController::class, 'edit'])->name('edit');
+        Route::patch('update/{income}', [IncomeController::class, 'update'])->name('update');
+        Route::delete('destroy/{income}', [IncomeController::class, 'destroy'])->name('destroy');
         Route::get('receivable-pay/{income}', [IncomeController::class, 'showFormReceivable'])->name('form_receivable');
         Route::patch('receivable-pay/{income}', [IncomeController::class, 'payReceivable'])->name('pay_receivable');
         Route::patch('full-pay/{income}', [IncomeController::class, 'fullPay'])->name('full_pay');

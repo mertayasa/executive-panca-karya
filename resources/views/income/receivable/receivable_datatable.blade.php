@@ -1,14 +1,16 @@
 <table class="table table-hover table-bordered" width="100%" id="incomeReceivable">
     <thead>
         <tr>
+            {{-- <th>Jenis Pendapatan</th> --}}
+            {{-- <th>Penerima</th> --}}
+            {{-- <th>Keterangan</th> --}}
+            {{-- <th>Tanggal </th> --}}
+
             <th>No</th>
             <th>Pelanggan</th>
-            <th>Jenis Pendapatan</th>
-            <th>Tanggal </th>
-            <th>Total Piutang</th>
-            <th>Sudah Dibayar</th>
-            <th>Sisa</th>
-            <th>Keterangan</th>
+            {{-- <th>Total Piutang</th>
+            <th>Sudah Dibayar</th> --}}
+            <th>Sisa Piutang</th>
             <th></th>
             @if (getRoleName() == 'staff')
                 <th>Aksi</th>
@@ -28,7 +30,7 @@
 
     function datatableReceivable(url) {
 
-        let responsivePriorityRec = 4
+        let responsivePriorityRec = 2
 
         let columnsRec = [
             {
@@ -38,35 +40,22 @@
                 searchable: false
             },
             {
-                data: 'customer.name',
-                name: 'customer.name'
+                data: 'name',
+                name: 'name'
             },
             {
-                data: 'income_type.name',
-                name: 'income_type.name'
+                data: 'total_receivable',
+                name: 'total_receivable',
+                // orderable: false
             },
-            {
-                data: 'date',
-                name: 'date',
-                orderable: false
-            },
-            {
-                data: 'total',
-                name: 'total',
-                orderable: false
-            },
-            {
-                data: 'paid',
-                name: 'paid'
-            },
-            {
-                data: 'receivable_remain',
-                name: 'receivable_remain'
-            },
-            {
-                data: 'ket',
-                name: 'ket'
-            },
+            // {
+            //     data: 'total_receivable',
+            //     name: 'total_receivable'
+            // },
+            // {
+            //     data: 'total_receivable',
+            //     name: 'total_receivable'
+            // },
             {
                 data: 'updated_at',
                 name: 'updated_at',
@@ -76,7 +65,7 @@
         ]
 
         @if(getRoleName() == 'staff')
-            responsivePriority = 9
+            responsivePriority = 3
             columnsRec.push({
                     data: 'action',
                     name: 'action',
@@ -92,7 +81,7 @@
             ajax: url,
             columns: columnsRec,
             order: [
-                [8, "desc"]
+                [3, "asc"]
             ],
             columnDefs: [
                 // { width: 300, targets: 1 },
@@ -101,8 +90,8 @@
                     className: 'align-middle'
                 },
                 {
-                    responsivePriority: 1,
-                    targets: 8
+                    responsivePriority: responsivePriority,
+                    targets: 4
                 },
             ],
             language: {

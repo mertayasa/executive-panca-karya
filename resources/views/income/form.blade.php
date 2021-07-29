@@ -4,8 +4,8 @@
         {!! Form::select('id_customer', $customers, null, ['class' => 'form-control', 'id' => 'customerId', 'disabled' => isset($income) || isset($disabled) ? true : false]) !!}
     </div>
     <div class="col-12 col-md-6 m-auto ">
-        {!! Form::label('incomeDate', 'Tanggal', ['class' => 'mb-1']) !!}
-        {!! Form::date('date', null, ['class' => 'form-control', 'id' => 'incomeDate', 'disabled' => isset($income) || isset($disabled) ? true : false]) !!}
+        {!! Form::label('receiverName', 'Nama Penerima ', ['class' => 'mb-1']) !!}
+        {!! Form::text('receiver_name', null, ['class' => 'form-control', 'id' => 'receiverName', 'disabled' => isset($income) || isset($disabled) ? true : false]) !!}
     </div>
 </div>
 
@@ -21,8 +21,12 @@
 </div>
 <div class="row mt-3">
     <div class="col-12  col-md-6 order-md-2">
-        {!! Form::label('incomeStatus', 'Status', ['class' => 'mb-1']) !!}
-        {!! Form::select('status', [1 => 'Lunas', 0 => 'Utang'], null, ['class' => 'form-control', 'id' => 'incomeStatus', 'disabled' => isset($income) || isset($disabled) ? true : false]) !!}
+        {{-- {!! Form::label('incomeStatus', 'Status', ['class' => 'mb-1']) !!}
+        {!! Form::select('status', [1 => 'Lunas', 0 => 'Utang'], null, ['class' => 'form-control', 'id' => 'incomeStatus', 'disabled' => isset($income) || isset($disabled) ? true : false]) !!} --}}
+        
+        {!! Form::label('incomeDate', 'Tanggal', ['class' => 'mb-1']) !!}
+        {!! Form::date('date', null, ['class' => 'form-control', 'id' => 'incomeDate', 'disabled' => isset($income) || isset($disabled) ? true : false]) !!}
+    
     </div>
     <div class="col-12  col-md-6 order-md-1">
         {!! Form::label('incomeKet', 'Keterangan ', ['class' => 'mb-1']) !!}
