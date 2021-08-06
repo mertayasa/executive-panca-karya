@@ -18,7 +18,7 @@ class CreateStaffTable extends Migration
             $table->unsignedBigInteger('id_user');
             $table->date('date');
             $table->tinyInteger('gender')->default(0);
-            $table->string('telp');
+            $table->string('telp', 13);
             $table->text('address');
             $table->timestamps();
 

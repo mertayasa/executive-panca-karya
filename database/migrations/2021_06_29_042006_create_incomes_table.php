@@ -13,7 +13,7 @@ class CreateIncomesTable extends Migration{
             $table->unsignedInteger('id_customer');
             $table->tinyInteger('status')->default(0);
             $table->date('date');
-            $table->string('total');
+            $table->integer('total');
             $table->integer('receivable_remain');
             $table->text('ket');
             $table->timestamps();

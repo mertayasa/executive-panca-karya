@@ -6,309 +6,301 @@
         <h1>Dashboard</h1>
     </div>
 
+    <div class="row">
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="card card-statistic-2">
+          <div class="card-icon shadow-primary bg-primary">
+            <i class="fas fa-users-cog"></i>
+          </div>
+          <div class="card-wrap">
+            <div class="card-header">
+              <h4> Staff </h4>
+            </div>
+            <div class="card-body">
+              {{$dashboard_data['staff_count']}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="card card-statistic-2">
+          <div class="card-icon shadow-primary bg-primary">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="card-wrap">
+            <div class="card-header">
+              <h4> Customer </h4>
+            </div>
+            <div class="card-body">
+              {{$dashboard_data['customer_count']}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="card card-statistic-2">
+          <div class="card-icon shadow-primary bg-primary">
+            <i class="fas fa-wallet"></i> 
+          </div>
+          <div class="card-wrap">
+            <div class="card-header">
+              <h4> Pendapatan </h4>
+            </div>
+            <div class="card-body">
+              {{ formatPrice($dashboard_data['income_count']) }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="card card-statistic-2">
+          <div class="card-icon shadow-primary bg-primary">
+            <i class="fas fa-file-alt"></i>
+          </div>
+          <div class="card-wrap">
+            <div class="card-header">
+              <h4> Piutang </h4>
+            </div>
+            <div class="card-body">
+              {{ formatPrice($dashboard_data['receiavable_count']) }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
       
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-12 col-md-12">
         <div class="card">
           <div class="card-header">
-            <h4>Grafik Pendapatan dan Pengeluaran per Bulan</h4>
-            <div class="card-header-action">
-              <div class="card-stats-title">
-             
+            <div class="row col-12 align-items-center justify-content-between p-0">
+              <div class="col-6">
+                <h4>Grafik Pendapatan <span id="incomeSelectedYear">{{\Carbon\Carbon::now()->year}}</span></h4>
+              </div>
+              <div class="col-6 text-right px-0">
+                <div class="card-stats-title">
+                  <div class="dropdown d-inline">
+                    <a class="font-weight-600 btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#" id="orders-month">Pilih Tahun</a>
+                    <ul class="dropdown-menu dropdown-menu-sm">
+                      @foreach ($dashboard_data['income_years'] as $year)
+                        <li><a href="javascript:void(0)" class="dropdown-item" onclick="generateChartData('{{$year}}')">{{$year}}</a></li>
+                      @endforeach
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           <div class="card-body">
-            <canvas id="myChart" height="158"></canvas>
-          </div>
-        </div>
-      </div>
-       <div class="col-lg-6">
-        <div class="card">
-          <div class="card-header">
-            <h4>Data pendapatan dan pengeluaran per bulan </h4>
-            <div class="card-header-action">
-              <div class="card-stats-title">
-                
-              </div>
-            </div>
-          </div>
-          <div class="card-body">
-           
+            <canvas id="myChart" height="350"></canvas>
           </div>
         </div>
       </div>
     </div>
-
+      
     <div class="row">
-      <div class="col-8 col-md-12">
+      <div class="col-12 col-md-12">
         <div class="card">
           <div class="card-header">
-            <h4>DataTables</h4>
-            <div class="card-header-action">
-              <a href="#" class="btn btn-danger">View More <i class="fas fa-chevron-right"></i></a>
+            <div class="row col-12 align-items-center justify-content-between p-0">
+              <div class="col-6">
+                <h4>Grafik Pengeluaran <span id="expenditureSelectedYear">{{\Carbon\Carbon::now()->year}}</span></h4>
+              </div>
+              <div class="col-6 text-right px-0">
+                <div class="card-stats-title">
+                  <div class="dropdown d-inline">
+                    <a class="font-weight-600 btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#" id="orders-month">Pilih Tahun</a>
+                    <ul class="dropdown-menu dropdown-menu-sm">
+                      @foreach ($dashboard_data['expenditure_years'] as $year)
+                        <li><a href="javascript:void(0)" class="dropdown-item" onclick="generateChartExpenditureData('{{$year}}')">{{$year}}</a></li>
+                      @endforeach
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="card-body p-4">
-            <div class="table-responsive table-invoice">
-              <table class="table table-striped" id="productTable">
-                <thead>
-                  <tr>
-                    <th>Invoice ID</th>
-                    <th>Customer</th>
-                    <th>Status</th>
-                    <th>Due Date</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><a href="#">INV-87239</a></td>
-                    <td class="font-weight-600">Kusnadi</td>
-                    <td><div class="badge badge-warning">Unpaid</div></td>
-                    <td>July 19, 2018</td>
-                    <td>
-                      <a href="#" class="btn btn-primary">Detail</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><a href="#">INV-48574</a></td>
-                    <td class="font-weight-600">Hasan Basri</td>
-                    <td><div class="badge badge-success">Paid</div></td>
-                    <td>July 21, 2018</td>
-                    <td>
-                      <a href="#" class="btn btn-primary">Detail</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><a href="#">INV-76824</a></td>
-                    <td class="font-weight-600">Muhamad Nuruzzaki</td>
-                    <td><div class="badge badge-warning">Unpaid</div></td>
-                    <td>July 22, 2018</td>
-                    <td>
-                      <a href="#" class="btn btn-primary">Detail</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><a href="#">INV-84990</a></td>
-                    <td class="font-weight-600">Agung Ardiansyah</td>
-                    <td><div class="badge badge-warning">Unpaid</div></td>
-                    <td>July 22, 2018</td>
-                    <td>
-                      <a href="#" class="btn btn-primary">Detail</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><a href="#">INV-87320</a></td>
-                    <td class="font-weight-600">Ardian Rahardiansyah</td>
-                    <td><div class="badge badge-success">Paid</div></td>
-                    <td>July 28, 2018</td>
-                    <td>
-                      <a href="#" class="btn btn-primary">Detail</a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-4 col-md-12">
-        <div class="card gradient-bottom">
-          <div class="card-header">
-            <h4>Top 5 Products</h4>
-            <div class="card-header-action dropdown">
-              <a href="#" data-toggle="dropdown" class="btn btn-danger dropdown-toggle">Month</a>
-              <ul class="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-                <li class="dropdown-title">Select Period</li>
-                <li><a href="#" class="dropdown-item">Today</a></li>
-                <li><a href="#" class="dropdown-item">Week</a></li>
-                <li><a href="#" class="dropdown-item active">Month</a></li>
-                <li><a href="#" class="dropdown-item">This Year</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="card-body" id="top-5-scroll">
-            <ul class="list-unstyled list-unstyled-border">
-              <li class="media">
-                <img class="mr-3 rounded" width="55" src="{{asset('stisla-assets/img/products/product-1-50.png')}}" alt="product">
-                <div class="media-body">
-                  <div class="float-right"><div class="font-weight-600 text-muted text-small">86 Sales</div></div>
-                  <div class="media-title">oPhone S9 Limited</div>
-                  <div class="mt-1">
-                    <div class="budget-price">
-                      <div class="budget-price-square bg-primary" data-width="64%"></div>
-                      <div class="budget-price-label">$68,714</div>
-                    </div>
-                    <div class="budget-price">
-                      <div class="budget-price-square bg-danger" data-width="43%"></div>
-                      <div class="budget-price-label">$38,700</div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="media">
-                <img class="mr-3 rounded" width="55" src="{{asset('stisla-assets/img/products/product-1-50.png')}}" alt="product">
-                <div class="media-body">
-                  <div class="float-right"><div class="font-weight-600 text-muted text-small">67 Sales</div></div>
-                  <div class="media-title">iBook Pro 2018</div>
-                  <div class="mt-1">
-                    <div class="budget-price">
-                      <div class="budget-price-square bg-primary" data-width="84%"></div>
-                      <div class="budget-price-label">$107,133</div>
-                    </div>
-                    <div class="budget-price">
-                      <div class="budget-price-square bg-danger" data-width="60%"></div>
-                      <div class="budget-price-label">$91,455</div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="media">
-                <img class="mr-3 rounded" width="55" src="{{asset('stisla-assets/img/products/product-1-50.png')}}" alt="product">
-                <div class="media-body">
-                  <div class="float-right"><div class="font-weight-600 text-muted text-small">63 Sales</div></div>
-                  <div class="media-title">Headphone Blitz</div>
-                  <div class="mt-1">
-                    <div class="budget-price">
-                      <div class="budget-price-square bg-primary" data-width="34%"></div>
-                      <div class="budget-price-label">$3,717</div>
-                    </div>
-                    <div class="budget-price">
-                      <div class="budget-price-square bg-danger" data-width="28%"></div>
-                      <div class="budget-price-label">$2,835</div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="media">
-                <img class="mr-3 rounded" width="55" src="{{asset('stisla-assets/img/products/product-1-50.png')}}" alt="product">
-                <div class="media-body">
-                  <div class="float-right"><div class="font-weight-600 text-muted text-small">28 Sales</div></div>
-                  <div class="media-title">oPhone X Lite</div>
-                  <div class="mt-1">
-                    <div class="budget-price">
-                      <div class="budget-price-square bg-primary" data-width="45%"></div>
-                      <div class="budget-price-label">$13,972</div>
-                    </div>
-                    <div class="budget-price">
-                      <div class="budget-price-square bg-danger" data-width="30%"></div>
-                      <div class="budget-price-label">$9,660</div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-              <li class="media">
-                <img class="mr-3 rounded" width="55" src="{{asset('stisla-assets/img/products/product-1-50.png')}}" alt="product">
-                <div class="media-body">
-                  <div class="float-right"><div class="font-weight-600 text-muted text-small">19 Sales</div></div>
-                  <div class="media-title">Old Camera</div>
-                  <div class="mt-1">
-                    <div class="budget-price">
-                      <div class="budget-price-square bg-primary" data-width="35%"></div>
-                      <div class="budget-price-label">$7,391</div>
-                    </div>
-                    <div class="budget-price">
-                      <div class="budget-price-square bg-danger" data-width="28%"></div>
-                      <div class="budget-price-label">$5,472</div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div class="card-footer pt-3 d-flex justify-content-center">
-            <div class="budget-price justify-content-center">
-              <div class="budget-price-square bg-primary" data-width="20"></div>
-              <div class="budget-price-label">Selling Price</div>
-            </div>
-            <div class="budget-price justify-content-center">
-              <div class="budget-price-square bg-danger" data-width="20"></div>
-              <div class="budget-price-label">Budget Price</div>
-            </div>
+          <div class="card-body">
+            <canvas id="chartExpenditure" height="350"></canvas>
           </div>
         </div>
       </div>
     </div>
+
 </section>
 @endsection
 
 @push('scripts')
-    <script>
-        $(function () {
-            $('#productTable').DataTable({
-                processing: true,
-                serverSide: false,
-                responsive: true
-            })
-        })
+  <script>
+    let chart
+    generateChartData()
 
-        // toastr.success('Welcome')
-        const ctx = document.getElementById("myChart").getContext('2d')
+    function generateChartData(year = null){
+      const url = "{{route('dashboard.chart_income')}}"
+      let formData = year == null ? {year: 'now'} : {year: year}
 
-        const labels = ["January", "February", "March", "April", "May", "June", "July", "August"]
-        const data = {
-            labels: labels,
-            datasets: [
-                {
-                    label: 'My First Dataset',
-                    data: [65, 59, 80, 81, 56, 55, 40, 99],
-                    fill: false,
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1
-                },{
-                    label: 'My Second Dataset',
-                    data: [34, 12, 76, 67, 43, 89, 45, 77],
-                    fill: false,
-                    borderColor: 'rgb(75, 111, 89)',
-                    tension: 0.1
+      const incomeSelectedYear = document.getElementById('incomeSelectedYear')
+      
+      if(year != null){
+        incomeSelectedYear.innerHTML = year
+      }
+
+      $.ajax({
+          url: url,
+          method: 'POST',
+          headers: {'X-CSRF-TOKEN': "{{csrf_token()}}"},
+          data: formData,
+          dataType:'json',
+          success:function(data){  
+              if(data.code === 1){
+                if(year != null){
+                  chart.destroy()
+                  chart = showChart(data)
+                }else{
+                  chart = showChart(data)
                 }
-            ]
-        }
+              }
 
-        const options = {
-            legend: {
-                display: false
-            },
-            elements: {
-                line: {
-                    lineTension: 0
-                }
-            },
+              if(data.code === 0){
+                console.log('error')
+              }
+          }
+      })
+    }
+
+    function showChart(data){
+      let canvasForecast = $('#myChart');
+      const labels = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
+      let barChart = new Chart(canvasForecast, {
+          type: 'bar',
+          data: {
+              labels: labels,
+              datasets: [
+                  {
+                      // lineTension: 0,
+                      label: 'Pemasukan',
+                      borderColor: "#6777ef",
+                      backgroundColor: "#6777ef",
+                      pointHoverBorderColor: "#6777ef",
+                      pointBorderWidth: 0,
+                      pointHoverRadius: 10,
+                      pointHoverBorderWidth: 1,
+                      pointRadius: 3,
+                      fill: false,
+                      borderWidth: 4,
+                      data: data.income
+                  },
+              ]
+          },
+          options: {
+            responsive:true,
+            maintainAspectRatio: false,
+            // Can't just just `stacked: true` like the docs say
             scales: {
-                yAxes: [
-                    {
-                        gridLines: {
-                            // display: false,
-                            drawBorder: false,
-                            color: '#f2f2f2',
-                        },
-                        ticks: {
-                            beginAtZero: true,
-                            stepSize: 1500,
-                            callback: function(value, index, values) {
-                                return '$' + value;
-                            }
-                        }
-                    }
-                ],
-                xAxes: [
-                    {
-                        gridLines: {
-                            display: false,
-                            tickMarkLength: 15,
-                        }
-                    }
-                ]
-            }
-        }
+            yAxes: [{
+                // stacked: true,
+                ticks: {
+                  beginAtZero: true
+              }
+            }]
+            },
+            animation: {
+                duration: 750,
+            },
+          }
+      });
 
-        var myLineChart = new Chart(ctx, {
-            type: 'line',
-            data: data,
-            options: options
-        });
+      return barChart
+    }
+  </script>
 
-    </script>
+  <script>
+    let chartExpenditure
+    generateChartExpenditureData()
+
+    function generateChartExpenditureData(year = null){
+      const url = "{{route('dashboard.chart_expenditure')}}"
+      let formData = year == null ? {year: 'now'} : {year: year}
+
+      const expenditureSelectedYear = document.getElementById('expenditureSelectedYear')
+      
+      if(year != null){
+        expenditureSelectedYear.innerHTML = year
+      }
+
+      $.ajax({
+          url: url,
+          method: 'POST',
+          headers: {'X-CSRF-TOKEN': "{{csrf_token()}}"},
+          data: formData,
+          dataType:'json',
+          success:function(data){  
+              if(data.code === 1){
+                if(year != null){
+                  chartExpenditure.destroy()
+                  chartExpenditure = showChartExpenditure(data)
+                }else{
+                  chartExpenditure = showChartExpenditure(data)
+                }
+              }
+
+              if(data.code === 0){
+                console.log('error')
+              }
+          }
+      })
+    }
+
+    function showChartExpenditure(data){
+      let canvasExpenditure = $('#chartExpenditure');
+      const labels = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
+      let barChartExpenditure = new Chart(canvasExpenditure, {
+          type: 'bar',
+          data: {
+              labels: labels,
+              datasets: [
+                  {
+                      // lineTension: 0,
+                      label: 'Pengeluaran',
+                      borderColor: "#FF0000",
+                      backgroundColor: "#FF0000",
+                      pointHoverBorderColor: "#FF0000",
+                      pointBorderWidth: 0,
+                      pointHoverRadius: 10,
+                      pointHoverBorderWidth: 1,
+                      pointRadius: 3,
+                      fill: false,
+                      borderWidth: 4,
+                      data: data.expenditure
+                  },
+              ]
+          },
+          options: {
+            responsive:true,
+            maintainAspectRatio: false,
+            // Can't just just `stacked: true` like the docs say
+            scales: {
+            yAxes: [{
+                // stacked: true,
+                ticks: {
+                  beginAtZero: true
+              }
+            }]
+            },
+            animation: {
+                duration: 750,
+            },
+          }
+      });
+
+      return barChartExpenditure
+    }
+  </script>
 @endpush

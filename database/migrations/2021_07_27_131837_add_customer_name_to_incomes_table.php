@@ -14,7 +14,7 @@ class AddCustomerNameToIncomesTable extends Migration
     public function up()
     {
         Schema::table('incomes', function (Blueprint $table) {
-            $table->string('receiver_name')->nullable();
+            $table->string('receiver_name', 50)->nullable();
         });
     }
 

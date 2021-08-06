@@ -23,7 +23,8 @@ class Income extends Model
     ];
 
     public $with = [
-        'income_type', 'customer', 'receivable_log', 'created_by', 'updated_by'
+        'income_type', 'customer', 'receivable_log'
+        // 'income_type', 'customer', 'receivable_log', 'created_by', 'updated_by'
     ];
 
 

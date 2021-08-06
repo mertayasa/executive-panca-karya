@@ -18,7 +18,7 @@ class CustomerFactory extends Factory
             'name' => $this->faker->name(),
             'address' => $this->faker->address(),
             'no_telp' => '273128312738',
-            'place_of_birth' => $this->faker->address(),
+            'place_of_birth' => $this->faker->city(),
             'date' => $this->faker->dateTimeBetween(Carbon::now()->subMonth(2), $date),
             'gender' => $status,
             'status' => $status,

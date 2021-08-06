@@ -8,7 +8,7 @@
         <a href="index.html">PKM</a>
       </div>
       <ul class="sidebar-menu">
-          <li class="{{Request::is('*dashboard*') ? 'active' : ''}}"> <a href="{{route('dashboard')}}" class="nav-link"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+          <li class="{{Request::is('*dashboard*') ? 'active' : ''}}"> <a href="{{route('dashboard.index')}}" class="nav-link"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
           
           @if (getRoleName() == 'pimpinan')
             <li class="{{Request::is('*staff*') ? 'active' : ''}}"><a class="nav-link" href="{{route('staff.index')}}"><i class="fas fa-user"></i> <span>Staff</span></a></li>

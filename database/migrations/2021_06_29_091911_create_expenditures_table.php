@@ -17,8 +17,8 @@ class CreateExpendituresTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('id_types');
             $table->date('date');
-            $table->string('amount');
-            $table->string('note');
+            $table->integer('amount');
+            $table->text('note');
             $table->timestamps();
 
             $table->foreign('id_types')->references('id')->on('expenditure_types')->onDelete('cascade')->onUpdate('cascade');

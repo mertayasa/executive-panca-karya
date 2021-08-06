@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         
         $staff = [
             'name' => 'Staff',
-            'email' => $faker->unique()->safeEmail(),
+            'email' => 'staff@demo.com',
             'email_verified_at' => now(),
             'password' => bcrypt('asdasdasd'), // password
             'remember_token' => Str::random(10),
@@ -27,22 +27,35 @@ class UserSeeder extends Seeder
 
         $owner = [
             'name' => 'Admin',
-            'email' => $faker->unique()->safeEmail(),
+            'email' => 'admin@demo.com',
             'email_verified_at' => now(),
             'password' => bcrypt('asdasdasd'), // password
             'remember_token' => Str::random(10),
             'level' => 1
         ];
 
-        $create_staff = User::create($staff);
-        $create_owner = User::create($owner);
-        $new_staff = new Staff;
-        $new_staff->id_user = $create_staff->id;
-        $new_staff->date = Carbon::now();
-        $new_staff->gender = (bool)random_int(0, 1);
-        $new_staff->telp = '98123912790';
-        $new_staff->address = $faker->address();
-        $new_staff->save();
+        $find_staff = User::where('email', 'staff@demo.com')->get();
+        $find_admin = User::where('email', 'admin@demo.com')->get();
+        if($find_staff->count() < 1){
+            $create_staff = User::create($staff);
+            $new_staff = new Staff;
+            $new_staff->id_user = $create_staff->id;
+            $new_staff->date = Carbon::now();
+            $new_staff->gender = (bool)random_int(0, 1);
+            $new_staff->telp = '98123912790';
+            $new_staff->address = $faker->address();
+            $new_staff->save();
+        }else{
+            $find_staff->password = bcrypt('asdasdasd');
+            $find_staff->save();
+        }
+
+        if($find_admin->count() < 1){
+            $create_owner = User::create($owner);
+        }else{
+            $find_admin->password = bcrypt('asdasdasd');
+            $find_admin->save();
+        }
 
 
     }

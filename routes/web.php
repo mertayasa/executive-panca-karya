@@ -36,7 +36,11 @@ Auth::routes(['register' => false]);
 
 Route::group(['middleware' => 'auth'], function () {
 
-Route::get('dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+    Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
+        Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+        Route::post('generate-chart', [App\Http\Controllers\HomeController::class, 'getIncomeChart'])->name('chart_income');
+        Route::post('generate-expenditure-chart', [App\Http\Controllers\HomeController::class, 'getExpenditureChart'])->name('chart_expenditure');
+    });
 
 Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
     Route::get('edit', [UserController::class, 'edit'])->name('edit');

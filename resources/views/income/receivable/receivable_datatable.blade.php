@@ -65,7 +65,7 @@
         ]
 
         @if(getRoleName() == 'staff')
-            responsivePriority = 3
+            responsivePriorityRec = 3
             columnsRec.push({
                     data: 'action',
                     name: 'action',
@@ -90,8 +90,8 @@
                     className: 'align-middle'
                 },
                 {
-                    responsivePriority: responsivePriority,
-                    targets: 4
+                    responsivePriority: 1,
+                    targets: responsivePriorityRec
                 },
             ],
             language: {
