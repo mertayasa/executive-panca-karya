@@ -31,7 +31,7 @@
                     </div>
                     <div class="col-12 mt-3">
                       <button class="btn btn-primary mr-3" type="submit">Simpan</button>
-                      <a href="{{route('income.index')}}" class="btn btn-danger">Kembali</a>
+                      <a href="{{route('receivable.index')}}" class="btn btn-danger">Kembali</a>
                     </div>
                     {!! Form::close() !!}
                   </div>

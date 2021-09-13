@@ -301,32 +301,50 @@ class IncomeController extends Controller{
     }
 
     public function payCustomAmount(Request $request, Customer $customer){
-        return redirect()->back();
-        // dd($customer->income->where('receivable_remain', '!=', 0));
-        // try{
-        //     if(!isset($request->pay) || $request->pay > $income->receivable_remain){
-        //         return redirect()->back()->withInput()->with('error', 'Jumlah pembayaran melebihi jumlah piutang yang harus dibayar');
-        //     }
+        try{
+            $data = $request->all();
+            if(!isset($request->pay)){
+                return redirect()->back()->withInput()->with('error', 'Jumlah pembayaran tidak boleh kosong');
+            }
 
-        //     $remain = $income->receivable_remain - $request->pay;
-        //     $income->receivable_remain = $remain;
-        //     $income->updated_by = Auth::id();
+            if($request->pay > $customer->total_receivable){
+                return redirect()->back()->withInput()->with('error', 'Jumlah pembayaran melebihi jumlah piutang yang harus dibayar');
+            }
+
+            $incomes = $customer->income()->orderBy('updated_at')->where('receivable_remain', '!=', 0)->get();
+
+            $pay_left = $data['pay'];
             
-        //     if($remain == 0){
-        //         $income->status = 1;
-        //     }
+            foreach($incomes as $income){
+                if($pay_left != 0){
+                    $remain = max($income->receivable_remain - $pay_left, 0);
+                    $pay_left = max($pay_left - max($income->receivable_remain - $remain, 0), 0);
 
-        //     $income->save();
+                    // dd($pay_left);
 
-        //     $this->storeReceivableLog($income, $remain, $request->pay);
-
-        // }catch(Exception $e){
-        //     Log::info($e->getMessage());
-        //     dd($e->getMessage());
-        // }
+                    $income->receivable_remain = $remain;
+                    $income->updated_by = Auth::id();
+                    
+                    if($remain == 0){
+                        $income->status = 1;
+                    }
         
-        // return response(['code' => 0, 'message' => 'Gagal membayar piutang']);
-        // return response(['code' => 1, 'message' => 'Berhasil membayar piutang']);
+                    $income->save();
+        
+                    $this->storeReceivableLog($income, $remain, $request->pay);
+                }
+            }
+
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal membayar piutang');
+        }
+
+        if($customer->refresh()->total_receivable != 0){
+            return redirect()->route('income.form_receivable', $customer->id)->with('success', 'Berhasil membayar piutang');
+        }
+
+        return redirect()->route('receivable.index')->with('success', 'Berhasil melunasi piutang '.$customer->name);
     }
 
     public function destroy(Income $income){
