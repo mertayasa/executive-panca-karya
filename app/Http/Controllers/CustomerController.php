@@ -47,9 +47,9 @@ class CustomerController extends Controller
         $customer->name           = $request->name;
         $customer->address        = $request->address;
         $customer->no_telp        = $request->no_telp;
-        $customer->place_of_birth = $request->place_of_birth;
-        $customer->date           = $request->date;
-        $customer->gender         = $request->gender;
+        // $customer->place_of_birth = $request->place_of_birth;
+        // $customer->date           = $request->date;
+        // $customer->gender         = $request->gender;
         $customer->status         = $request->status;
 
         $customer->save();
@@ -93,9 +93,9 @@ class CustomerController extends Controller
         $update->name            = $request->name;
         $update->address         = $request->address;
         $update->no_telp         = $request->no_telp;
-        $update->place_of_birth  = $request->place_of_birth;
-        $update->date            = $request->date;
-        $update->gender          = $request->gender;
+        // $update->place_of_birth  = $request->place_of_birth;
+        // $update->date            = $request->date;
+        // $update->gender          = $request->gender;
         $update->status          = $request->status;
 
         $update->save();

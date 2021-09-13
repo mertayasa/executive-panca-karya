@@ -161,6 +161,7 @@ class IncomeController extends Controller{
             $income->total  = $request->total;
             $income->ket    = $request->ket;
             $income->updated_by = Auth::id();
+            $income->receiver_name = $request->receiver_name; 
             $income->save();
         }catch(Exception $e){
             Log::info($e->getMessage());
@@ -268,7 +269,6 @@ class IncomeController extends Controller{
         try{
             if(!isset($request->pay) || $request->pay > $income->receivable_remain){
                 return response(['code' => 0, 'message' => 'Jumlah pembayaran melebihi jumlah piutang yang harus dibayar']);
-                // return redirect()->back()->withInput()->with('error', 'Jumlah pembayaran melebihi jumlah piutang yang harus dibayar');
             }
 
             $remain = $income->receivable_remain - $request->pay;
@@ -286,11 +286,9 @@ class IncomeController extends Controller{
         }catch(Exception $e){
             Log::info($e->getMessage());
             return response(['code' => 0, 'message' => 'Gagal membayar piutang']);
-            // return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data pembayaran piutang');
         }
 
         return response(['code' => 1, 'message' => 'Berhasil membayar piutang']);
-        // return redirect()->route('income.index')->with(['success' => 'Berhasil menyimpan pembayaran piutang', 'active' => 'incomeNotFix' ]);
 
     }
 
@@ -300,6 +298,35 @@ class IncomeController extends Controller{
         $accounts_receiveables->pay = $pay;
         $accounts_receiveables->remain = $remain;
         $accounts_receiveables->save();
+    }
+
+    public function payCustomAmount(Request $request, Customer $customer){
+        return redirect()->back();
+        // dd($customer->income->where('receivable_remain', '!=', 0));
+        // try{
+        //     if(!isset($request->pay) || $request->pay > $income->receivable_remain){
+        //         return redirect()->back()->withInput()->with('error', 'Jumlah pembayaran melebihi jumlah piutang yang harus dibayar');
+        //     }
+
+        //     $remain = $income->receivable_remain - $request->pay;
+        //     $income->receivable_remain = $remain;
+        //     $income->updated_by = Auth::id();
+            
+        //     if($remain == 0){
+        //         $income->status = 1;
+        //     }
+
+        //     $income->save();
+
+        //     $this->storeReceivableLog($income, $remain, $request->pay);
+
+        // }catch(Exception $e){
+        //     Log::info($e->getMessage());
+        //     dd($e->getMessage());
+        // }
+        
+        // return response(['code' => 0, 'message' => 'Gagal membayar piutang']);
+        // return response(['code' => 1, 'message' => 'Berhasil membayar piutang']);
     }
 
     public function destroy(Income $income){

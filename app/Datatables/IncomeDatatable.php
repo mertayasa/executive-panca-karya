@@ -10,7 +10,7 @@ class IncomeDataTable
     static public function set($income){
         return Datatables::of($income)
             ->editColumn('total', function($income){
-                return formatPrice($income->total);
+                return formatPriceRaw($income->total);
             })
             ->editColumn('date', function($income){
                 return indonesianDate($income->date);

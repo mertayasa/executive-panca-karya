@@ -6,9 +6,9 @@
             <th>Penerima</th>
             <th>Jenis Pendapatan</th>
             <th>Tanggal </th>
-            <th>Total Piutang</th>
-            <th>Sudah Dibayar</th>
-            <th>Sisa</th>
+            <th>Total Piutang (Rp)</th>
+            <th>Sudah Dibayar (Rp)</th>
+            <th>Sisa (Rp)</th>
             <th>Keterangan</th>
             <th></th>
             @if (getRoleName() == 'staff')
@@ -58,15 +58,18 @@
             {
                 data: 'total',
                 name: 'total',
-                orderable: false
+                orderable: false,
+                className: "text-right"
             },
             {
                 data: 'paid',
-                name: 'paid'
+                name: 'paid',
+                className: "text-right"
             },
             {
                 data: 'receivable_remain',
-                name: 'receivable_remain'
+                name: 'receivable_remain',
+                className: "text-right"
             },
             {
                 data: 'ket',

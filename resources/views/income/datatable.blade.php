@@ -5,7 +5,7 @@
             <th>Pelanggan</th>
             <th>Jenis Pendapatan</th>
             <th>Tanggal </th>
-            <th>Total</th>
+            <th class="text-right">Total (Rp)</th>
             <th>Penerima</th>
             <th>Keterangan</th>
             <th></th>
@@ -51,7 +51,8 @@
             {
                 data: 'total',
                 name: 'total',
-                orderable: false
+                orderable: false,
+                className: "text-right"
             },
             {
                 data: 'receiver_name',

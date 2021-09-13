@@ -10,7 +10,7 @@
             <th>Pelanggan</th>
             {{-- <th>Total Piutang</th>
             <th>Sudah Dibayar</th> --}}
-            <th>Sisa Piutang</th>
+            <th class="text-right">Sisa Piutang (Rp)</th>
             <th></th>
             @if (getRoleName() == 'staff')
                 <th>Aksi</th>
@@ -46,6 +46,7 @@
             {
                 data: 'total_receivable',
                 name: 'total_receivable',
+                className: "text-right"
                 // orderable: false
             },
             // {

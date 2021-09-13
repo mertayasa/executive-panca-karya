@@ -8,13 +8,13 @@ class IncomeReceivableDataTableDetail{
     static public function set($income){
         return Datatables::of($income)
             ->editColumn('total', function($income){
-                return formatPrice($income->total);
+                return formatPriceRaw($income->total);
             })
             ->addColumn('paid', function($income){
-                return formatPrice($income->total - $income->receivable_remain);
+                return formatPriceRaw($income->total - $income->receivable_remain);
             })
             ->editColumn('receivable_remain', function($income){
-                return formatPrice($income->receivable_remain);
+                return formatPriceRaw($income->receivable_remain);
             })
             ->editColumn('date', function($income){
                 return indonesianDate($income->date);

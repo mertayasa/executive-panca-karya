@@ -25,6 +25,7 @@ class IncomeFactory extends Factory
             'status' => $status,
             'receivable_remain' => $status == 0 ? $total : 0,
             'ket' => $this->faker->sentence(),
+            'receiver_name' => $this->faker->name(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
             'created_by' => User::where('level', 0)->first()->id,

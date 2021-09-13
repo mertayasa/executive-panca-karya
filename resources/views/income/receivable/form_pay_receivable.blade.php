@@ -9,7 +9,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header d-flex justify-content-between">
-            <h4>Bayar Piutang Sekalian <span class="text-danger"> (Belum Berfungsi) </span> </h4>
+            {{-- <h4>Bayar Piutang Sekalian <span class="text-danger"> (Belum Berfungsi) </span> </h4> --}}
           </div>
           <div class="card-body">
             @include('layouts.flash')
@@ -24,16 +24,16 @@
                 </div>
                 <div class="col-12 col-md-6">
                   <div class="row">
-                    {{-- {!! Form::model($customers, ['route' => ['income.pay_receivable', $customers->id], 'method' => 'patch']) !!} --}}
+                    {!! Form::model($customer, ['route' => ['income.pay_custom_amount', $customer->id], 'method' => 'patch', 'class' => 'col-12']) !!}
                     <div class="col-12 ">
                         {!! Form::label('incomePay', 'Bayar ', ['class' => 'mb-1']) !!}
                         {!! Form::number('pay', null, ['class' => 'form-control', 'id' => 'incomePay']) !!}
                     </div>
                     <div class="col-12 mt-3">
-                      <button class="btn btn-primary mr-3" disabled type="submit">Simpan</button>
+                      <button class="btn btn-primary mr-3" type="submit">Simpan</button>
                       <a href="{{route('income.index')}}" class="btn btn-danger">Kembali</a>
                     </div>
-                    {{-- {!! Form::close() !!} --}}
+                    {!! Form::close() !!}
                   </div>
                 </div>
             </div>
@@ -48,7 +48,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header d-flex justify-content-between">
-            <h4>Daftar Piutang {{ucwords($customer->name)}} <span class="text-info"> (Berfungsi) </span> </h4>
+            <h4>Daftar Piutang {{ucwords($customer->name)}} </h4>
           </div>
           <div class="card-body">
             @include('income.receivable.receivable_datatable_detail')

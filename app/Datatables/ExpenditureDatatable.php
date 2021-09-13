@@ -11,7 +11,7 @@ class ExpenditureDataTable
     {
         return Datatables::of($expenditure)
             ->editColumn('amount', function($expenditure){
-                return formatPrice($expenditure->amount);
+                return formatPriceRaw($expenditure->amount);
             })
             ->editColumn('date', function($expenditure){
                 return indonesianDate($expenditure->date);

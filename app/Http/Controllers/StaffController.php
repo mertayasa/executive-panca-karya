@@ -31,7 +31,7 @@ class StaffController extends Controller{
             $user = new User;
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->password = bcrypt ($request->password);
+            $user->password = bcrypt($request->password);
     
             $user->save();
     
@@ -69,7 +69,7 @@ class StaffController extends Controller{
             }
             
             if($request->password!=null){
-                $user->password= bcrypt ($request->password);
+                $user->password= bcrypt($request->password);
             }
     
             $user->update();

@@ -5,9 +5,9 @@
             <th>Nama</th>
             <th>Alamat</th>
             <th>No. Telp</th>
-            <th>Tempat Lahir</th>
+            {{-- <th>Tempat Lahir</th>
             <th>Tgl. Lahir</th>
-            <th>Jenis Kelamin</th>
+            <th>Jenis Kelamin</th> --}}
             <th>Status</th>
             @if (getRoleName() == 'staff')
                 <th>Aksi</th>
@@ -47,20 +47,20 @@
                     name: 'no_telp',
                     orderable: false
                 },
-                {
-                    data: 'place_of_birth',
-                    name: 'place_of_birth',
-                    orderable: false
-                },
-                {
-                    data: 'date',
-                    name: 'date',
-                    orderable: false
-                },
-                {
-                    data: 'gender',
-                    name: 'gender'
-                },
+                // {
+                //     data: 'place_of_birth',
+                //     name: 'place_of_birth',
+                //     orderable: false
+                // },
+                // {
+                //     data: 'date',
+                //     name: 'date',
+                //     orderable: false
+                // },
+                // {
+                //     data: 'gender',
+                //     name: 'gender'
+                // },
                 {
                     data: 'status',
                     name: 'status'

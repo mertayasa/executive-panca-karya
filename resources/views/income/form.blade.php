@@ -5,7 +5,7 @@
     </div>
     <div class="col-12 col-md-6 m-auto ">
         {!! Form::label('receiverName', 'Nama Penerima ', ['class' => 'mb-1']) !!}
-        {!! Form::text('receiver_name', null, ['class' => 'form-control', 'id' => 'receiverName', 'disabled' => isset($income) || isset($disabled) ? true : false]) !!}
+        {!! Form::text('receiver_name', null, ['class' => 'form-control', 'id' => 'receiverName']) !!}
     </div>
 </div>
 
@@ -15,8 +15,8 @@
         {!! Form::select('id_income_type', $income_type, null, ['class' => 'form-control', 'id' => 'incomeType', 'disabled' => isset($disabled) ? true : false ]) !!}
     </div>
     <div class="col-12  col-md-6 m-auto">
-        {!! Form::label('incomerTotal', 'Total ', ['class' => 'mb-1']) !!}
-        {!! Form::number('total', null, ['class' => 'form-control', 'id' => 'incomerTotal', 'disabled' => isset($disabled) ? true : false]) !!}
+        {!! Form::label('incomeTotal', 'Total ', ['class' => 'mb-1']) !!}
+        {!! Form::number('total', null, ['class' => 'form-control', 'id' => 'incomeTotal', 'disabled' => isset($disabled) ? true : false]) !!}
     </div>
 </div>
 <div class="row mt-3">

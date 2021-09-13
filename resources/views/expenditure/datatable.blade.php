@@ -4,7 +4,7 @@
             <th>No</th>
             <th>Jenis Pengeluaran</th>
             <th>Tanggal </th>
-            <th>Jumlah Pengeluaran</th>
+            <th class="text-right">Jumlah Pengeluaran (Rp)</th>
             <th>Nota</th>
             @if(getRoleName() == 'staff')
                 <th>Aksi</th>
@@ -45,7 +45,8 @@
             {
                 data: 'amount',
                 name: 'amount',
-                orderable: false
+                orderable: false,
+                className: "text-right"
             },
             {
                 data: 'note',

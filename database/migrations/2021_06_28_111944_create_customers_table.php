@@ -18,9 +18,9 @@ class CreateCustomersTable extends Migration
             $table->string('name', 50);
             $table->text('address');
             $table->string('no_telp', 13);
-            $table->string('place_of_birth', 50);
-            $table->date('date');
-            $table->tinyInteger('gender')->default(0);
+            // $table->string('place_of_birth', 50);
+            // $table->date('date');
+            // $table->tinyInteger('gender')->default(0);
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });

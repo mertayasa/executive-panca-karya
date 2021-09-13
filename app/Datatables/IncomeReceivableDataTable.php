@@ -8,7 +8,7 @@ class IncomeReceivableDataTable{
     static public function set($customer){
         return Datatables::of($customer)
             ->editColumn('total_receivable', function($customer){
-                return formatPrice($customer->total_receivable);
+                return formatPriceRaw($customer->total_receivable);
             })
             // ->editColumn('total', function($income){
             //     return formatPrice($income->total);

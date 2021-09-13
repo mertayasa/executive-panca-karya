@@ -32,6 +32,10 @@ function formatPrice($value){
     return 'Rp '. number_format($value,0,',','.');
 }
 
+function formatPriceRaw($value){
+    return number_format($value,0,',','.');
+}
+
 function indonesianDate($date){
     return Carbon::parse($date)->isoFormat('LL');
 }
