@@ -2,10 +2,10 @@
     <aside id="sidebar-wrapper">
       <div class="sidebar-brand">
         <!-- <a href="index.html">PANCA KARYA MANUNGGAL</a> -->
-         <img class="img-fluid" src="{{asset('images/logo-panca.jpeg')}}" alt="Responsive image" width="200" height="200">
+         <img class="img-fluid" src="{{asset('images/logo-panca.jpeg')}}" alt="Responsive image" width="200" height="200" >
       </div>
       <div class="sidebar-brand sidebar-brand-sm">
-        <a href="index.html">PKM</a>
+        <a href="index.html"></a>
       </div>
       <ul class="sidebar-menu">
           <li class="{{Request::is('*dashboard*') ? 'active' : ''}}"> <a href="{{route('dashboard.index')}}" class="nav-link"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>

@@ -1,12 +1,11 @@
 @extends('layouts.app')
 
+
 @section('content')
 <section class="section">
-    <div class="section-header">
-        <h1>Dashboard</h1>
-    </div>
+ 
 
-    <div class="row">
+    {{-- <div class="row">
       <div class="col-lg-4 col-md-4 col-sm-12">
         <div class="card card-statistic-2">
           <div class="card-icon shadow-primary bg-primary">
@@ -70,15 +69,123 @@
           </div>
         </div>
       </div>
+    </div> --}}
 
 
+      
+
+{{-- <div class="container bootstrap snippets bootdeys"> --}}
+<div class="row pt-5">
+    {{-- <div class="col-md-4 col-sm-6 content-card">
+        <div class="card-big-shadow">
+            <div class="card-d card-just-text" data-background="color" data-color="green" data-radius="none">
+                <div class="content">
+                    <h6 class="category text-white">Total Staff</h6>
+                    <h4 class="title"><a href="#"> *</a></h4>
+                    <p class="description"> {{$dashboard_data['staff_count']}} </p>
+                </div>
+            </div>
+        </div>
     </div>
+    
+    <div class="col-md-4 col-sm-6 content-card">
+        <div class="card-big-shadow">
+            <div class="card-d card-just-text" data-background="color" data-color="yellow" data-radius="none">
+                <div class="content">
+                    <h6 class="category text-white">Total Pelanggan</h6>
+                    <h4 class="title"><a href="#"> *</a></h4>
+                    <p class="description"> {{$dashboard_data['customer_count']}} </p>
+                </div>
+            </div> 
+        </div>
+    </div>
+    
+    <div class="col-md-4 col-sm-6 content-card">
+        <div class="card-big-shadow">
+            <div class="card-d card-just-text" data-background="color" data-color="brown" data-radius="none">
+                <div class="content">
+                    <h6 class="category text-white">Total Pendapatan</h6>
+                    <h4 class="title"><a href="#"> *</a></h4>
+                    <p class="description"> {{ formatPrice($dashboard_data['income_count']) }} </p>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+    
+   
+
+    <div class="col-md-4 col-sm-6">
+        <div class="card card-custom bg-white border-white border-0">
+          <div class="card-custom-img" style="background-color: #343e5f" >
+          </div>
+          <div class="card-custom-avatar">
+           <a href=" {{route('staff.index')}} ">  <span><i class="fa fa-users"></i> </span> </a>
+          </div>
+          <div class="card-body pt-3">
+            <h5 class="card-title mb-4">Total Staff</h5>
+              <div class="icon">
+                {{$dashboard_data['staff_count']}}
+              </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <div class="card card-custom bg-white border-white border-0">
+          <div class="card-custom-img "  style="background-color:#9a7e83" >
+          </div>
+          <div class="card-custom-avatar">
+            <a href=" {{route('customer.index')}} "> <span><center><i class="fa fa-portrait"></i></center> </span> </a>
+          </div>
+          <div class="card-body pt-3">
+            <h5 class="card-title mb-4">Total Pelanggan</h5>
+              <div class="icon">
+                {{$dashboard_data['customer_count']}} 
+              </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <div class="card card-custom bg-white border-white border-0">
+          <div class="card-custom-img"  style="background-color:#bdaea6" >
+          </div>
+          <div class="card-custom-avatar">
+              <a href=" {{route('income.index')}} "> <span><center><i class="fas fa-wallet"></i></center> </span> </a>
+          </div>
+          <div class="card-body pt-3">
+            <h5 class="card-title mb-4">Total Pendapatan</h5>
+              <div class="icon">
+               {{ formatPrice($dashboard_data['income_count']) }} 
+              </div>
+          </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-6">
+        <div class="card card-custom bg-white border-white border-0">
+          <div class="card-custom-img " style="background-color:#acbda6" >
+          </div>
+          <div class="card-custom-avatar">
+           <a href=" {{route('expenditure.index')}} ">  <span><center><i class="fas fa-wallet"></i></center> </span> </a>
+          </div>
+          <div class="card-body pt-3">
+            <h5 class="card-title mb-4">Total Pengeluaran</h5>
+              <div class="icon">
+                 {{ formatPrice($dashboard_data['receiavable_count']) }}
+              </div>
+          </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+     
 
 
       
     <div class="row">
       <div class="col-12 col-md-12">
-        <div class="card">
+        <div class="card-d">
           <div class="card-header">
             <div class="row col-12 align-items-center justify-content-between p-0">
               <div class="col-6">
@@ -87,7 +194,7 @@
               <div class="col-6 text-right px-0">
                 <div class="card-stats-title">
                   <div class="dropdown d-inline">
-                    <a class="font-weight-600 btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#" id="orders-month">Pilih Tahun</a>
+                    <a class="font-weight-600 btn btn-new1 dropdown-toggle" data-toggle="dropdown" href="#" id="orders-month">Pilih Tahun</a>
                     <ul class="dropdown-menu dropdown-menu-sm">
                       @foreach ($dashboard_data['income_years'] as $year)
                         <li><a href="javascript:void(0)" class="dropdown-item" onclick="generateChartData('{{$year}}')">{{$year}}</a></li>
@@ -116,7 +223,7 @@
               <div class="col-6 text-right px-0">
                 <div class="card-stats-title">
                   <div class="dropdown d-inline">
-                    <a class="font-weight-600 btn btn-danger dropdown-toggle" data-toggle="dropdown" href="#" id="orders-month">Pilih Tahun</a>
+                    <a class="font-weight-600 btn btn-new1 dropdown-toggle" data-toggle="dropdown" href="#" id="orders-month">Pilih Tahun</a>
                     <ul class="dropdown-menu dropdown-menu-sm">
                       @foreach ($dashboard_data['expenditure_years'] as $year)
                         <li><a href="javascript:void(0)" class="dropdown-item" onclick="generateChartExpenditureData('{{$year}}')">{{$year}}</a></li>
@@ -186,9 +293,9 @@
                   {
                       // lineTension: 0,
                       label: 'Pemasukan',
-                      borderColor: "#6777ef",
-                      backgroundColor: "#6777ef",
-                      pointHoverBorderColor: "#6777ef",
+                      borderColor: "#bdaea6",
+                      backgroundColor: "#bdaea6",
+                      pointHoverBorderColor: "#bdaea6",
                       pointBorderWidth: 0,
                       pointHoverRadius: 10,
                       pointHoverBorderWidth: 1,
@@ -269,9 +376,9 @@
                   {
                       // lineTension: 0,
                       label: 'Pengeluaran',
-                      borderColor: "#FF0000",
-                      backgroundColor: "#FF0000",
-                      pointHoverBorderColor: "#FF0000",
+                      borderColor: "#acbda6",
+                      backgroundColor: "#acbda6",
+                      pointHoverBorderColor: "#acbda6",
                       pointBorderWidth: 0,
                       pointHoverRadius: 10,
                       pointHoverBorderWidth: 1,
