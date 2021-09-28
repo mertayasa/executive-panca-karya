@@ -40,6 +40,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
         Route::post('generate-chart', [App\Http\Controllers\HomeController::class, 'getIncomeChart'])->name('chart_income');
         Route::post('generate-expenditure-chart', [App\Http\Controllers\HomeController::class, 'getExpenditureChart'])->name('chart_expenditure');
+        Route::get('datatablePerDay', [App\Http\Controllers\HomeController::class, 'datatablePerDay'])->name('datatablePerDay');
+        Route::get('datatableExPerDay', [App\Http\Controllers\HomeController::class, 'datatableExPerDay'])->name('datatableExPerDay');
     });
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
@@ -102,11 +104,13 @@ Route::group(['middleware' => 'auth'], function () {
             Route::patch('full-pay/{customer}', [IncomeController::class, 'fullPay'])->name('full_pay');
             Route::patch('custom-amount-pay/{customer}', [IncomeController::class, 'payCustomAmount'])->name('pay_custom_amount');
             Route::patch('single-full-pay/{income}', [IncomeController::class, 'singleFullPay'])->name('single_full_pay');
+            Route::get('income_per_day', [IncomeController::class, 'income_per_day'])->name('income_per_day');
         });
 
         Route::get('datatable/{param?}', [IncomeController::class, 'datatable'])->name('datatable');
         Route::get('datatable-receivable/{param?}', [IncomeController::class, 'datatableReceivable'])->name('datatable_receivable');
         Route::get('datatable-receivable-detail/{id_customer}/{param?}', [IncomeController::class, 'datatableReceivableDetail'])->name('datatable_receivable_detail');
+        Route::get('datatablePerDay/{param?}', [IncomeController::class, 'datatablePerDay'])->name('datatablePerDay');
     });
 
     Route::group(['prefix' => 'receivable', 'as' => 'receivable.'], function () {

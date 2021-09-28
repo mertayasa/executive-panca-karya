@@ -119,17 +119,17 @@
           <div class="card-custom-img" style="background-color: #343e5f" >
           </div>
           <div class="card-custom-avatar">
-           <a href=" {{route('staff.index')}} ">  <span><i class="fa fa-users"></i> </span> </a>
+           <a href=" {{route('customer.index')}} ">  <span><i class="fa fa-users"></i> </span> </a>
           </div>
           <div class="card-body pt-3">
-            <h5 class="card-title mb-4">Total Staff</h5>
+            <h5 class="card-title mb-4">Total Pelanggan</h5>
               <div class="icon">
-                {{$dashboard_data['staff_count']}}
+                {{$dashboard_data['customer_count']}}
               </div>
           </div>
         </div>
     </div>
-    <div class="col-md-4 col-sm-6">
+    {{-- <div class="col-md-4 col-sm-6">
         <div class="card card-custom bg-white border-white border-0">
           <div class="card-custom-img "  style="background-color:#9a7e83" >
           </div>
@@ -143,13 +143,13 @@
               </div>
           </div>
         </div>
-    </div>
+    </div> --}}
     <div class="col-md-4 col-sm-6">
         <div class="card card-custom bg-white border-white border-0">
-          <div class="card-custom-img"  style="background-color:#bdaea6" >
+          <div class="card-custom-img"  style="background-color:#9a7e83" >
           </div>
           <div class="card-custom-avatar">
-              <a href=" {{route('income.index')}} "> <span><center><i class="fas fa-wallet"></i></center> </span> </a>
+              <a href=" #income_per_day "> <span><center><i class="fas fa-wallet"></i></center> </span> </a>
           </div>
           <div class="card-body pt-3">
             <h5 class="card-title mb-4">Total Pendapatan</h5>
@@ -164,7 +164,7 @@
           <div class="card-custom-img " style="background-color:#acbda6" >
           </div>
           <div class="card-custom-avatar">
-           <a href=" {{route('expenditure.index')}} ">  <span><center><i class="fas fa-wallet"></i></center> </span> </a>
+           <a href=" #expen_per_day ">  <span><center><i class="fas fa-wallet"></i></center> </span> </a>
           </div>
           <div class="card-body pt-3">
             <h5 class="card-title mb-4">Total Pengeluaran</h5>
@@ -174,17 +174,53 @@
           </div>
         </div>
     </div>
-
 </div>
 
 
+ @if (getRoleName() == 'staff')  
+<div class="row" id="income_per_day">
+  <div class="col-12 col-md-12">
+    <div class="card-d">
+      <div class="card-header">
+        <div class="row col-12 align-items-center justify-content-between p-0">
+          <div class="col-6">
+            <h4>Data Pendapatan Per Hari</h4>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+      {{-- @include('income.filter_datatable', ['tableId' => 'incomeDatatable']) --}}
+        <hr>
+        @include('dashboard.datatablePerDay')
+      </div>
+    </div>
+  </div>
+</div>
 
-     
+<div class="row" id="expen_per_day">
+  <div class="col-12 col-md-12">
+    <div class="card-d">
+      <div class="card-header">
+        <div class="row col-12 align-items-center justify-content-between p-0">
+          <div class="col-6">
+            <h4>Data Pengeluaran Per Hari</h4>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+      {{-- @include('income.filter_datatable', ['tableId' => 'incomeDatatable']) --}}
+        <hr>
+        @include('dashboard.datatableExPerDay')
+      </div>
+    </div>
+  </div>
+</div>
+@endif
 
-
-      
+ @if (getRoleName() == 'pimpinan')
+{{--GRAFIK  --}}
     <div class="row">
-      <div class="col-12 col-md-12">
+      <div class="col-6 col-md-6">
         <div class="card-d">
           <div class="card-header">
             <div class="row col-12 align-items-center justify-content-between p-0">
@@ -210,11 +246,9 @@
           </div>
         </div>
       </div>
-    </div>
-      
-    <div class="row">
-      <div class="col-12 col-md-12">
-        <div class="card">
+
+      <div class="col-6 col-md-6">
+        <div class="card-d">
           <div class="card-header">
             <div class="row col-12 align-items-center justify-content-between p-0">
               <div class="col-6">
@@ -240,11 +274,13 @@
         </div>
       </div>
     </div>
+{{-- END GRAFIK --}}
+@endif
 
 </section>
 @endsection
 
-@push('scripts')
+ @push('scripts')
   <script>
     let chart
     generateChartData()
@@ -293,9 +329,9 @@
                   {
                       // lineTension: 0,
                       label: 'Pemasukan',
-                      borderColor: "#bdaea6",
-                      backgroundColor: "#bdaea6",
-                      pointHoverBorderColor: "#bdaea6",
+                      borderColor: "#9a7e83",
+                      backgroundColor: "#9a7e83",
+                      pointHoverBorderColor: "#9a7e83",
                       pointBorderWidth: 0,
                       pointHoverRadius: 10,
                       pointHoverBorderWidth: 1,
@@ -410,4 +446,4 @@
       return barChartExpenditure
     }
   </script>
-@endpush
+@endpush 

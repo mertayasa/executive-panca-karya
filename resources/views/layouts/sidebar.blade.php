@@ -3,10 +3,10 @@
       <div class="sidebar-brand">
         <!-- <a href="index.html">PANCA KARYA MANUNGGAL</a> -->
          <img class="img-fluid" src="{{asset('images/logo-panca.jpeg')}}" alt="Responsive image" width="200" height="200" >
+         <h1 class="mt-3">{{Auth::user()->name}}</h1>
+          {{-- <h1 class="mt-3">{{Auth::user()->}}</h1> --}}
       </div>
-      <div class="sidebar-brand sidebar-brand-sm">
-        <a href="index.html"></a>
-      </div>
+     
       <ul class="sidebar-menu">
           <li class="{{Request::is('*dashboard*') ? 'active' : ''}}"> <a href="{{route('dashboard.index')}}" class="nav-link"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
           
