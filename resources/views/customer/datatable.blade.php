@@ -8,6 +8,7 @@
             {{-- <th>Tempat Lahir</th>
             <th>Tgl. Lahir</th>
             <th>Jenis Kelamin</th> --}}
+            <th>Kategori</th>
             <th>Status</th>
             @if (getRoleName() == 'staff')
                 <th>Aksi</th>
@@ -61,10 +62,15 @@
                 //     data: 'gender',
                 //     name: 'gender'
                 // },
+                  {
+                    data: 'category',
+                    name: 'category'
+                },
                 {
                     data: 'status',
                     name: 'status'
                 }
+
             ]
 
         @if(getRoleName() == 'staff')
