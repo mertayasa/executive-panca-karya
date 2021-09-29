@@ -79,15 +79,15 @@
             }
         ]
 
-        @if(getRoleName() == 'staff')
-        responsivePriority = 9
-        columnsRec.push({
-            data: 'action',
-            name: 'action',
-            orderable: false,
-            searchable: false
-        })
-        @endif
+        // @if(getRoleName() == 'staff')
+        // responsivePriority = 9
+        // columnsRec.push({
+        //     data: 'action',
+        //     name: 'action',
+        //     orderable: false,
+        //     searchable: false
+        // })
+        // @endif
 
         table_receivable = $('#incomeReceivable').DataTable({
             processing: true,

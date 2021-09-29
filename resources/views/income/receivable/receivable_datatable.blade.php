@@ -8,6 +8,8 @@
 
             <th>No</th>
             <th>Pelanggan</th>
+            <th>Tanggal </th>
+
             {{-- <th>Total Piutang</th>
             <th>Sudah Dibayar</th> --}}
             <th class="text-right">Sisa Piutang (Rp)</th>
@@ -42,6 +44,10 @@
             {
                 data: 'name',
                 name: 'name'
+            },
+              {
+                data: 'created_at',
+                name: 'created_at'
             },
             {
                 data: 'total_receivable',

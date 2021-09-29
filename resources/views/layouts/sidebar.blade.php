@@ -17,7 +17,9 @@
           <li class="{{Request::is('*customer*') ? 'active' : ''}}"><a class="nav-link" href="{{route('customer.index')}}"><i class="fas fa-portrait"></i> <span>Pelanggan</span></a></li>
           <li class="{{Request::is('*income*') && !Request::is('*income-type*') && !Request::is('*report*') && !Request::is('*receivable*') ? 'active' : ''}}"><a href="{{route('income.index')}}"><i class="fas fa-wallet"></i> <span> Pendapatan </span> </a></li>
           <li class="{{Request::is('*receivable*') ? 'active' : ''}}"><a href="{{route('receivable.index')}}"><i class="fas fa-receipt"></i> <span> Piutang </span> </a></li>
+
           <li class="{{Request::is('*expenditure*') && !Request::is('*expenditure-type*') && !Request::is('*report*') ? 'active' : ''}}"><a href="{{route('expenditure.index')}}"><i class="fas fa-file-alt"></i> <span> Pengeluaran </span> </a></li>
+          
           <li class="menu-header">Data Master</li>
           <li class="{{Request::is('*income-type*') ? 'active' : ''}}"><a href="{{route('income_type.index')}}"><i class="fas fa-dot-circle"></i> <span> Jenis Pendapatan </span> </a></li>
           <li class="{{Request::is('*expenditure-type*') ? 'active' : ''}}"><a href="{{route('expenditure_type.index')}}"><i class="fas fa-dot-circle"></i> <span> Jenis Pengeluaran </span> </a></li>

@@ -225,7 +225,7 @@
           <div class="card-header">
             <div class="row col-12 align-items-center justify-content-between p-0">
               <div class="col-6">
-                <h4>Grafik Pendapatan <span id="incomeSelectedYear">{{\Carbon\Carbon::now()->year}}</span></h4>
+                <h3>Grafik Pendapatan <span id="incomeSelectedYear">{{\Carbon\Carbon::now()->year}}</span></h3>
               </div>
               <div class="col-6 text-right px-0">
                 <div class="card-stats-title">
@@ -252,7 +252,7 @@
           <div class="card-header">
             <div class="row col-12 align-items-center justify-content-between p-0">
               <div class="col-6">
-                <h4>Grafik Pengeluaran <span id="expenditureSelectedYear">{{\Carbon\Carbon::now()->year}}</span></h4>
+                <h3>Grafik Pengeluaran <span id="expenditureSelectedYear">{{\Carbon\Carbon::now()->year}}</span></h3>
               </div>
               <div class="col-6 text-right px-0">
                 <div class="card-stats-title">
@@ -273,6 +273,36 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div class ="row">
+    <div class="col-6 col-md-6">
+        <div class="card-d">
+          <div class="card-header">
+            <div class="row col-12 align-items-center justify-content-between p-0">
+              <div class="col-6">
+                <h3>Grafik persentase  <span id="expenditureSelectedYear">{{\Carbon\Carbon::now()->year}}</span></h3>
+              </div>
+              <div class="col-6 text-right px-0">
+                <div class="card-stats-title">
+                  <div class="dropdown d-inline">
+                    <a class="font-weight-600 btn btn-new1 dropdown-toggle" data-toggle="dropdown" href="#" id="orders-month">Pilih Tahun</a>
+                    <ul class="dropdown-menu dropdown-menu-sm">
+                      @foreach ($dashboard_data['expenditure_years'] as $year)
+                        <li><a href="javascript:void(0)" class="dropdown-item" onclick="generateChartExpenditureData('{{$year}}')">{{$year}}</a></li>
+                      @endforeach
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <canvas id="chart_pie height="350"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
     </div>
 {{-- END GRAFIK --}}
 @endif
@@ -446,4 +476,6 @@
       return barChartExpenditure
     }
   </script>
+
+  
 @endpush 

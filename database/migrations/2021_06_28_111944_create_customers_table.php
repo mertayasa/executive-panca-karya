@@ -21,6 +21,7 @@ class CreateCustomersTable extends Migration
             // $table->string('place_of_birth', 50);
             // $table->date('date');
             // $table->tinyInteger('gender')->default(0);
+            $table->tinyInteger('category')->default(0);;
             $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });

@@ -52,7 +52,7 @@ class IncomeController extends Controller
 
     public function datatable($filter = null)
     {
-        $rawQuery = Income::where('status', 1);
+        $rawQuery = Income::where('status', 1)->orderBy('created_at', 'DESC');
 
         if ($filter == null) {
             $income = $rawQuery->get();
@@ -62,44 +62,6 @@ class IncomeController extends Controller
 
         return IncomeDataTable::set($income);
     }
-
-
-    // public function datatablePerDay($filter = null)
-    // {
-    //     $date = Carbon::now()->subDays(30)->startOfDay();
-    //     $income_per_day = Income::selectRaw('date(date) date, sum(total) total')
-    //         ->where('status', 1)
-    //         ->whereYear('date', $date)
-    //         ->groupBy('date')
-    //         ->orderBy('date', 'DESC')
-    //         ->get();
-
-    //     if ($filter == null) {
-    //         $income = $income_per_day->get();
-    //     } else {
-    //         $income = $this->filterDatatable($income_per_day, $filter);
-    //     }
-
-    //     return IncomeDataTable::set($income);
-    // }
-
-    // public function income_per_day()
-    // {
-    //     $income = Income::latest()->get();
-    //     $anual = Income::selectRaw('DISTINCT year(date) year')->orderBy('year', 'DESC')->pluck('year', 'year');
-    //     $monthly = Income::orderBy('date', 'DESC')->get()->pluck('monthly', 'monthly_raw')->unique();
-
-    //     $totals = Income::whereMonth('date', Carbon::now())->sum('total');
-    //     $customers = Customer::pluck('name', 'id');
-    //     $income_types = IncomeType::pluck('name', 'id');
-    //     $month_selected = $totals >= 0 ? $income[0]->raw_month : null;
-
-    //     $view = str_contains(FacadesRequest::route()->getName(), 'income') ? 'income.income_per_day' : 'income.receivable.index';
-
-    //     return view($view, compact('anual', 'monthly', 'totals', 'month_selected', 'income_types', 'customers'));
-    // }
-
-
 
     public function filterDatatable($rawQuery, $filter)
     {
@@ -158,20 +120,41 @@ class IncomeController extends Controller
         $income_status = str_contains(FacadesRequest::route()->getName(), 'income') ? '1' : '0';
 
         try {
+            // $income = new Income;
+            // $income->id_income_type = $request->id_income_type;
+            // $income->id_customer = $request->id_customer;
+            // $income->receiver_name = $request->receiver_name ?? Customer::findOrFail($request->id_customer)->name;
+            // $income->date = $request->date;
+            // $income->total = $request->total;
+            // $income->receivable_remain = $income_status == '0' ? $request->total : 0;
+            // $income->ket = $request->ket;
+            // $income->created_by = Auth::id();
+            // $income->updated_by = Auth::id();
+            // $income->save();
+
+            // if ($income_status == '0') {
+            //     $accounts_receiveables = new ReceivableLog;
+            //     $accounts_receiveables->id_income = $income->id;
+            //     $accounts_receiveables->pay = 0;
+            //     $accounts_receiveables->remain = $request->total;
+            //     $accounts_receiveables->save();
+            // }
+
             $income = new Income;
             $income->id_income_type = $request->id_income_type;
             $income->id_customer = $request->id_customer;
-            $income->receiver_name = $request->receiver_name ?? Customer::findOrFail($request->id_customer)->name;
+            // $income->receiver_name = $request->receiver_name ?? Customer::findOrFail($request->id_customer)->name;
+            $income->status = $request->status;
             $income->date = $request->date;
             $income->total = $request->total;
-            $income->receivable_remain = $income_status == '0' ? $request->total : 0;
+            $income->receivable_remain = $income->status == '0' ? $request->total : 0;
             $income->ket = $request->ket;
             $income->created_by = Auth::id();
             $income->updated_by = Auth::id();
-            $income->status = $income_status;
             $income->save();
 
-            if ($income_status == '0') {
+            if ($income->status == '0') {
+
                 $accounts_receiveables = new ReceivableLog;
                 $accounts_receiveables->id_income = $income->id;
                 $accounts_receiveables->pay = 0;
@@ -183,7 +166,8 @@ class IncomeController extends Controller
             return redirect()->back()->withInput()->with('error', 'Gagal menyimpan data pendapatan, periksa lagi data anda !');
         }
 
-        $context = $income_status == 1 ? ['income.index', 'Pendapatan'] : ['receivable.index', 'Piutang'];
+        // $context = $income_status == 1 ? ['income.index', 'Pendapatan'] : ['receivable.index', 'Piutang'];
+        $context = $income->status == 1 ? ['income.index', 'Pendapatan'] : ['receivable.index', 'Piutang'];
 
         return redirect()->route($context[0])->with('success', 'Data ' . $context[1] . ' Berhasil Ditambahkan');
     }
@@ -265,6 +249,7 @@ class IncomeController extends Controller
         return IncomeReceivableDataTableDetail::set($receivable);
     }
 
+
     public function fullPay(Customer $customer)
     {
         try {
@@ -288,6 +273,8 @@ class IncomeController extends Controller
         return response(['code' => 1, 'message' => 'Berhasil melunasi hutang']);
     }
 
+
+
     public function singleFullPay(Income $income)
     {
         try {
@@ -308,6 +295,20 @@ class IncomeController extends Controller
         return response(['code' => 1, 'message' => 'Berhasil melunasi hutang']);
     }
 
+
+    public function storeReceivableLog($income, $remain, $pay)
+    {
+        $accounts_receiveables = new ReceivableLog;
+        $accounts_receiveables->id_income = $income->id;
+        $accounts_receiveables->pay = $pay;
+        $accounts_receiveables->remain = $remain;
+        $accounts_receiveables->save();
+    }
+
+
+
+
+    // ============
     public function showFormReceivable(Customer $customer)
     {
         $incomes = Income::where('status', 0)->where('id_customer', $customer->id)->get();
@@ -328,6 +329,8 @@ class IncomeController extends Controller
 
             if ($remain == 0) {
                 $income->status = 1;
+                // $income->total  = $income->total + $income->receivable_remain;
+                // $income->total;
             }
 
             $income->save();
@@ -339,15 +342,6 @@ class IncomeController extends Controller
         }
 
         return response(['code' => 1, 'message' => 'Berhasil membayar piutang']);
-    }
-
-    public function storeReceivableLog($income, $remain, $pay)
-    {
-        $accounts_receiveables = new ReceivableLog;
-        $accounts_receiveables->id_income = $income->id;
-        $accounts_receiveables->pay = $pay;
-        $accounts_receiveables->remain = $remain;
-        $accounts_receiveables->save();
     }
 
     public function payCustomAmount(Request $request, Customer $customer)
@@ -378,6 +372,8 @@ class IncomeController extends Controller
 
                     if ($remain == 0) {
                         $income->status = 1;
+                        // $income->total = $total;
+                        // $income->total  = $income->total + $income->receivable_remain;
                     }
 
                     $income->save();
@@ -396,6 +392,7 @@ class IncomeController extends Controller
 
         return redirect()->route('receivable.index')->with('success', 'Berhasil melunasi piutang ' . $customer->name);
     }
+
 
     public function destroy(Income $income)
     {

@@ -56,3 +56,8 @@ function getCategory($category)
 {
     return $category == 0 ? 'Perorangan' : 'Instansi';
 }
+
+function indonesianDateNew($date)
+{
+    return Carbon::parse($date)->isoFormat('ll');
+}

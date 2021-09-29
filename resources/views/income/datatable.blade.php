@@ -2,12 +2,13 @@
     <thead>
         <tr>
             <th>No</th>
+            <th>Tanggal </th>
             <th>Pelanggan</th>
             <th>Jenis Pendapatan</th>
-            <th>Tanggal </th>
             <th class="text-right">Total (Rp)</th>
-            <th>Penerima</th>
-            <th>Keterangan</th>
+            {{-- <th>Penerima</th> --}}
+            {{-- <th>Keterangan</th> --}}
+             <th>Pembayaran</th>
             <th></th>
             @if(getRoleName() == 'staff')
                 <th>Aksi</th>
@@ -27,13 +28,18 @@
 
     function datatable(url) {
 
-        let responsivePriority = 4
+        let responsivePriority = 3
         let columns = [
             {
                 data: 'DT_RowIndex',
                 name: 'no',
                 orderable: false,
                 searchable: false
+            },
+                {
+                data: 'date',
+                name: 'date',
+                orderable: false
             },
             {
                 data: 'customer.name',
@@ -44,24 +50,23 @@
                 name: 'income_type.name'
             },
             {
-                data: 'date',
-                name: 'date',
-                orderable: false
-            },
-            {
                 data: 'total',
                 name: 'total',
                 orderable: false,
                 className: "text-right"
             },
-            {
-                data: 'receiver_name',
-                name: 'receiver_name'
+              {
+                data: 'status',
+                name: 'status'
             },
-            {
-                data: 'ket',
-                name: 'ket'
-            },
+            // {
+            //     data: 'receiver_name',
+            //     name: 'receiver_name'
+            // },
+            // {
+            //     data: 'ket',
+            //     name: 'ket'
+            // },
             {
                 data: 'updated_at',
                 name: 'updated_at',
@@ -71,7 +76,7 @@
         ]
 
         @if(getRoleName() == 'staff')
-            responsivePriority = 8
+            responsivePriority = 5
             columns.push({
                     data: 'action',
                     name: 'action',
@@ -87,9 +92,9 @@
             responsive: true,
             ajax: url,
             columns: columns,
-            order: [
-                [6, "desc"]
-            ],
+            // order: [
+            //     [2, "desc"]
+            // ],
             columnDefs: [
                 // { width: 300, targets: 1 },
                 {

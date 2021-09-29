@@ -105,6 +105,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::patch('custom-amount-pay/{customer}', [IncomeController::class, 'payCustomAmount'])->name('pay_custom_amount');
             Route::patch('single-full-pay/{income}', [IncomeController::class, 'singleFullPay'])->name('single_full_pay');
             Route::get('income_per_day', [IncomeController::class, 'income_per_day'])->name('income_per_day');
+
+            Route::get('show/{income}', [IncomeController::class, 'show'])->name('show');
         });
 
         Route::get('datatable/{param?}', [IncomeController::class, 'datatable'])->name('datatable');

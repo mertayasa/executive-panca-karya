@@ -12,9 +12,9 @@
             <h4>Data Piutang</h4>
             <div class="right">
               <button class="btn btn-warning btn-icon icon-left mr-3"><i class="fas fa-print"></i> Print Excel</button>
-              @if (getRoleName() == 'staff')
+              {{-- @if (getRoleName() == 'staff')
                 <a href="{{route('receivable.create')}}" class="btn btn-primary">Tambah Piutang</a>
-              @endif
+              @endif --}}
             </div>
           </div>
           <div class="col-12">
