@@ -22,10 +22,14 @@
           </div>
           <div class="card-body">
             
-            <table class="table table-bordered">
+            <table class="table table-bordered table-responsive">
               <tr>
-                <td>Tanggal Pelunasan</td>
+                <td style="width: 300px">Tanggal Pelunasan</td>
                 <td>{{indonesianDate($income->updated_at)}}</td>
+              </tr>
+              <tr>
+                <td>Jumlah</td>
+                <td>{{formatPriceRaw($income->total)}}</td>
               </tr>
               <tr>
                 <td>Keterangan</td>

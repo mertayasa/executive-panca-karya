@@ -34,13 +34,17 @@
       {!! Form::label('incomeTotal', 'Sisa ', ['class' => 'mb-1']) !!}
         {!! Form::number('receivable_remain', null, ['class' => 'form-control', 'id' => 'incomeTotal', 'disabled' => isset($disabled) ? true : false]) !!}
     </div> --}}
-</div>
-
-<div class="row mt-3">
-    <div class="col-12 col-md-6 pb-3 pb-md-0">
+     <div class="col-12 col-md-6 pb-3 pb-md-0">
           {!! Form::label('incomeKet', 'Keterangan ', ['class' => 'mb-1']) !!}
         {!! Form::textarea('ket', null, ['class' => 'form-control', 'id' => 'incomeKet', 'style' => 'height:150px', 'disabled' => isset($disabled) ? true : false]) !!}
     </div>
+</div>
+
+<div class="row mt-3">
+    {{-- <div class="col-12 col-md-6 pb-3 pb-md-0">
+          {!! Form::label('incomeKet', 'Keterangan ', ['class' => 'mb-1']) !!}
+        {!! Form::textarea('ket', null, ['class' => 'form-control', 'id' => 'incomeKet', 'style' => 'height:150px', 'disabled' => isset($disabled) ? true : false]) !!}
+    </div> --}}
     <div class="col-12 col-md-6 pb-3 pb-md-0">
         {{-- {!! Form::label('incomeTotal', 'Sisa ', ['class' => 'mb-1']) !!}
         {!! Form::number('receivable_remain', null, ['class' => 'form-control', 'id' => 'incomeTotal', 'disabled' => isset($disabled) ? true : false]) !!} --}}
