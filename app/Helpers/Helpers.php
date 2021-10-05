@@ -1,24 +1,51 @@
 <?php
 
 use Carbon\Carbon;
+use ConvertApi\ConvertApi;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 
-function uploadFile($base_64_foto)
+function uploadFile($base_64_foto, $folder, $savepdf = null)
 {
     try {
         $foto = base64_decode($base_64_foto['data']);
-        $folderName = 'images/uploaded/';
-        $safeName = time() . $base_64_foto['name'];
-        $destinationPath = public_path() . '/' . $folderName;
-        file_put_contents($destinationPath . $safeName, $foto);
+        $folderName = 'images/'.$folder;
+
+        $formatted_file_name = str_replace(' ', '-', $base_64_foto['name']);
+
+        if(file_exists($folderName.'/'.$formatted_file_name)){
+            return $folder.'/'.$formatted_file_name;
+        };
+        
+        if (!file_exists($folderName)) {
+            mkdir($folderName, 0755, true); 
+        }
+        
+        if(isset($savepdf)){
+            if (!file_exists($folderName.'/pdf')) {
+                mkdir($folderName.'/pdf', 0755, true); 
+            }
+        }
+
+        // dd('asdas');
+
+        // return $folderName;
+
+        $safeName = time() . $formatted_file_name;
+        $inventoriePath = public_path() . '/' . $folderName;
+        file_put_contents($inventoriePath. '/' . $safeName, $foto);
+        
+        ConvertApi::setApiSecret(env('CONVERT_API_KEY'));
+        $result = ConvertApi::convert('pdf', ['File' => 'images/'.$folder.'/'.$safeName]);
+        $result->getFile()->save(base_path().'/public/images/'. $folder .'/'.'pdf/' .$safeName.'.pdf');
+
     } catch (Exception $e) {
         Log::info($e->getMessage());
         return 0;
     }
 
-    return $safeName;
+    return $folder.'/'.$safeName;
 }
 
 function getGender($gender)

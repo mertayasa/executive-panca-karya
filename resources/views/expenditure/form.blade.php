@@ -52,7 +52,7 @@
                         maxFileSize: '500KB'
                     }
                 @else
-                    imageUrl = "{{asset('images/uploaded/'.$expenditure->note)}}"
+                    imageUrl = "{{asset('images/'.$expenditure->note)}}"
                     options = {
                         acceptedFileTypes: ['image/png', 'image/jng', 'image/jpeg'],
                         maxFileSize: '500KB',

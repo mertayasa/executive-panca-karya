@@ -6,6 +6,7 @@ use App\Models\Expenditure;
 use App\Models\ExpenditureType;
 use Illuminate\Http\Request;
 use App\Datatables\ExpenditureDatatable;
+use ConvertApi\ConvertApi;
 use Illuminate\Support\Facades\Auth;
 
 class ExpenditureController extends Controller{
@@ -29,9 +30,9 @@ class ExpenditureController extends Controller{
     public function store(Request $request){
         $data = $request->all();
         $base_64_foto = json_decode($request['note'], true);
-        $upload_image = uploadFile($base_64_foto);
+        $upload_image = uploadFile($base_64_foto, 'expenditure', true);
 
-        if($upload_image == 0){
+        if($upload_image === 0){
             return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
         }
 
@@ -63,9 +64,8 @@ class ExpenditureController extends Controller{
     public function update(Request $request, $id){
         $data = $request->all();
         $base_64_foto = json_decode($request['note'], true);
-        $upload_image = uploadFile($base_64_foto);
-
-        if($upload_image == 0){
+        $upload_image = uploadFile($base_64_foto, 'expenditure', true);
+        if($upload_image === 0){
             return redirect()->back()->withInput()->with('error', 'Gagal mengupload gambar!');
         }
 

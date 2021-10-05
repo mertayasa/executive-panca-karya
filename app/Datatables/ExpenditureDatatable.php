@@ -17,7 +17,7 @@ class ExpenditureDataTable
                 return indonesianDateNew($expenditure->date);
             })
             ->editColumn('note', function ($expenditure) {
-                return '<img src="' . asset('images/uploaded/' . $expenditure->note) . '" alt="" width="100px">';
+                return '<img src="' . asset('images/' . $expenditure->note) . '" alt="" width="100px">';
             })
             ->addColumn('action', function ($expenditure) {
                 return
