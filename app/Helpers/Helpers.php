@@ -36,9 +36,11 @@ function uploadFile($base_64_foto, $folder, $savepdf = null)
         $inventoriePath = public_path() . '/' . $folderName;
         file_put_contents($inventoriePath. '/' . $safeName, $foto);
         
-        ConvertApi::setApiSecret(env('CONVERT_API_KEY'));
-        $result = ConvertApi::convert('pdf', ['File' => 'images/'.$folder.'/'.$safeName]);
-        $result->getFile()->save(base_path().'/public/images/'. $folder .'/'.'pdf/' .$safeName.'.pdf');
+        if(isset($savepdf)){
+            ConvertApi::setApiSecret(env('CONVERT_API_KEY'));
+            $result = ConvertApi::convert('pdf', ['File' => 'images/'.$folder.'/'.$safeName]);
+            $result->getFile()->save(base_path().'/public/images/'. $folder .'/'.'pdf/' .$safeName.'.pdf');
+        }
 
     } catch (Exception $e) {
         Log::info($e->getMessage());
