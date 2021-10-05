@@ -3,12 +3,12 @@
         <tr>
             <th>No</th>
             <th>Pelanggan</th>
-            <th>Penerima</th>
+            {{-- <th>Penerima</th> --}}
             <th>Jenis Pendapatan</th>
             <th>Tanggal </th>
             <th>Total Piutang (Rp)</th>
-            <th>Sudah Dibayar (Rp)</th>
-            <th>Sisa (Rp)</th>
+            {{-- <th>Sudah Dibayar (Rp)</th>
+            <th>Sisa (Rp)</th> --}}
             <th>Keterangan</th>
             <th></th>
             @if (getRoleName() == 'staff')
@@ -42,10 +42,10 @@
                 data: 'customer.name',
                 name: 'customer.name'
             },
-            {
-                data: 'receiver_name',
-                name: 'receiver_name'
-            },
+            // {
+            //     data: 'receiver_name',
+            //     name: 'receiver_name'
+            // },
             {
                 data: 'income_type.name',
                 name: 'income_type.name'
@@ -61,16 +61,16 @@
                 orderable: false,
                 className: "text-right"
             },
-            {
-                data: 'paid',
-                name: 'paid',
-                className: "text-right"
-            },
-            {
-                data: 'receivable_remain',
-                name: 'receivable_remain',
-                className: "text-right"
-            },
+            // {
+            //     data: 'paid',
+            //     name: 'paid',
+            //     className: "text-right"
+            // },
+            // {
+            //     data: 'receivable_remain',
+            //     name: 'receivable_remain',
+            //     className: "text-right"
+            // },
             {
                 data: 'ket',
                 name: 'ket'
@@ -99,9 +99,9 @@
             responsive: true,
             ajax: url,
             columns: columnsRec,
-            order: [
-                [8, "desc"]
-            ],
+            // order: [
+            //     [8, "desc"]
+            // ],
             columnDefs: [
                 // { width: 300, targets: 1 },
                 {
@@ -110,7 +110,7 @@
                 },
                 {
                     responsivePriority: 1,
-                    targets: 8
+                    targets: 6
                 },
             ],
             language: {

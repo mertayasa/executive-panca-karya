@@ -2,8 +2,8 @@
 
 @section('content')
 <section class="section">
-    <div class="section-header">
-        <h1>Piutang</h1>
+    <div class="section-header justify-content-center">
+        <h1> Piutang</h1>
     </div>
     <div class="row">
       <div class="col-12">
@@ -12,9 +12,9 @@
             <h4>Data Piutang</h4>
             <div class="right">
               <button class="btn btn-warning btn-icon icon-left mr-3"><i class="fas fa-print"></i> Print Excel</button>
-              @if (getRoleName() == 'staff')
+              {{-- @if (getRoleName() == 'staff')
                 <a href="{{route('receivable.create')}}" class="btn btn-primary">Tambah Piutang</a>
-              @endif
+              @endif --}}
             </div>
           </div>
           <div class="col-12">

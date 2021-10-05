@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="section">
-    <div class="section-header">
+    <div class="section-header justify-content-center">
         <h1>Jenis Pengeluaran</h1>
     </div>
     <div class="row">

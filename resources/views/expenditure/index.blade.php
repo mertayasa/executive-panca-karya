@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="section">
-    <div class="section-header">
+    <div class="section-header justify-content-center">
         <h1>Pengeluaran</h1>
     </div>
     <div class="row">
@@ -10,9 +10,9 @@
         <div class="card">
           <div class="card-header d-flex justify-content-between">
             <h4>Data Pengeluaran</h4>
-            @if (getRoleName() == 'staff')
+            {{-- @if (getRoleName() == 'staff') --}}
               <a href="{{route('expenditure.create')}}" class="btn btn-primary">Tambah Pengeluaran</a>
-            @endif
+            {{-- @endif --}}
           </div>
           <div class="col-12">
               @include('layouts.flash')

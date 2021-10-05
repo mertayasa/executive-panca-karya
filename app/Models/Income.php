@@ -28,33 +28,40 @@ class Income extends Model
     ];
 
 
-    public function income_type(){
+    public function income_type()
+    {
         return $this->belongsTo('App\Models\IncomeType', 'id_income_type');
     }
 
-    public function customer(){
+    public function customer()
+    {
         return $this->belongsTo('App\Models\Customer', 'id_customer');
     }
 
-    public function created_by(){
+    public function created_by()
+    {
         return $this->belongsTo('App\Models\User', 'created_by');
     }
 
-    public function updated_by(){
+    public function updated_by()
+    {
         return $this->belongsTo('App\Models\User', 'updated_by');
     }
 
-    public function receivable_log(){
+    public function receivable_log()
+    {
         return $this->hasMany('App\Models\ReceivableLog', 'id_income');
     }
 
-    public function getMonthlyAttribute(){
+    public function getMonthlyAttribute()
+    {
         $date = Carbon::parse($this->attributes['date'])->locale('id');
         $date->settings(['formatFunction' => 'translatedFormat']);
         return $date->format('F Y');
     }
 
-    public function getMonthlyRawAttribute(){
+    public function getMonthlyRawAttribute()
+    {
         $date = Carbon::parse($this->attributes['date']);
         return $date->format('m-Y');
     }
@@ -76,7 +83,3 @@ class Income extends Model
     // }
 
 }
-
-
-
-

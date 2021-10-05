@@ -12,7 +12,7 @@
             <th>Keterangan</th>
             <th></th>
             @if (getRoleName() == 'staff')
-                <th>Aksi</th>
+            <th>Aksi</th>
             @endif
         </tr>
     </thead>
@@ -31,8 +31,7 @@
 
         let responsivePriorityRec = 4
 
-        let columnsRec = [
-            {
+        let columnsRec = [{
                 data: 'DT_RowIndex',
                 name: 'no',
                 orderable: false,
@@ -80,15 +79,15 @@
             }
         ]
 
-        @if(getRoleName() == 'staff')
-            responsivePriority = 9
-            columnsRec.push({
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                })
-        @endif
+        // @if(getRoleName() == 'staff')
+        // responsivePriority = 9
+        // columnsRec.push({
+        //     data: 'action',
+        //     name: 'action',
+        //     orderable: false,
+        //     searchable: false
+        // })
+        // @endif
 
         table_receivable = $('#incomeReceivable').DataTable({
             processing: true,

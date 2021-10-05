@@ -43,6 +43,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('generate-income-expenditure-chart-monthly', [DashboardController::class, 'getIncomeAndExpenChartMonthly'])->name('chart_income_expenditure_monthly');
         Route::get('generate-income-by-category', [DashboardController::class, 'getIncomeByCategory'])->name('chart_income_by_category');
         Route::get('generate-expen-by-category', [DashboardController::class, 'getExpenByCategory'])->name('chart_expen_by_category');
+        Route::get('datatablePerDay', [App\Http\Controllers\HomeController::class, 'datatablePerDay'])->name('datatablePerDay');
+        Route::get('datatableExPerDay', [App\Http\Controllers\HomeController::class, 'datatableExPerDay'])->name('datatableExPerDay');
         // Route::post('generate-expenditure-chart', [DashboardController::class, 'getExpenditureChart'])->name('chart_expenditure');
     });
 
@@ -106,11 +108,15 @@ Route::group(['middleware' => 'auth'], function () {
             Route::patch('full-pay/{customer}', [IncomeController::class, 'fullPay'])->name('full_pay');
             Route::patch('custom-amount-pay/{customer}', [IncomeController::class, 'payCustomAmount'])->name('pay_custom_amount');
             Route::patch('single-full-pay/{income}', [IncomeController::class, 'singleFullPay'])->name('single_full_pay');
+            Route::get('income_per_day', [IncomeController::class, 'income_per_day'])->name('income_per_day');
+
+            Route::get('show/{income}', [IncomeController::class, 'show'])->name('show');
         });
 
         Route::get('datatable/{param?}', [IncomeController::class, 'datatable'])->name('datatable');
         Route::get('datatable-receivable/{param?}', [IncomeController::class, 'datatableReceivable'])->name('datatable_receivable');
         Route::get('datatable-receivable-detail/{id_customer}/{param?}', [IncomeController::class, 'datatableReceivableDetail'])->name('datatable_receivable_detail');
+        Route::get('datatablePerDay/{param?}', [IncomeController::class, 'datatablePerDay'])->name('datatablePerDay');
     });
 
     Route::group(['prefix' => 'receivable', 'as' => 'receivable.'], function () {

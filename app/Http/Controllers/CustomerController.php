@@ -50,8 +50,8 @@ class CustomerController extends Controller
         // $customer->place_of_birth = $request->place_of_birth;
         // $customer->date           = $request->date;
         // $customer->gender         = $request->gender;
-        $customer->status         = $request->status;
-
+        $customer->status = 1;
+        $customer->category = $request->category;
         $customer->save();
 
         return redirect('/customer')->with('success', 'Data Pelanggan Berhasil Ditambahkan');
@@ -97,6 +97,7 @@ class CustomerController extends Controller
         // $update->date            = $request->date;
         // $update->gender          = $request->gender;
         $update->status          = $request->status;
+        $update->status = $request->category;
 
         $update->save();
 
