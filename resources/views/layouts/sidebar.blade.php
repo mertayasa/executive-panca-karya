@@ -2,12 +2,13 @@
     <aside id="sidebar-wrapper">
       <div class="sidebar-brand">
         <!-- <a href="index.html">PANCA KARYA MANUNGGAL</a> -->
-         <img class="img-fluid" src="{{asset('images/logo-panca.jpeg')}}" alt="Responsive image" width="200" height="200" >
-         <h1 class="mt-3">{{Auth::user()->name}}</h1>
-          {{-- <h1 class="mt-3">{{Auth::user()->}}</h1> --}}
-      </div>
+         <img class="mb-2" src="{{asset('images/logo-panca.jpeg')}}" alt="Responsive image" width="160" height="160" style="object-fit: contain;">
+         <p class="text-center mb-0">Hi, {{Auth::user()->name}}</p>
+         <p class="text-center mb-0">Login sebagai <b> {{ucfirst(getRoleName())}} </b></p>
+        </div>
+        <hr>
      
-      <ul class="sidebar-menu">
+      <ul class="sidebar-menu mt-3">
           <li class="{{Request::is('*dashboard*') ? 'active' : ''}}"> <a href="{{route('dashboard.index')}}" class="nav-link"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
           
           @if (getRoleName() == 'pimpinan')

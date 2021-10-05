@@ -445,7 +445,7 @@
                 },
                 dataType: 'json',
                 success: function(data) {
-					console.log(data)
+					// console.log(data)
                     if (data.code === 1) {
                         if (month != null) {
                             incomeByCategory.destroy()
@@ -523,7 +523,7 @@
                 },
                 dataType: 'json',
                 success: function(data) {
-					console.log(data)
+					// console.log(data)
                     if (data.code === 1) {
                         if (month != null) {
                             expenditureByCategory.destroy()
