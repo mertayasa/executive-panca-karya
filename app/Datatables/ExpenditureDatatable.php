@@ -17,6 +17,12 @@ class ExpenditureDataTable
                 return indonesianDateNew($expenditure->date);
             })
             ->editColumn('note', function ($expenditure) {
+                $file_name = explode('/', $expenditure->note)[1] ?? '-';
+                $folder = explode('/', $expenditure->note)[0] ?? '-';
+
+                return '<a target="_blank" href="'. asset('images/'.$folder.'/pdf'.'/'.$file_name.'.pdf') .'">
+                    <img src="' . asset('images/' . $expenditure->note) . '" alt="" width="100px">
+                </a>';
                 return '<img src="' . asset('images/' . $expenditure->note) . '" alt="" width="100px">';
             })
             ->addColumn('action', function ($expenditure) {

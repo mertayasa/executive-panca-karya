@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Auth;
 class ExpenditureController extends Controller{
 
     public function index(){
+        // $expenditure = Expenditure::find(1);
+        // dd(explode('/', $expenditure->note)[1]);
         return view('expenditure.index');
     }
 
