@@ -11,4 +11,12 @@ class ExpenditureType extends Model{
     protected $fillable = [
         'name'
     ];
+
+    public function expenditures(){
+        return $this->hasMany('App\Models\Expenditure', 'id_types');
+    }
+
+    public function getExpenditureSumAttribute(){
+        return $this->expenditures->sum('amount');
+    }
 }

@@ -11,6 +11,7 @@ use App\Http\Controllers\IncomeReportController;
 use App\Http\Controllers\ExpenditureReportController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AccoutsReceivableController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -37,9 +38,12 @@ Auth::routes(['register' => false]);
 Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
-        Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
-        Route::post('generate-chart', [App\Http\Controllers\HomeController::class, 'getIncomeChart'])->name('chart_income');
-        Route::post('generate-expenditure-chart', [App\Http\Controllers\HomeController::class, 'getExpenditureChart'])->name('chart_expenditure');
+        Route::get('/', [DashboardController::class, 'index'])->name('index');
+        Route::post('generate-income-expenditure-chart', [DashboardController::class, 'getIncomeAndExpenChart'])->name('chart_income_expenditure');
+        Route::post('generate-income-expenditure-chart-monthly', [DashboardController::class, 'getIncomeAndExpenChartMonthly'])->name('chart_income_expenditure_monthly');
+        Route::get('generate-income-by-category', [DashboardController::class, 'getIncomeByCategory'])->name('chart_income_by_category');
+        Route::get('generate-expen-by-category', [DashboardController::class, 'getExpenByCategory'])->name('chart_expen_by_category');
+        // Route::post('generate-expenditure-chart', [DashboardController::class, 'getExpenditureChart'])->name('chart_expenditure');
     });
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
