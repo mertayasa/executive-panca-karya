@@ -260,17 +260,17 @@ class IncomeController extends Controller
                 $income->updated_by = Auth::id();
                 $income->save();
 
-                $pay = $income->receivable_log[0]->remain ?? $income->receivable_log->remain;
-                $remain = 0;
+                // $pay = $income->receivable_log[0]->remain ?? $income->receivable_log->remain;
+                // $remain = 0;
 
-                $this->storeReceivableLog($income, $remain, $pay);
+                // $this->storeReceivableLog($income, $remain, $pay);
             }
         } catch (Exception $e) {
             Log::info($e->getMessage());
-            return response(['code' => 0, 'message' => 'Gagal melunasi hutang']);
+            return redirect()->back()->withInput()->with('error', 'Gagal mengubah data pendapatan, mohon periksa lagi data anda !');
         }
 
-        return response(['code' => 1, 'message' => 'Berhasil melunasi hutang']);
+        return redirect()->route('income.index')->withInput()->with('success', 'Berhasil melunasi hutang');
     }
 
 

@@ -51,7 +51,7 @@
           <div class="card-header d-flex justify-content-between">
             <h4>Daftar Piutang {{ucwords($customer->name)}} </h4>
                
-            <a  class="text-white btn btn-warning" href="javascript:void(0)}" onclick="fullPay('$full_pay ')" > Bayar Sekalian  </a>
+            <a  class="text-white btn btn-warning" href="{{route('income.full_pay', $customer->id)}}" > Bayar Sekalian  </a>
           </div>
           <div class="card-body">
             @include('income.receivable.receivable_datatable_detail')

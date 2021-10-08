@@ -105,7 +105,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::delete('destroy/{income}', [IncomeController::class, 'destroy'])->name('destroy');
             Route::get('receivable-pay/{customer}', [IncomeController::class, 'showFormReceivable'])->name('form_receivable');
             Route::patch('receivable-pay/{income}', [IncomeController::class, 'payReceivable'])->name('pay_receivable');
-            Route::patch('full-pay/{customer}', [IncomeController::class, 'fullPay'])->name('full_pay');
+            Route::get('full-pay/{customer}', [IncomeController::class, 'fullPay'])->name('full_pay');
             Route::patch('custom-amount-pay/{customer}', [IncomeController::class, 'payCustomAmount'])->name('pay_custom_amount');
             Route::patch('single-full-pay/{income}', [IncomeController::class, 'singleFullPay'])->name('single_full_pay');
             Route::get('income_per_day', [IncomeController::class, 'income_per_day'])->name('income_per_day');
