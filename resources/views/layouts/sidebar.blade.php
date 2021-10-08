@@ -2,16 +2,16 @@
     <aside id="sidebar-wrapper">
       <div class="sidebar-brand">
         <!-- <a href="index.html">PANCA KARYA MANUNGGAL</a> -->
-         <img class="mb-2" src="{{asset('images/logo-panca.jpeg')}}" alt="Responsive image" width="150" height="150" style="object-fit: contain;">
-         <h1 class="text-center mb-0">{{Auth::user()->name}}</h1>
-         {{-- <p class="text-center mb-0">Login sebagai <b> {{ucfirst(getRoleName())}} </b></p> --}}
+         <img class="mb-2" src="{{asset('images/logo-panca.jpeg')}}" alt="Responsive image" width="100" height="100" style="object-fit: contain;">
+         <h3 class="text-center mb-0">{{Auth::user()->name}}</h3>
+         <p class="text-center mb-0">Login sebagai <b> {{Auth::user()->level == 1 ? 'owner' : 'staff'}} </b></p>
         </div>
         <hr>
      
       <ul class="sidebar-menu mt-3">
           <li class="{{Request::is('*dashboard*') ? 'active' : ''}}"> <a href="{{route('dashboard.index')}}" class="nav-link"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
           
-          @if (getRoleName() == 'pimpinan')
+          @if (getRoleName() == 'owner')
             <li class="{{Request::is('*staff*') ? 'active' : ''}}"><a class="nav-link" href="{{route('staff.index')}}"><i class="fas fa-user"></i> <span>Staff</span></a></li>
           @endif
           

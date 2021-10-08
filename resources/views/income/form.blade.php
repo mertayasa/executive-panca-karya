@@ -1,3 +1,12 @@
+@if (Request::is('*edit*'))
+    <div class="row">
+        <div class="col-12 col-md-6 pb-3 pb-md-0">
+            {!! Form::label('incomeInvoice', 'No Nota / Invoice', ['class' => 'mb-1']) !!}
+            {!! Form::text('invoice_no', null, ['class' => 'form-control', 'id' => 'incomeInvoice', 'disabled' => true]) !!}
+          </div>
+    </div>
+@endif
+
 <div class="row mt-3">
     <div class="col-12 col-md-6 pb-3 pb-md-0">
       {!! Form::label('incomeDate', 'Tanggal', ['class' => 'mb-1']) !!}

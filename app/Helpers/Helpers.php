@@ -56,7 +56,7 @@ function getGender($gender)
 
 function getRoleName()
 {
-    return Auth::user()->level == 0 ? 'staff' : 'pimpinan';
+    return Auth::user()->level == 0 ? 'staff' : 'owner';
 }
 
 function formatPrice($value)
@@ -87,5 +87,5 @@ function getCategory($category)
 
 function indonesianDateNew($date)
 {
-    return Carbon::parse($date)->isoFormat('ll');
+    return Carbon::parse($date)->isoFormat('DD MMM Y');
 }

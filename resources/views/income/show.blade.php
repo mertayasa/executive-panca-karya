@@ -25,7 +25,7 @@
             <table class="table table-bordered table-responsive">
               <tr>
                 <td style="width: 300px">Tanggal Pelunasan</td>
-                <td>{{indonesianDate($income->updated_at)}}</td>
+                <td>{{indonesianDateNew($income->updated_at)}}</td>
               </tr>
               <tr>
                 <td>Jumlah</td>
@@ -37,7 +37,7 @@
               </tr>
             </table>
 
-            <a href="{{route('income.index')}}" class="btn btn-danger">Kembali</a>
+            <a href="{{$url_referer}}" class="btn btn-danger">Kembali</a>
           </div>
         </div>
       </div>

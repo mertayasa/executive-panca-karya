@@ -23,7 +23,7 @@ class IncomeFactory extends Factory
             'total' => $total,
             'id_customer' => Customer::inRandomOrder()->first()->id,
             'status' => $status,
-            'receivable_remain' => $status == 0 ? $total : 0,
+            // 'receivable_remain' => $status == 0 ? $total : 0,
             'ket' => $this->faker->sentence(),
             'receiver_name' => $this->faker->name(),
             'created_at' => Carbon::now(),

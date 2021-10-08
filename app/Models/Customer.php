@@ -20,7 +20,7 @@ class Customer extends Model
     public function getTotalIncomeAttribute(){
         $sum = 0;
         foreach($this->income as $income){
-            $sum =  $sum + $income->receivable_remain;
+            $sum =  $sum + $income->total;
         }
 
         return $sum;
@@ -29,9 +29,11 @@ class Customer extends Model
     public function getTotalReceivableAttribute(){
         $sum = 0;
         foreach($this->income as $income){
-            $sum =  $sum + $income->receivable_remain;
+            if($income->status == 0){
+                $sum =  $sum + $income->total;
+            }
         }
-
+        
         return $sum;
     }
 

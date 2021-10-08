@@ -7,16 +7,14 @@
             {{-- <th>Tanggal </th> --}}
 
             <th>No</th>
+            <th></th>
             <th>Pelanggan</th>
-            <th>Tanggal </th>
+            {{-- <th>Tanggal </th> --}}
 
             {{-- <th>Total Piutang</th>
             <th>Sudah Dibayar</th> --}}
-            <th class="text-right">Sisa Piutang (Rp)</th>
-            <th></th>
-            @if (getRoleName() == 'staff')
-                <th>Aksi</th>
-            @endif
+            <th class="text-right align-middle">Sisa Piutang (Rp)</th>
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody></tbody>
@@ -31,9 +29,6 @@
     datatableReceivable(url_receivable)
 
     function datatableReceivable(url) {
-
-        let responsivePriorityRec = 2
-
         let columnsRec = [
             {
                 data: 'DT_RowIndex',
@@ -42,13 +37,19 @@
                 searchable: false
             },
             {
+                data: 'updated_at',
+                name: 'updated_at',
+                searchable: false,
+                visible: false,
+            },
+            {
                 data: 'name',
                 name: 'name'
             },
-              {
-                data: 'created_at',
-                name: 'created_at'
-            },
+            // {
+            //     data: 'created_at',
+            //     name: 'created_at'
+            // },
             {
                 data: 'total_receivable',
                 name: 'total_receivable',
@@ -64,22 +65,12 @@
             //     name: 'total_receivable'
             // },
             {
-                data: 'updated_at',
-                name: 'updated_at',
-                searchable: false,
-                visible: false,
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false
             }
         ]
-
-        @if(getRoleName() == 'staff')
-            responsivePriorityRec = 3
-            columnsRec.push({
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                })
-        @endif
 
         table_receivable = $('#incomeReceivable').DataTable({
             processing: true,
@@ -98,7 +89,7 @@
                 },
                 {
                     responsivePriority: 1,
-                    targets: responsivePriorityRec
+                    targets: 4
                 },
             ],
             language: {

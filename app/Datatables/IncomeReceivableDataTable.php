@@ -21,10 +21,17 @@ class IncomeReceivableDataTable
             // ->editColumn('receivable_remain', function($income){
             //     return formatPrice($income->receivable_remain);
             // })
-            ->editColumn('created_at', function ($receivable_log) {
-                return indonesianDateNew($receivable_log->date);
-            })
+            // ->addColumn('total', function($customer){
+
+            // })
+            // ->editColumn('created_at', function ($customer) {
+            //     return indonesianDateNew($customer->date);
+            // })
             ->addColumn('action', function ($customer) {
+                if(getRoleName() == 'owner'){
+                    return  '<a href="' . route('income.form_receivable', $customer->id) . '" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Lihat Detail" style="margin-right: 5px">Detail</a>';
+                }
+
                 $full_pay = "'" . route('income.full_pay', $customer->id) . "', '$customer->name', '$customer->total_receivable'";
 
                 return '<div class="btn-group">' .
@@ -34,7 +41,7 @@ class IncomeReceivableDataTable
                     //         <a class="dropdown-item" href="' . route('income.form_receivable', $customer->id) . '">Bayar Piutang</a>
                     //     </div>' .
 
-                    // '<a href="' . route('income.reivable.info', $customer->id) . '" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px" ><i class="menu-icon fa fa-pencil-alt"></i></a>' .
+                    // '<a href="' . route('income.reivable.info', $customer->id) . '" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px" >Edit</a>' .
 
 
                     '<a href="' . route('income.form_receivable', $customer->id) . '" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px">Bayar Piutang</a>' .

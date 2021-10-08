@@ -103,16 +103,16 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('edit/{income}', [IncomeController::class, 'edit'])->name('edit');
             Route::patch('update/{income}', [IncomeController::class, 'update'])->name('update');
             Route::delete('destroy/{income}', [IncomeController::class, 'destroy'])->name('destroy');
-            Route::get('receivable-pay/{customer}', [IncomeController::class, 'showFormReceivable'])->name('form_receivable');
             Route::patch('receivable-pay/{income}', [IncomeController::class, 'payReceivable'])->name('pay_receivable');
             Route::get('full-pay/{customer}', [IncomeController::class, 'fullPay'])->name('full_pay');
             Route::patch('custom-amount-pay/{customer}', [IncomeController::class, 'payCustomAmount'])->name('pay_custom_amount');
             Route::patch('single-full-pay/{income}', [IncomeController::class, 'singleFullPay'])->name('single_full_pay');
             Route::get('income_per_day', [IncomeController::class, 'income_per_day'])->name('income_per_day');
-
-            Route::get('show/{income}', [IncomeController::class, 'show'])->name('show');
+            
         });
-
+        
+        Route::get('receivable-pay/{customer}', [IncomeController::class, 'showFormReceivable'])->name('form_receivable');
+        Route::get('show/{income}', [IncomeController::class, 'show'])->name('show');
         Route::get('datatable/{param?}', [IncomeController::class, 'datatable'])->name('datatable');
         Route::get('datatable-receivable/{param?}', [IncomeController::class, 'datatableReceivable'])->name('datatable_receivable');
         Route::get('datatable-receivable-detail/{id_customer}/{param?}', [IncomeController::class, 'datatableReceivableDetail'])->name('datatable_receivable_detail');
@@ -128,11 +128,11 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('edit/{income}', [IncomeController::class, 'edit'])->name('edit');
             Route::patch('update/{income}', [IncomeController::class, 'update'])->name('update');
             Route::delete('destroy/{income}', [IncomeController::class, 'destroy'])->name('destroy');
-            Route::get('receivable-pay/{income}', [IncomeController::class, 'showFormReceivable'])->name('form_receivable');
-            Route::patch('receivable-pay/{income}', [IncomeController::class, 'payReceivable'])->name('pay_receivable');
             Route::patch('full-pay/{income}', [IncomeController::class, 'fullPay'])->name('full_pay');
         });
-
+        
+        Route::get('receivable-pay/{income}', [IncomeController::class, 'showFormReceivable'])->name('form_receivable');
+        Route::patch('receivable-pay/{income}', [IncomeController::class, 'payReceivable'])->name('pay_receivable');
         Route::get('datatable/{param?}', [IncomeController::class, 'datatable'])->name('datatable');
         Route::get('datatable-receivable', [IncomeController::class, 'datatableReceivable'])->name('datatable_receivable');
     });
@@ -153,7 +153,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Route::group(['prefix' => 'customer','as'=>'customer.', 'middleware' => 'role:admin,employee'], function () {
 
-    Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => 'role:pimpinan'], function () {
+    Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => 'role:owner'], function () {
         Route::get('/', [StaffController::class, 'index'])->name('index');
         Route::get('create', [StaffController::class, 'create'])->name('create');
         Route::post('store', [StaffController::class, 'store'])->name('store');

@@ -2,7 +2,9 @@
     <thead>
         <tr>
             <th>No</th>
-            <th>Pelanggan</th>
+            <th></th>
+            <th>No Nota / Invoice</th>
+            {{-- <th>Pelanggan</th> --}}
             {{-- <th>Penerima</th> --}}
             <th>Jenis Pendapatan</th>
             <th>Tanggal </th>
@@ -10,10 +12,7 @@
             {{-- <th>Sudah Dibayar (Rp)</th>
             <th>Sisa (Rp)</th> --}}
             <th>Keterangan</th>
-            <th></th>
-            @if (getRoleName() == 'staff')
-                <th>Aksi</th>
-            @endif
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody></tbody>
@@ -29,8 +28,6 @@
 
     function datatableReceivable(url) {
 
-        let responsivePriorityRec = 4
-
         let columnsRec = [
             {
                 data: 'DT_RowIndex',
@@ -39,9 +36,13 @@
                 searchable: false
             },
             {
-                data: 'customer.name',
-                name: 'customer.name'
+                data: 'invoice_no',
+                name: 'invoice_no'
             },
+            // {
+            //     data: 'customer.name',
+            //     name: 'customer.name'
+            // },
             // {
             //     data: 'receiver_name',
             //     name: 'receiver_name'
@@ -80,18 +81,14 @@
                 name: 'updated_at',
                 searchable: false,
                 visible: false,
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false
             }
         ]
-
-        @if(getRoleName() == 'staff')
-            responsivePriority = 9
-            columnsRec.push({
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                })
-        @endif
 
         table_receivable = $('#incomeReceivable').DataTable({
             processing: true,
@@ -110,7 +107,7 @@
                 },
                 {
                     responsivePriority: 1,
-                    targets: 6
+                    targets: 7
                 },
             ],
             language: {

@@ -217,7 +217,7 @@
 </div>
 @endif
 
- @if (getRoleName() == 'pimpinan')
+ @if (getRoleName() == 'owner')
 {{--GRAFIK  --}}
     <div class="row">
       <div class="col-6 col-md-6">

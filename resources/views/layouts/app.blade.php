@@ -93,11 +93,16 @@
     $(document).ready(function() {
         $('select').select2();
     })
-      
   </script>
 
   <!-- Page Specific JS File -->
   {{-- <script src="{{asset('admin/js/page/index.js')}}"></script> --}}
   @stack('scripts')
+
+  <style>
+    td{
+      vertical-align: middle !important;
+    }
+  </style>
 </body>
 </html>

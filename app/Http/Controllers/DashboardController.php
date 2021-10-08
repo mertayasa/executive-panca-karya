@@ -24,7 +24,7 @@ class DashboardController extends Controller
     {
         $staff_count = Staff::count();
         $income_count = Income::sum('total');
-        $receiavable_count = Income::sum('receivable_remain');
+        $receiavable_count = Income::where('status', 0)->sum('total');
         $customer_count = Customer::count();
         $years = Income::selectRaw('DISTINCT year(date) year')->orderBy('year', 'DESC')->pluck('year', 'year');
 

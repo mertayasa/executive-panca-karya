@@ -3,7 +3,7 @@
         <tr>
             <th class="text-center">No</th>
             <th class="text-center">Tanggal</th>
-            <th class="text-center">Total Pengeluaran (Rp)</th>
+            <th class="text-right">Total Pengeluaran (Rp)</th>
         </tr>
     </thead>
     <tbody></tbody>

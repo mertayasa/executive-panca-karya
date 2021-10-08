@@ -21,7 +21,6 @@ class IncomeController extends Controller
 {
     public function index()
     {
-        // $this->groupCustomer();
         $income = Income::latest()->get();
         $anual = Income::selectRaw('DISTINCT year(date) year')->orderBy('year', 'DESC')->pluck('year', 'year');
         $monthly = Income::orderBy('date', 'DESC')->get()->pluck('monthly', 'monthly_raw')->unique();
@@ -87,12 +86,13 @@ class IncomeController extends Controller
         }
 
         $raws = $rawQuery->get();
-        $new = [];
+        $new = $raws;
+        // $new = [];
 
-        foreach ($raws as $raw) {
-            $raw->paid = $raw->total - $raw->receivable_remain;
-            array_push($new, $raw);
-        }
+        // foreach ($raws as $raw) {
+        //     $raw->paid = $raw->total - $raw->receivable_remain;
+        //     array_push($new, $raw);
+        // }
 
         return $new;
     }
@@ -141,16 +141,30 @@ class IncomeController extends Controller
             // }
 
             $income = new Income;
+
+            $last_income = Income::orderBy('id', 'DESC')->first();
+            
+            if(!$last_income){
+                $income->invoice_no = '00001';
+            }else{
+                $last_invoice = ltrim($last_income->invoice_no, '0');
+                $invoice_no = sprintf("%05d", $last_invoice+1);
+                $income->invoice_no = $invoice_no;
+            }
+
+
             $income->id_income_type = $request->id_income_type;
             $income->id_customer = $request->id_customer;
             // $income->receiver_name = $request->receiver_name ?? Customer::findOrFail($request->id_customer)->name;
             $income->status = $request->status;
             $income->date = $request->date;
             $income->total = $request->total;
-            $income->receivable_remain = $income->status == '0' ? $request->total : 0;
+            // $income->receivable_remain = $income->status == '0' ? $request->total : 0;
             $income->ket = $request->ket;
+            // $income->invoice_no = 
             $income->created_by = Auth::id();
             $income->updated_by = Auth::id();
+            
             $income->save();
 
             if ($income->status == '0') {
@@ -174,7 +188,9 @@ class IncomeController extends Controller
 
     public function show(Income $income)
     {
-        return view('income.show', compact('income'));
+        $url_referer = request()->headers->get('referer');
+        // dd($referer);
+        return view('income.show', compact('income', 'url_referer'));
     }
 
     public function edit(Income $income)
@@ -255,7 +271,7 @@ class IncomeController extends Controller
         try {
             $incomes = Income::where('id_customer', $customer->id)->get();
             foreach ($incomes as $income) {
-                $income->receivable_remain = 0;
+                // $income->receivable_remain = 0;
                 $income->status = 1;
                 $income->updated_by = Auth::id();
                 $income->save();
@@ -278,15 +294,15 @@ class IncomeController extends Controller
     public function singleFullPay(Income $income)
     {
         try {
-            $income->receivable_remain = 0;
+            // $income->receivable_remain = 0;
             $income->status = 1;
             $income->updated_by = Auth::id();
             $income->save();
 
-            $pay = $income->receivable_log[0]->remain ?? $income->receivable_log->remain;
+            // $pay = $income->receivable_log[0]->remain ?? $income->receivable_log->remain;
             $remain = 0;
 
-            $this->storeReceivableLog($income, $remain, $pay);
+            // $this->storeReceivableLog($income, $remain, $pay);
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return response(['code' => 0, 'message' => 'Gagal melunasi hutang']);
@@ -296,14 +312,14 @@ class IncomeController extends Controller
     }
 
 
-    public function storeReceivableLog($income, $remain, $pay)
-    {
-        $accounts_receiveables = new ReceivableLog;
-        $accounts_receiveables->id_income = $income->id;
-        $accounts_receiveables->pay = $pay;
-        $accounts_receiveables->remain = $remain;
-        $accounts_receiveables->save();
-    }
+    // public function storeReceivableLog($income, $remain, $pay)
+    // {
+    //     $accounts_receiveables = new ReceivableLog;
+    //     $accounts_receiveables->id_income = $income->id;
+    //     $accounts_receiveables->pay = $pay;
+    //     $accounts_receiveables->remain = $remain;
+    //     $accounts_receiveables->save();
+    // }
 
 
 
@@ -318,79 +334,79 @@ class IncomeController extends Controller
 
     public function payReceivable(Request $request, Income $income)
     {
-        try {
-            if (!isset($request->pay) || $request->pay > $income->receivable_remain) {
-                return response(['code' => 0, 'message' => 'Jumlah pembayaran melebihi jumlah piutang yang harus dibayar']);
-            }
+        // try {
+        //     if (!isset($request->pay) || $request->pay > $income->receivable_remain) {
+        //         return response(['code' => 0, 'message' => 'Jumlah pembayaran melebihi jumlah piutang yang harus dibayar']);
+        //     }
 
-            $remain = $income->receivable_remain - $request->pay;
-            $income->receivable_remain = $remain;
-            $income->updated_by = Auth::id();
+        //     $remain = $income->receivable_remain - $request->pay;
+        //     $income->receivable_remain = $remain;
+        //     $income->updated_by = Auth::id();
 
-            if ($remain == 0) {
-                $income->status = 1;
-                // $income->total  = $income->total + $income->receivable_remain;
-                // $income->total;
-            }
+        //     if ($remain == 0) {
+        //         $income->status = 1;
+        //         // $income->total  = $income->total + $income->receivable_remain;
+        //         // $income->total;
+        //     }
 
-            $income->save();
+        //     $income->save();
 
-            $this->storeReceivableLog($income, $remain, $request->pay);
-        } catch (Exception $e) {
-            Log::info($e->getMessage());
-            return response(['code' => 0, 'message' => 'Gagal membayar piutang']);
-        }
+        //     $this->storeReceivableLog($income, $remain, $request->pay);
+        // } catch (Exception $e) {
+        //     Log::info($e->getMessage());
+        //     return response(['code' => 0, 'message' => 'Gagal membayar piutang']);
+        // }
 
-        return response(['code' => 1, 'message' => 'Berhasil membayar piutang']);
+        // return response(['code' => 1, 'message' => 'Berhasil membayar piutang']);
     }
 
     public function payCustomAmount(Request $request, Customer $customer)
     {
-        try {
-            $data = $request->all();
-            if (!isset($request->pay)) {
-                return redirect()->back()->withInput()->with('error', 'Jumlah pembayaran tidak boleh kosong');
-            }
+        // try {
+        //     $data = $request->all();
+        //     if (!isset($request->pay)) {
+        //         return redirect()->back()->withInput()->with('error', 'Jumlah pembayaran tidak boleh kosong');
+        //     }
 
-            if ($request->pay > $customer->total_receivable) {
-                return redirect()->back()->withInput()->with('error', 'Jumlah pembayaran melebihi jumlah piutang yang harus dibayar');
-            }
+        //     if ($request->pay > $customer->total_receivable) {
+        //         return redirect()->back()->withInput()->with('error', 'Jumlah pembayaran melebihi jumlah piutang yang harus dibayar');
+        //     }
 
-            $incomes = $customer->income()->orderBy('updated_at')->where('receivable_remain', '!=', 0)->get();
+        //     $incomes = $customer->income()->orderBy('updated_at')->where('receivable_remain', '!=', 0)->get();
 
-            $pay_left = $data['pay'];
+        //     $pay_left = $data['pay'];
 
-            foreach ($incomes as $income) {
-                if ($pay_left != 0) {
-                    $remain = max($income->receivable_remain - $pay_left, 0);
-                    $pay_left = max($pay_left - max($income->receivable_remain - $remain, 0), 0);
+        //     foreach ($incomes as $income) {
+        //         if ($pay_left != 0) {
+        //             $remain = max($income->receivable_remain - $pay_left, 0);
+        //             $pay_left = max($pay_left - max($income->receivable_remain - $remain, 0), 0);
 
-                    // dd($pay_left);
+        //             // dd($pay_left);
 
-                    $income->receivable_remain = $remain;
-                    $income->updated_by = Auth::id();
+        //             $income->receivable_remain = $remain;
+        //             $income->updated_by = Auth::id();
 
-                    if ($remain == 0) {
-                        $income->status = 1;
-                        // $income->total = $total;
-                        // $income->total  = $income->total + $income->receivable_remain;
-                    }
+        //             if ($remain == 0) {
+        //                 $income->status = 1;
+        //                 // $income->total = $total;
+        //                 // $income->total  = $income->total + $income->receivable_remain;
+        //             }
 
-                    $income->save();
+        //             $income->save();
 
-                    $this->storeReceivableLog($income, $remain, $request->pay);
-                }
-            }
-        } catch (Exception $e) {
-            Log::info($e->getMessage());
-            return redirect()->back()->withInput()->with('error', 'Gagal membayar piutang');
-        }
+        //             $this->storeReceivableLog($income, $remain, $request->pay);
+        //         }
+        //     }
+        // } catch (Exception $e) {
+        //     Log::info($e->getMessage());
+        //     return redirect()->back()->withInput()->with('error', 'Gagal membayar piutang');
+        // }
 
-        if ($customer->refresh()->total_receivable != 0) {
-            return redirect()->route('income.form_receivable', $customer->id)->with('success', 'Berhasil membayar piutang');
-        }
+        // if ($customer->refresh()->total_receivable != 0) {
+        //     return redirect()->route('income.form_receivable', $customer->id)->with('success', 'Berhasil membayar piutang');
+        // }
 
-        return redirect()->route('receivable.index')->with('success', 'Berhasil melunasi piutang ' . $customer->name);
+        // return redirect()->route('receivable.index')->with('success', 'Berhasil melunasi piutang ' . $customer->name);
     }
 
 

@@ -2,17 +2,16 @@
     <thead>
         <tr>
             <th>No</th>
+            <th></th>
             <th>Tanggal </th>
+            <th>No Nota / Invoice</th>
             <th>Pelanggan</th>
             <th>Jenis Pendapatan</th>
-            <th class="text-right">Total (Rp)</th>
+            <th class="text-right align-middle">Total (Rp)</th>
             {{-- <th>Penerima</th> --}}
             {{-- <th>Keterangan</th> --}}
              <th>Pembayaran</th>
-            <th></th>
-            @if(getRoleName() == 'staff')
-                <th>Aksi</th>
-            @endif
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody></tbody>
@@ -28,7 +27,6 @@
 
     function datatable(url) {
 
-        let responsivePriority = 3
         let columns = [
             {
                 data: 'DT_RowIndex',
@@ -36,10 +34,20 @@
                 orderable: false,
                 searchable: false
             },
-                {
+            {
+                data: 'updated_at',
+                name: 'updated_at',
+                searchable: false,
+                visible: false,
+            },
+            {
                 data: 'date',
                 name: 'date',
                 orderable: false
+            },
+            {
+                data: 'invoice_no',
+                name: 'invoice_no'
             },
             {
                 data: 'customer.name',
@@ -68,23 +76,12 @@
             //     name: 'ket'
             // },
             {
-                data: 'updated_at',
-                name: 'updated_at',
-                searchable: false,
-                visible: false,
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false
             }
         ]
-
-        @if(getRoleName() == 'staff')
-            responsivePriority = 5
-            columns.push({
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                })
-            
-        @endif
 
         table = $('#incomeDatatable').DataTable({
             processing: true,
@@ -103,7 +100,7 @@
                 },
                 {
                     responsivePriority: 1,
-                    targets: responsivePriority
+                    targets: 8
                 },
             ],
             language: {

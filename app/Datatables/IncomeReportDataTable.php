@@ -13,7 +13,7 @@ class IncomeReportDataTable
                 return formatPrice($income->total);
             })
             ->editColumn('date', function($income){
-                return indonesianDate($income->date);
+                return indonesianDateNew($income->date);
             })->addIndexColumn()->make(true);
     }
 }

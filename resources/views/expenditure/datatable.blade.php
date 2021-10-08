@@ -4,7 +4,7 @@
             <th>No</th>
             <th>Jenis Pengeluaran</th>
             <th>Tanggal </th>
-            <th class="text-right">Jumlah Pengeluaran (Rp)</th>
+            <th class="text-right align-middle">Jumlah Pengeluaran (Rp)</th>
             <th>Nota</th>
             @if(getRoleName() == 'staff')
                 <th>Aksi</th>

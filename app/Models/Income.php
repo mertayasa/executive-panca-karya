@@ -16,14 +16,14 @@ class Income extends Model
         'date',
         'total',
         'ket',
-        'receivable_remain',
+        // 'receivable_remain',
         'status',
         'created_by',
         'updated_by',
     ];
 
     public $with = [
-        'income_type', 'customer', 'receivable_log'
+        'income_type', 'customer'
         // 'income_type', 'customer', 'receivable_log', 'created_by', 'updated_by'
     ];
 
@@ -48,10 +48,10 @@ class Income extends Model
         return $this->belongsTo('App\Models\User', 'updated_by');
     }
 
-    public function receivable_log()
-    {
-        return $this->hasMany('App\Models\ReceivableLog', 'id_income');
-    }
+    // public function receivable_log()
+    // {
+    //     return $this->hasMany('App\Models\ReceivableLog', 'id_income');
+    // }
 
     public function getMonthlyAttribute()
     {
