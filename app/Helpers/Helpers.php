@@ -10,21 +10,21 @@ function uploadFile($base_64_foto, $folder, $savepdf = null)
 {
     try {
         $foto = base64_decode($base_64_foto['data']);
-        $folderName = 'images/'.$folder;
+        $folderName = 'images/' . $folder;
 
         $formatted_file_name = str_replace(' ', '-', $base_64_foto['name']);
 
-        if(file_exists($folderName.'/'.$formatted_file_name)){
-            return $folder.'/'.$formatted_file_name;
+        if (file_exists($folderName . '/' . $formatted_file_name)) {
+            return $folder . '/' . $formatted_file_name;
         };
-        
+
         if (!file_exists($folderName)) {
-            mkdir($folderName, 0755, true); 
+            mkdir($folderName, 0755, true);
         }
-        
-        if(isset($savepdf)){
-            if (!file_exists($folderName.'/pdf')) {
-                mkdir($folderName.'/pdf', 0755, true); 
+
+        if (isset($savepdf)) {
+            if (!file_exists($folderName . '/pdf')) {
+                mkdir($folderName . '/pdf', 0755, true);
             }
         }
 
@@ -34,20 +34,19 @@ function uploadFile($base_64_foto, $folder, $savepdf = null)
 
         $safeName = time() . $formatted_file_name;
         $inventoriePath = public_path() . '/' . $folderName;
-        file_put_contents($inventoriePath. '/' . $safeName, $foto);
-        
-        if(isset($savepdf)){
-            ConvertApi::setApiSecret(env('CONVERT_API_KEY'));
-            $result = ConvertApi::convert('pdf', ['File' => 'images/'.$folder.'/'.$safeName]);
-            $result->getFile()->save(base_path().'/public/images/'. $folder .'/'.'pdf/' .$safeName.'.pdf');
-        }
+        file_put_contents($inventoriePath . '/' . $safeName, $foto);
 
+        if (isset($savepdf)) {
+            ConvertApi::setApiSecret(env('CONVERT_API_KEY'));
+            $result = ConvertApi::convert('pdf', ['File' => 'images/' . $folder . '/' . $safeName]);
+            $result->getFile()->save(base_path() . '/public/images/' . $folder . '/' . 'pdf/' . $safeName . '.pdf');
+        }
     } catch (Exception $e) {
         Log::info($e->getMessage());
         return 0;
     }
 
-    return $folder.'/'.$safeName;
+    return $folder . '/' . $safeName;
 }
 
 function getGender($gender)

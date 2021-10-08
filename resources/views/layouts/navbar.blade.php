@@ -5,7 +5,7 @@
       <li><a href="#" data-toggle="sidebar" class="nav-link nav-link-lg"><i class="fas fa-bars"></i></a></li>
       <li><a href="#" data-toggle="search" class="nav-link nav-link-lg d-sm-none"><i class="fas fa-search"></i></a></li>
     </ul>
-     <h1 class=" justify-content-center text-white mb-0">CV Panca Karya</h1>
+     <h1 class=" justify-content-center text-white mb-0">CV Panca Karya Manunggal</h1>
   </form>
   <ul class="navbar-nav navbar-right">
    
