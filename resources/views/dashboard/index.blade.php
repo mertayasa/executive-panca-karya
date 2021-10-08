@@ -2,11 +2,11 @@
 
 @section('content')
 <section class="section">
-    {{-- <div class="section-header">
+     <div class="section-header justify-content-center">
         <h1>Dashboard</h1>
     </div>
 
-    <div class="row">
+     {{-- <div class="row">
       <div class="col-lg-4 col-md-4 col-sm-12">
         <div class="card card-statistic-2">
           <div class="card-icon shadow-primary bg-primary">
@@ -95,7 +95,11 @@
           <div class="card-custom-img"  style="background-color:#9a7e83" >
           </div>
           <div class="card-custom-avatar">
-              <a href=" #income_per_day "> <span><center><i class="fas fa-wallet"></i></center> </span> </a>
+          @if (getRoleName() == 'staff')
+            <a href=" #income_per_day ">  <span><center><i class="fas fa-wallet"></i></center> </span> </a>
+          @else     
+            <a href=" {{route('income.index')}} ">  <span><center><i class="fas fa-wallet"></i></center> </span> </a>
+          @endif
           </div>
           <div class="card-body pt-3">
             <h5 class="card-title mb-4">Total Pendapatan</h5>
@@ -110,7 +114,11 @@
           <div class="card-custom-img " style="background-color:#acbda6" >
           </div>
           <div class="card-custom-avatar">
-           <a href=" #expen_per_day ">  <span><center><i class="fas fa-wallet"></i></center> </span> </a>
+          @if (getRoleName() == 'staff')
+            <a href=" #expen_per_day ">  <span><center><i class="fas fa-wallet"></i></center> </span> </a>
+          @else     
+            <a href=" {{route('expenditure.index')}} ">  <span><center><i class="fas fa-wallet"></i></center> </span> </a>
+          @endif
           </div>
           <div class="card-body pt-3">
             <h5 class="card-title mb-4">Total Pengeluaran</h5>
@@ -125,7 +133,7 @@
           <div class="card-custom-img " style="background-color:#bdbba6" >
           </div>
           <div class="card-custom-avatar">
-           <a href=" #expen_per_day ">  <span><center><i class="fas fa-wallet"></i></center> </span> </a>
+           <a href="{{route('receivable.index')}} ">  <span><center><i class="fas fa-wallet"></i></center> </span> </a>
           </div>
           <div class="card-body pt-3">
             <h5 class="card-title mb-4">Total Piutang</h5>

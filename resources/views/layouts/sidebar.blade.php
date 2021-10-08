@@ -2,9 +2,9 @@
     <aside id="sidebar-wrapper">
       <div class="sidebar-brand">
         <!-- <a href="index.html">PANCA KARYA MANUNGGAL</a> -->
-         <img class="mb-2" src="{{asset('images/logo-panca.jpeg')}}" alt="Responsive image" width="160" height="160" style="object-fit: contain;">
-         <p class="text-center mb-0">Hi, {{Auth::user()->name}}</p>
-         <p class="text-center mb-0">Login sebagai <b> {{ucfirst(getRoleName())}} </b></p>
+         <img class="mb-2" src="{{asset('images/logo-panca.jpeg')}}" alt="Responsive image" width="150" height="150" style="object-fit: contain;">
+         <h1 class="text-center mb-0">{{Auth::user()->name}}</h1>
+         {{-- <p class="text-center mb-0">Login sebagai <b> {{ucfirst(getRoleName())}} </b></p> --}}
         </div>
         <hr>
      

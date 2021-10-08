@@ -9,7 +9,8 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header d-flex justify-content-between">
-            <h4>Bayar Piutang Sekalian <span class="text-danger"> (Belum Berfungsi) </span> </h4>
+            
+            <a  class="text-danger btn btn-danger" href="javascript:void(0)}" onclick="fullPay('$full_pay ')" > (Belum Berfungsi)  </a>
           </div>
           <div class="card-body">
             @include('layouts.flash')
@@ -49,6 +50,8 @@
         <div class="card">
           <div class="card-header d-flex justify-content-between">
             <h4>Daftar Piutang {{ucwords($customer->name)}} </h4>
+               
+            <a  class="text-white btn btn-warning" href="javascript:void(0)}" onclick="fullPay('$full_pay ')" > Bayar Sekalian  </a>
           </div>
           <div class="card-body">
             @include('income.receivable.receivable_datatable_detail')

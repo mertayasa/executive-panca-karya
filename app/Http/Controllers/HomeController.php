@@ -45,7 +45,7 @@ class HomeController extends Controller
             'customer_count' => $customer_count,
             'income_years' => $income_years,
             'expenditure_years' => $expenditure_years,
-            'income_per_day' => $income_per_day
+            'income_per_day' => $income_per_day,
 
         ];
     }

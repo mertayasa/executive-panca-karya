@@ -38,7 +38,7 @@
                 {
                     data: 'total',
                     name: 'total',
-                    className: "text-center"
+                    className: "text-right"
                 },
             
             ],
