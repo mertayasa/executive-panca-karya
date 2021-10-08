@@ -1,3 +1,7 @@
+@if (isset($receiavable_count))
+    <h5 class="mb-3">Total Piutang : {{$receiavable_count}}</h5>
+@endif
+
 <table class="table table-hover table-bordered" width="100%" id="incomeReceivable">
     <thead>
         <tr>

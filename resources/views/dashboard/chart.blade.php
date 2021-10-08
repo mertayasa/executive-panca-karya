@@ -58,7 +58,11 @@
                 </div>
             </div>
             <div class="card-body">
-                <canvas id="yearlyDoughnutChart"></canvas>
+                <h4>Total Pendapatan  : <span id="totalIncome"></span> </h4>
+                <h4>Total Pengeluaran : <span id="totalExpen"></span> </h4>
+                <div class="asd" style="height: 250px;">
+                    <canvas id="yearlyDoughnutChart"></canvas>
+                </div>
             </div>
         </div>
     </div>
@@ -93,7 +97,7 @@
         </div>
     </div>
 
-    <div class="col-12 col-md-7 d-flex">
+    <div class="col-12 col-md-12 d-flex">
         <div class="card flex-fill">
             <div class="card-header">
                 <div class="row col-12 align-items-center justify-content-between p-0">
@@ -103,12 +107,12 @@
                 </div>
             </div>
             <div class="card-body">
-                @include('income.receivable.receivable_datatable')
+                @include('income.receivable.receivable_datatable', ['receiavable_count' => formatPrice($dashboard_data['receiavable_count'])])
             </div>
         </div>
     </div>
 
-    <div class="col-12 col-md-5 d-flex">
+    {{-- <div class="col-12 col-md-5 d-flex">
         <div class="card flex-fill">
             <div class="card-header">
                 <div class="row col-12 align-items-center justify-content-between p-0">
@@ -140,7 +144,7 @@
                 <canvas id="monthlyBarChart"></canvas>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 
 @push('scripts')
@@ -253,7 +257,8 @@
         function generateDoughnutChartData(year = null) {
             const url = "{{ route('dashboard.chart_income_expenditure') }}"
             let formData = year == null ? {year: 'now', type:'doughnut'} : {year: year, type:'doughnut'}
-
+            const totalIncome = document.getElementById('totalIncome')
+            const totalExpen = document.getElementById('totalExpen')
             const doughnutSelectedYear = document.getElementById('doughnutSelectedYear')
 
             if (year != null) {
@@ -269,6 +274,7 @@
                 data: formData,
                 dataType: 'json',
                 success: function(data) {
+                    console.log(data)
                     if (data.code === 1) {
                         if (year != null) {
                             yearlyDoughnutChart.destroy()
@@ -276,6 +282,9 @@
                         } else {
                             yearlyDoughnutChart = showDoughnutChart(data)
                         }
+
+                        totalIncome.innerHTML = data.sum_income
+                        totalExpen.innerHTML = data.sum_expen
                     }
 
                     if (data.code === 0) {
@@ -289,7 +298,7 @@
             let doughnutChart = $('#yearlyDoughnutChart');
             const labels = ["Pendapatan", "Pengeluaran"]
             let doughtChartRating = new Chart(doughnutChart, {
-                type: 'pie',
+                type: 'bar',
                 data: {
                     labels: labels,
                     datasets: [{
@@ -332,103 +341,6 @@
             });
 
             return doughtChartRating
-        }
-
-        let monthlyChartData
-        generateMonthlyChartData()
-
-        function generateMonthlyChartData(month = null) {
-            const url = "{{ route('dashboard.chart_income_expenditure_monthly') }}"
-            let formData = month == null ? {month: 'now'} : {month: month}
-
-            const monthlySelectedMonth = document.getElementById('monthlySelectedMonth')
-			const months = {'month01':"Januari", 'month02': "Februari", 'month03': "Maret", 'month04': "April", 'month05': "Mei", 'month06': "Juni", 'month07': "Juli", 'month08': "Agustus", 'month09': "September", 'month10': "Oktober", 'month11': "November", 'month12': "Desember"}
-
-            if (month != null) {
-				let monthIndex = 'month' + month
-                monthlySelectedMonth.innerHTML = months[monthIndex]
-            }
-
-            $.ajax({
-                url: url,
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
-                },
-                data: formData,
-                dataType: 'json',
-                success: function(data) {
-                    if (data.code === 1) {
-                        if (month != null) {
-                            monthlyChartData.destroy()
-                            monthlyChartData = showMonthlyBarChart(data)
-                        } else {
-                            monthlyChartData = showMonthlyBarChart(data)
-                        }
-                    }
-
-                    if (data.code === 0) {
-                        console.log('error')
-                    }
-                }
-            })
-        }
-
-		function showMonthlyBarChart(data) {
-            let monthlyBarChartEl = $('#monthlyBarChart');
-            let monthlyBarChart = new Chart(monthlyBarChartEl, {
-                type: 'bar',
-                data: {
-                    labels: ['2021'],
-                    datasets: [{
-                            // lineTension: 0,
-                            label: 'Pendapatan',
-                            borderColor: "#6777ef",
-                            backgroundColor: "#6777ef",
-                            pointHoverBorderColor: "#6777ef",
-                            pointBorderWidth: 0,
-                            pointHoverRadius: 10,
-                            pointHoverBorderWidth: 1,
-                            pointRadius: 3,
-                            fill: false,
-                            borderWidth: 4,
-                            data: data.income
-                        },
-                        {
-                            // lineTension: 0,
-                            label: 'Pengeluaran',
-                            borderColor: "#FF0000",
-                            backgroundColor: "#FF0000",
-                            pointHoverBorderColor: "#FF0000",
-                            pointBorderWidth: 0,
-                            pointHoverRadius: 10,
-                            pointHoverBorderWidth: 1,
-                            pointRadius: 3,
-                            fill: false,
-                            borderWidth: 4,
-                            data: data.expenditure
-                        },
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    // Can't just just `stacked: true` like the docs say
-                    scales: {
-                        yAxes: [{
-                            // stacked: true,
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    },
-                    animation: {
-                        duration: 750,
-                    },
-                }
-            });
-
-            return monthlyBarChart
         }
 
         let incomeByCategory
@@ -588,3 +500,100 @@
         }
     </script>
 @endpush
+
+{{-- let monthlyChartData
+generateMonthlyChartData()
+
+function generateMonthlyChartData(month = null) {
+    const url = "{{ route('dashboard.chart_income_expenditure_monthly') }}"
+    let formData = month == null ? {month: 'now'} : {month: month}
+
+    const monthlySelectedMonth = document.getElementById('monthlySelectedMonth')
+    const months = {'month01':"Januari", 'month02': "Februari", 'month03': "Maret", 'month04': "April", 'month05': "Mei", 'month06': "Juni", 'month07': "Juli", 'month08': "Agustus", 'month09': "September", 'month10': "Oktober", 'month11': "November", 'month12': "Desember"}
+
+    if (month != null) {
+        let monthIndex = 'month' + month
+        monthlySelectedMonth.innerHTML = months[monthIndex]
+    }
+
+    $.ajax({
+        url: url,
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': "{{ csrf_token() }}"
+        },
+        data: formData,
+        dataType: 'json',
+        success: function(data) {
+            if (data.code === 1) {
+                if (month != null) {
+                    monthlyChartData.destroy()
+                    monthlyChartData = showMonthlyBarChart(data)
+                } else {
+                    monthlyChartData = showMonthlyBarChart(data)
+                }
+            }
+
+            if (data.code === 0) {
+                console.log('error')
+            }
+        }
+    })
+}
+
+function showMonthlyBarChart(data) {
+    let monthlyBarChartEl = $('#monthlyBarChart');
+    let monthlyBarChart = new Chart(monthlyBarChartEl, {
+        type: 'bar',
+        data: {
+            labels: ['2021'],
+            datasets: [{
+                    // lineTension: 0,
+                    label: 'Pendapatan',
+                    borderColor: "#6777ef",
+                    backgroundColor: "#6777ef",
+                    pointHoverBorderColor: "#6777ef",
+                    pointBorderWidth: 0,
+                    pointHoverRadius: 10,
+                    pointHoverBorderWidth: 1,
+                    pointRadius: 3,
+                    fill: false,
+                    borderWidth: 4,
+                    data: data.income
+                },
+                {
+                    // lineTension: 0,
+                    label: 'Pengeluaran',
+                    borderColor: "#FF0000",
+                    backgroundColor: "#FF0000",
+                    pointHoverBorderColor: "#FF0000",
+                    pointBorderWidth: 0,
+                    pointHoverRadius: 10,
+                    pointHoverBorderWidth: 1,
+                    pointRadius: 3,
+                    fill: false,
+                    borderWidth: 4,
+                    data: data.expenditure
+                },
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            // Can't just just `stacked: true` like the docs say
+            scales: {
+                yAxes: [{
+                    // stacked: true,
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            },
+            animation: {
+                duration: 750,
+            },
+        }
+    });
+
+    return monthlyBarChart
+} --}}

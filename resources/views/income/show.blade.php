@@ -24,16 +24,32 @@
             
             <table class="table table-bordered table-responsive">
               <tr>
-                <td style="width: 300px">Tanggal Pelunasan</td>
-                <td>{{indonesianDateNew($income->updated_at)}}</td>
+                <td width="40%">No Nota / Invoice</td>
+                <td width="60%">{{$income->invoice_no}}</td>
               </tr>
               <tr>
-                <td>Jumlah</td>
-                <td>{{formatPriceRaw($income->total)}}</td>
+                <td width="40%">Nama Pelanggan</td>
+                <td width="60%">{{$income->customer->name}}</td>
               </tr>
               <tr>
-                <td>Keterangan</td>
-                <td>{{$income->ket}} </td>
+                <td width="40%">Status Pembayaran</td>
+                <td width="60%">{{$income->status == 0 ? 'Piutang' : 'Lunas'}}</td>
+              </tr>
+              <tr>
+                <td width="40%">Tanggal Pendapatan</td>
+                <td width="60%">{{indonesianDateNew($income->date)}}</td>
+              </tr>
+              <tr>
+                <td width="40%">Jenis Pendapatan</td>
+                <td width="60%">{{$income->income_type->name}}</td>
+              </tr>
+              <tr>
+                <td width="40%">Jumlah</td>
+                <td width="60%">{{formatPrice($income->total)}}</td>
+              </tr>
+              <tr>
+                <td width="40%">Keterangan</td>
+                <td width="60%">{{$income->ket}} </td>
               </tr>
             </table>
 

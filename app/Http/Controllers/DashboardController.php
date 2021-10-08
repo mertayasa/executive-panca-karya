@@ -71,8 +71,9 @@ class DashboardController extends Controller
         }
 
         if (isset($request->type) && $request->type = 'doughnut') {
-            return response(['code' => 1, 'income' => array_sum($income), 'expenditure' => array_sum($expenditure)]);
+            return response(['code' => 1, 'income' => array_sum($income), 'expenditure' => array_sum($expenditure), 'sum_income' => formatPrice(array_sum($income)), 'sum_expen' => formatPrice(array_sum($expenditure))]);
         }
+
         return response(['code' => 1, 'income' => $income, 'expenditure' => $expenditure]);
     }
 
