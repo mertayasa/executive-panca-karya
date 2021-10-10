@@ -157,6 +157,9 @@ class IncomeController extends Controller
             $income->id_customer = $request->id_customer;
             // $income->receiver_name = $request->receiver_name ?? Customer::findOrFail($request->id_customer)->name;
             $income->status = $request->status;
+            if($income->status == 1){
+                $income->paid_date = Carbon::today();
+            }
             $income->date = $request->date;
             $income->total = $request->total;
             // $income->receivable_remain = $income->status == '0' ? $request->total : 0;
@@ -274,6 +277,7 @@ class IncomeController extends Controller
                 // $income->receivable_remain = 0;
                 $income->status = 1;
                 $income->updated_by = Auth::id();
+                $income->paid_date = Carbon::today();
                 $income->save();
 
                 // $pay = $income->receivable_log[0]->remain ?? $income->receivable_log->remain;
@@ -297,6 +301,7 @@ class IncomeController extends Controller
             // $income->receivable_remain = 0;
             $income->status = 1;
             $income->updated_by = Auth::id();
+            $income->paid_date = Carbon::today();
             $income->save();
 
             // $pay = $income->receivable_log[0]->remain ?? $income->receivable_log->remain;

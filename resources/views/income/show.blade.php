@@ -40,6 +40,10 @@
                 <td width="60%">{{indonesianDateNew($income->date)}}</td>
               </tr>
               <tr>
+                <td width="40%">Tanggal Pelunasan</td>
+                <td width="60%">{{$income->paid_date != null ? indonesianDateNew($income->paid_date) : '-'}}</td>
+              </tr>
+              <tr>
                 <td width="40%">Jenis Pendapatan</td>
                 <td width="60%">{{$income->income_type->name}}</td>
               </tr>

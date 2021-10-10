@@ -16,6 +16,9 @@ class IncomeDataTable
             ->editColumn('date', function ($income) {
                 return indonesianDateNew($income->date);
             })
+            ->editColumn('paid_date', function($income){
+                return $income->paid_date ? indonesianDateNew($income->paid_date) : '-';
+            })
             ->editColumn('status', function ($income) {
                 if ($income->status == 0) {
                     return 'Piutang';

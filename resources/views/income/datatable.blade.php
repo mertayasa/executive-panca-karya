@@ -3,14 +3,14 @@
         <tr>
             <th>No</th>
             <th></th>
-            <th>Tanggal </th>
+            <th>Tanggal Pendapatan</th>
             <th>No Nota / Invoice</th>
             <th>Pelanggan</th>
             <th>Jenis Pendapatan</th>
             <th class="text-right align-middle">Total (Rp)</th>
             {{-- <th>Penerima</th> --}}
             {{-- <th>Keterangan</th> --}}
-             <th>Pembayaran</th>
+             <th>Tgl Pelunasan</th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -64,9 +64,13 @@
                 className: "text-right"
             },
               {
-                data: 'status',
-                name: 'status'
+                data: 'paid_date',
+                name: 'paid_date'
             },
+            //   {
+            //     data: 'status',
+            //     name: 'status'
+            // },
             // {
             //     data: 'receiver_name',
             //     name: 'receiver_name'
