@@ -90,6 +90,23 @@
           </div>
         </div>
     </div>
+    @if (getRoleName() == 'owner')
+      <div class="col-md-4 col-sm-6">
+          <div class="card card-custom bg-white border-white border-0">
+            <div class="card-custom-img" style="background-color: #343e5f" >
+            </div>
+            <div class="card-custom-avatar">
+            <a href=" {{route('customer.index')}} ">  <span><i class="fa fa-users"></i> </span> </a>
+            </div>
+            <div class="card-body pt-3">
+              <h5 class="card-title mb-4">Total Staff</h5>
+                <div class="icon">
+                  {{$dashboard_data['staff_count']}}
+                </div>
+            </div>
+          </div>
+      </div>
+    @endif
     <div class="col-md-4 col-sm-6">
         <div class="card card-custom bg-white border-white border-0">
           <div class="card-custom-img"  style="background-color:#9a7e83" >

@@ -36,6 +36,12 @@
                 searchable: false
             },
             {
+                data: 'updated_at',
+                name: 'updated_at',
+                searchable: false,
+                visible: false,
+            },
+            {
                 data: 'invoice_no',
                 name: 'invoice_no'
             },
@@ -75,12 +81,6 @@
             {
                 data: 'ket',
                 name: 'ket'
-            },
-            {
-                data: 'updated_at',
-                name: 'updated_at',
-                searchable: false,
-                visible: false,
             },
             {
                 data: 'action',
