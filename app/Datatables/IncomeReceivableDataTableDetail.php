@@ -44,7 +44,7 @@ class IncomeReceivableDataTableDetail
                     // '<button type="button" onclick="populateModal(' . $single_pay . ')" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
                     //     Bayar
                     // </button>' .
-                    '<a href="javascript:void(0)" onclick="fullPay(' . $full_pay . ')" class="btn btn-warning rounded" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Bayar Piutang" > Bayar Piutang </a>' .
+                    '<a href="javascript:void(0)" onclick="fullPay(' . $full_pay . ')" class="btn btn-warning rounded" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Bayar Piutang" > Bayar </a>' .
                     '</div>';
             })->addIndexColumn()->rawColumns(['action'])->make(true);
     }

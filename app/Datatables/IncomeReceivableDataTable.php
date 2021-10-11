@@ -44,7 +44,7 @@ class IncomeReceivableDataTable
                     // '<a href="' . route('income.reivable.info', $customer->id) . '" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px" >Edit</a>' .
 
 
-                    '<a href="' . route('income.form_receivable', $customer->id) . '" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px">Bayar Piutang</a>' .
+                    '<a href="' . route('income.form_receivable', $customer->id) . '" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px">Bayar</a>' .
 
                     '</div>';
             })->addIndexColumn()->rawColumns(['action'])->make(true);

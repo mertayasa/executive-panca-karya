@@ -24,6 +24,9 @@
           <i class="fas fa-cog"></i> Settings
         </a> --}}
         {{-- <div class="dropdown-divider"></div> --}}
+        {{-- <a href="{{route('profile.edit')}}" class="dropdown-item has-icon text-white">
+          Profile
+        </a> --}}
         <a class="dropdown-item has-icon text-danger" href="{{ route('logout') }}"
             onclick="event.preventDefault();
                           document.getElementById('logout-form').submit();">

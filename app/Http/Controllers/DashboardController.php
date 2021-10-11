@@ -26,6 +26,8 @@ class DashboardController extends Controller
         $income_count = Income::sum('total');
         $receiavable_count = Income::where('status', 0)->sum('total');
         $customer_count = Customer::count();
+        $expenditure_count = Expenditure::sum('amount');
+        // dd($expenditure_count);
         $years = Income::selectRaw('DISTINCT year(date) year')->orderBy('year', 'DESC')->pluck('year', 'year');
 
         return [
@@ -33,6 +35,7 @@ class DashboardController extends Controller
             'income_count' => $income_count,
             'receiavable_count' => $receiavable_count,
             'customer_count' => $customer_count,
+            'expenditure_count' => $expenditure_count,
             'years' => $years,
             // 'income_count_day' => $income_count_day
         ];

@@ -140,7 +140,7 @@
           <div class="card-body pt-3">
             <h5 class="card-title mb-4">Total Pengeluaran</h5>
               <div class="icon">
-                 {{ formatPrice($dashboard_data['receiavable_count']) }}
+                 {{ formatPrice($dashboard_data['expenditure_count']) }}
               </div>
           </div>
         </div>

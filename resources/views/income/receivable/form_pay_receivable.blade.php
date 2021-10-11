@@ -52,7 +52,7 @@
             <h4>Daftar Piutang {{ucwords($customer->name)}} </h4>
             
             @if (getRoleName() == 'staff')
-              <a  class="text-white btn btn-danger" href="{{route('income.full_pay', $customer->id)}}" > Bayar Sekalian  </a>
+              <a  class="text-white btn btn-danger" href="{{route('income.full_pay', $customer->id)}}" > Lunas  </a>
             @endif
           </div>
           <div class="card-body">
