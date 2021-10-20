@@ -13,6 +13,7 @@
           </div>
           <div class="card-body">
             @include('layouts.flash')
+            @include('layouts.error_message')
             {!! Form::open(['route' => Request::is('*income*') ? 'income.store' : 'receivable.store']) !!}
             @include('income.form')
             <br>

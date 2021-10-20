@@ -89,6 +89,7 @@ class CustomerController extends Controller
 
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         $update = Customer::find($id);
         $update->name            = $request->name;
         $update->address         = $request->address;
@@ -97,7 +98,7 @@ class CustomerController extends Controller
         // $update->date            = $request->date;
         // $update->gender          = $request->gender;
         $update->status          = $request->status;
-        $update->status = $request->category;
+        $update->category = $request->category;
 
         $update->save();
 

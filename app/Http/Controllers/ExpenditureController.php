@@ -6,6 +6,7 @@ use App\Models\Expenditure;
 use App\Models\ExpenditureType;
 use Illuminate\Http\Request;
 use App\Datatables\ExpenditureDatatable;
+use App\Http\Requests\ExpenditureRequest;
 use ConvertApi\ConvertApi;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,7 +30,7 @@ class ExpenditureController extends Controller{
         return view('expenditure.create', compact('expenditure_type'));
     }
 
-    public function store(Request $request){
+    public function store(ExpenditureRequest $request){
         $data = $request->all();
         $base_64_foto = json_decode($request['note'], true);
         $upload_image = uploadFile($base_64_foto, 'expenditure', true);
@@ -63,7 +64,7 @@ class ExpenditureController extends Controller{
         return view('expenditure.edit', compact('expenditure' , 'expenditure_type'));
     }
 
-    public function update(Request $request, $id){
+    public function update(ExpenditureRequest $request, $id){
         $data = $request->all();
         $base_64_foto = json_decode($request['note'], true);
         $upload_image = uploadFile($base_64_foto, 'expenditure', true);

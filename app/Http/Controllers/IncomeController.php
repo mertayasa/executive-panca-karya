@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Datatables\IncomeDatatable;
 use App\DataTables\IncomeReceivableDataTable;
 use App\DataTables\IncomeReceivableDataTableDetail;
+use App\Http\Requests\IncomeRequest;
 use App\Models\Customer;
 use App\Models\ReceivableLog;
 use Carbon\Carbon;
@@ -115,7 +116,7 @@ class IncomeController extends Controller
         return view('income.create', compact('income_type', 'customers', 'page_context'));
     }
 
-    public function store(Request $request)
+    public function store(IncomeRequest $request)
     {
         $income_status = str_contains(FacadesRequest::route()->getName(), 'income') ? '1' : '0';
 
@@ -170,14 +171,14 @@ class IncomeController extends Controller
             
             $income->save();
 
-            if ($income->status == '0') {
+            // if ($income->status == '0') {
 
-                $accounts_receiveables = new ReceivableLog;
-                $accounts_receiveables->id_income = $income->id;
-                $accounts_receiveables->pay = 0;
-                $accounts_receiveables->remain = $request->total;
-                $accounts_receiveables->save();
-            }
+            //     $accounts_receiveables = new ReceivableLog;
+            //     $accounts_receiveables->id_income = $income->id;
+            //     $accounts_receiveables->pay = 0;
+            //     $accounts_receiveables->remain = $request->total;
+            //     $accounts_receiveables->save();
+            // }
         } catch (Exception $e) {
             Log::info($e->getMessage());
             return redirect()->back()->withInput()->with('error', 'Gagal menyimpan data pendapatan, periksa lagi data anda !');
@@ -204,7 +205,7 @@ class IncomeController extends Controller
         return view('income.edit', compact('income', 'income_type', 'customers'));
     }
 
-    public function update(Request $request, Income $income)
+    public function update(IncomeRequest $request, Income $income)
     {
         try {
             $income->id_income_type   = $request->id_income_type;

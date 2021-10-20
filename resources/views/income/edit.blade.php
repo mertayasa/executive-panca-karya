@@ -13,7 +13,7 @@
           </div>
           <div class="card-body">
             @include('layouts.flash')
-            {{-- @include('layouts.error_message') --}}
+            @include('layouts.error_message')
             {!! Form::model($income, ['route' => ['income.update', $income->id], 'method' => 'patch']) !!}
             @include('income.form')
             <div class="row px-0 mt-3">
