@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ExpenditureType;
 use Illuminate\Http\Request;
 use App\Datatables\ExpenditureTypeDatatable;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class ExpenditureTypeController extends Controller
 {
@@ -43,12 +45,17 @@ class ExpenditureTypeController extends Controller
      */
     public function store(Request $request)
     {
-        $expenditure_type = new ExpenditureType;
-        $expenditure_type->name = $request->name;
+        try{
+            $expenditure_type = new ExpenditureType;
+            $expenditure_type->name = $request->name;
+    
+            $expenditure_type->save();
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal menambahkan data jenis pengeluaran');
+        }
 
-        $expenditure_type->save();
-
-        return redirect('/expenditure_type')->with('success', 'Data Jenis Pengeluaran Berhasil Ditambahkan');
+        return redirect()->route('expenditure_type.index')->with('success', 'Berhasil menambahkan data jenis pendapatan');
     }
 
     /**
@@ -82,12 +89,17 @@ class ExpenditureTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $update = ExpenditureType::find($id);
-        $update->name = $request->name;
+        try{
+            $update = ExpenditureType::find($id);
+            $update->name = $request->name;
+    
+            $update->save();
+        }catch(Exception $e){
+            Log::info($e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Gagal mengubah data jenis pengeluaran');
+        }
 
-        $update->save();
-
-        return redirect('/expenditure_type')->with('info', 'Data Jenis Pengeluaran Berhasil Diedit');
+        return redirect()->route('expenditure_type.index')->with('info', 'Berhasil mengubah data jenis pengeluaran');
     }
 
     /**

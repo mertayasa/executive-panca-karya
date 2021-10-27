@@ -12,6 +12,9 @@ class IncomeReceivableDataTable
             ->editColumn('total_receivable', function ($customer) {
                 return formatPriceRaw($customer->total_receivable);
             })
+            ->addColumn('raw_total_receivable', function ($customer) {
+                return $customer->total_receivable;
+            })
             // ->editColumn('total', function($income){
             //     return formatPrice($income->total);
             // })

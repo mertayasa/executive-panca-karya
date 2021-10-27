@@ -302,23 +302,29 @@
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Keuangan',
-                        backgroundColor: [
-                            '#e76f51',
-                            '#f4a261',
-                        ],
-                        pointBorderWidth: 0,
-                        pointHoverRadius: 10,
-                        pointHoverBorderWidth: 1,
-                        pointRadius: 3,
-                        fill: false,
-                        borderWidth: 1,
-                        data: [data.income, data.expenditure]
-                    }, ]
+                            label: '',
+                            backgroundColor: [
+                                '#6777ef',
+                                '#FF0000',
+                            ],
+                            pointBorderWidth: 0,
+                            pointHoverRadius: 10,
+                            pointHoverBorderWidth: 1,
+                            pointRadius: 3,
+                            fill: false,
+                            borderWidth: 1,
+                            data: [data.income, data.expenditure]
+                        }, 
+                    ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                        display: false
+                        }
+                    },
                     // plugins: {
                     //     tooltip: {
                     //         callbacks: {

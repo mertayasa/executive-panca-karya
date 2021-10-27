@@ -2,6 +2,7 @@
     <thead>
         <tr>
             <th>No</th>
+            <th></th>
             <th>Jenis Pengeluaran</th>
             <th>Tanggal </th>
             <th class="text-right align-middle">Jumlah Pengeluaran (Rp)</th>
@@ -31,6 +32,12 @@
                 data: 'DT_RowIndex',
                 name: 'no',
                 orderable: false,
+                searchable: false
+            },
+            {
+                data: 'updated_at',
+                name: 'updated_at',
+                visible: false,
                 searchable: false
             },
             {
@@ -77,7 +84,7 @@
             ajax: url,
             columns: columns,
             order: [
-                [2, "desc"]
+                [1, "desc"]
             ],
             columnDefs: [
                 // { width: 300, targets: 1 },

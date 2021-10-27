@@ -18,6 +18,7 @@
             {{-- <th>Total Piutang</th>
             <th>Sudah Dibayar</th> --}}
             <th class="text-right align-middle">Sisa Piutang (Rp)</th>
+            <th></th>
             <th>Aksi</th>
         </tr>
     </thead>
@@ -50,24 +51,18 @@
                 data: 'name',
                 name: 'name'
             },
-            // {
-            //     data: 'created_at',
-            //     name: 'created_at'
-            // },
             {
                 data: 'total_receivable',
                 name: 'total_receivable',
                 className: "text-right"
                 // orderable: false
             },
-            // {
-            //     data: 'total_receivable',
-            //     name: 'total_receivable'
-            // },
-            // {
-            //     data: 'total_receivable',
-            //     name: 'total_receivable'
-            // },
+            {
+                data: 'raw_total_receivable',
+                name: 'raw_total_receivable',
+                visible: false,
+                searchable: false
+            },
             {
                 data: 'action',
                 name: 'action',
@@ -83,7 +78,7 @@
             ajax: url,
             columns: columnsRec,
             order: [
-                [3, "asc"]
+                [4, "asc"]
             ],
             columnDefs: [
                 // { width: 300, targets: 1 },
