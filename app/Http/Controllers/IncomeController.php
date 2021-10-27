@@ -144,12 +144,12 @@ class IncomeController extends Controller
             $income = new Income;
 
             $last_income = Income::orderBy('id', 'DESC')->first();
-            
-            if(!$last_income){
+
+            if (!$last_income) {
                 $income->invoice_no = '00001';
-            }else{
+            } else {
                 $last_invoice = ltrim($last_income->invoice_no, '0');
-                $invoice_no = sprintf("%05d", $last_invoice+1);
+                $invoice_no = sprintf("%05d", $last_invoice + 1);
                 $income->invoice_no = $invoice_no;
             }
 
@@ -158,7 +158,7 @@ class IncomeController extends Controller
             $income->id_customer = $request->id_customer;
             // $income->receiver_name = $request->receiver_name ?? Customer::findOrFail($request->id_customer)->name;
             $income->status = $request->status;
-            if($income->status == 1){
+            if ($income->status == 1) {
                 $income->paid_date = Carbon::today();
             }
             $income->date = $request->date;
@@ -168,7 +168,7 @@ class IncomeController extends Controller
             // $income->invoice_no = 
             $income->created_by = Auth::id();
             $income->updated_by = Auth::id();
-            
+
             $income->save();
 
             // if ($income->status == '0') {

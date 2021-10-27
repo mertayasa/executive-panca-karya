@@ -93,9 +93,9 @@
             responsive: true,
             ajax: url,
             columns: columns,
-            // order: [
-            //     [2, "desc"]
-            // ],
+            order: [
+                [3, "desc"]
+            ],
             columnDefs: [
                 // { width: 300, targets: 1 },
                 {
