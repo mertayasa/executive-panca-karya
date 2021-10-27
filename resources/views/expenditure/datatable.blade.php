@@ -6,9 +6,9 @@
             <th>Tanggal </th>
             <th class="text-right align-middle">Jumlah Pengeluaran (Rp)</th>
             <th>Nota</th>
-            @if(getRoleName() == 'staff')
+            {{-- @if(getRoleName() == 'staff') --}}
                 <th>Aksi</th>
-            @endif
+            {{-- @endif --}}
         </tr>
     </thead>
     <tbody></tbody>
@@ -51,18 +51,24 @@
             {
                 data: 'note',
                 name: 'note'
-            }
+            },
+               {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false
+            },
         ]
 
-        @if(getRoleName() == 'staff')
-            responsivePriority = 5
-            columns.push({
-                    data: 'action',
-                    name: 'action',
-                    orderable: false,
-                    searchable: false
-                })
-        @endif
+        // @if(getRoleName() == 'staff')
+        //     responsivePriority = 5
+        //     columns.push({
+        //             data: 'action',
+        //             name: 'action',
+        //             orderable: false,
+        //             searchable: false
+        //         })
+        // @endif
 
         table = $('#expenseDatatable').DataTable({
             processing: true,

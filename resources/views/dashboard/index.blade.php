@@ -106,7 +106,7 @@
             </div>
           </div>
       </div>
-    @endif
+   
     <div class="col-md-4 col-sm-6">
         <div class="card card-custom bg-white border-white border-0">
           <div class="card-custom-img"  style="background-color:#9a7e83" >
@@ -162,7 +162,9 @@
     </div>
   </div>
 
+ @endif
 
+ 
     @if (getRoleName() == 'staff')
       @include('dashboard.chart_staff')      
     @else

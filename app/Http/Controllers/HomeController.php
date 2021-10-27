@@ -19,13 +19,14 @@ class HomeController extends Controller
     public function index()
     {
         $dashboard_data = $this->getDashboardData();
-        return view('home', compact('dashboard_data'));
+        return view('dashboard.index', compact('dashboard_data'));
     }
 
     private function getDashboardData()
     {
         $staff_count = Staff::count();
-        $income_count = Income::sum('total');
+        $income_count = Income::sum('total')->where('status', 1)->get();
+        // $income_countb = Income::count();
         $receiavable_count = Income::sum('receivable_remain');
         $customer_count = Customer::count();
         $income_years = Income::selectRaw('DISTINCT year(date) year')->orderBy('year', 'DESC')->pluck('year', 'year');

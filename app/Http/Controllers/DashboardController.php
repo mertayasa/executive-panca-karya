@@ -23,7 +23,7 @@ class DashboardController extends Controller
     private function getDashboardData()
     {
         $staff_count = Staff::count();
-        $income_count = Income::sum('total');
+        $income_count = Income::where('status', 1)->sum('total');
         $receiavable_count = Income::where('status', 0)->sum('total');
         $customer_count = Customer::count();
         $expenditure_count = Expenditure::sum('amount');

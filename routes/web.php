@@ -108,9 +108,8 @@ Route::group(['middleware' => 'auth'], function () {
             Route::patch('custom-amount-pay/{customer}', [IncomeController::class, 'payCustomAmount'])->name('pay_custom_amount');
             Route::patch('single-full-pay/{income}', [IncomeController::class, 'singleFullPay'])->name('single_full_pay');
             Route::get('income_per_day', [IncomeController::class, 'income_per_day'])->name('income_per_day');
-            
         });
-        
+
         Route::get('receivable-pay/{customer}', [IncomeController::class, 'showFormReceivable'])->name('form_receivable');
         Route::get('show/{income}', [IncomeController::class, 'show'])->name('show');
         Route::get('datatable/{param?}', [IncomeController::class, 'datatable'])->name('datatable');
@@ -130,7 +129,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::delete('destroy/{income}', [IncomeController::class, 'destroy'])->name('destroy');
             Route::patch('full-pay/{income}', [IncomeController::class, 'fullPay'])->name('full_pay');
         });
-        
+
         Route::get('receivable-pay/{income}', [IncomeController::class, 'showFormReceivable'])->name('form_receivable');
         Route::patch('receivable-pay/{income}', [IncomeController::class, 'payReceivable'])->name('pay_receivable');
         Route::get('datatable/{param?}', [IncomeController::class, 'datatable'])->name('datatable');
@@ -140,13 +139,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'expenditure', 'as' => 'expenditure.'], function () {
         Route::get('/', [ExpenditureController::class, 'index'])->name('index');
 
-        Route::middleware('role:staff')->group(function () {
-            Route::get('create', [ExpenditureController::class, 'create'])->name('create');
-            Route::post('store', [ExpenditureController::class, 'store'])->name('store');
-            Route::get('edit/{expenditure}', [ExpenditureController::class, 'edit'])->name('edit');
-            Route::patch('update/{expenditure}', [ExpenditureController::class, 'update'])->name('update');
-            Route::delete('destroy/{expenditure}', [ExpenditureController::class, 'destroy'])->name('destroy');
-        });
+        // Route::middleware('role:staff')->group(function () {
+        Route::get('create', [ExpenditureController::class, 'create'])->name('create');
+        Route::post('store', [ExpenditureController::class, 'store'])->name('store');
+        Route::get('edit/{expenditure}', [ExpenditureController::class, 'edit'])->name('edit');
+        Route::patch('update/{expenditure}', [ExpenditureController::class, 'update'])->name('update');
+        Route::delete('destroy/{expenditure}', [ExpenditureController::class, 'destroy'])->name('destroy');
+        // });
 
         Route::get('datatable', [ExpenditureController::class, 'datatable'])->name('datatable');
     });
