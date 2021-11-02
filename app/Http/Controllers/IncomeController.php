@@ -212,7 +212,7 @@ class IncomeController extends Controller
             $income->total  = $request->total;
             $income->ket    = $request->ket;
             $income->updated_by = Auth::id();
-            $income->receiver_name = $request->receiver_name;
+            // $income->receiver_name = $request->receiver_name;
             $income->save();
         } catch (Exception $e) {
             Log::info($e->getMessage());
