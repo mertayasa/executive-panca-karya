@@ -6,15 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <link href="{{asset('admin/css/sb-admin-2.css')}}" rel="stylesheet">
-    <style> 
-    .kop {
-        text-align: center;
-    }
-    .title{
-        font-size: 20px;
-
-    }
-    </style>
+ 
 
     <title>Data Piutang {{indonesianDate($start_date)}} -  {{indonesianDate($end_date)}}</title>
 </head>
@@ -58,7 +50,13 @@
                 @endforelse
             </tbody>
         </table>
-
+            <div class="signature text-right"> 
+                Bangli,  {{\Carbon\Carbon::now()->isoFormat('LL') }}
+                <br><br><br><br><br>
+                {{-- @foreach ($transaksi as $data) --}}
+                 {{'Pande Nengah Sudirma'}}
+                 {{-- @endforeach --}}
+            </div>
 
     </div>
 
@@ -81,6 +79,19 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+        .signature{
+             margin-left: 55%;
+    margin-top: 80px;
+    text-align: center;
+    color: black;
+        }
+
+          .kop {
+        text-align: center;
+    }
+    .title{
+        font-size: 20px;
+    }
     </style>
 
     <script src="{{asset('admin/vendor/jquery/jquery.min.js')}}"></script>

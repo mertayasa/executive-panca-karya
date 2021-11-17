@@ -21,9 +21,11 @@
 
           <li class="{{Request::is('*expenditure*') && !Request::is('*expenditure-type*') && !Request::is('*report*') ? 'active' : ''}}"><a href="{{route('expenditure.index')}}"><i class="fas fa-file-alt"></i> <span> Pengeluaran </span> </a></li>
           
+          @if (getRoleName() != 'owner')
           <li class="menu-header">Data Master</li>
           <li class="{{Request::is('*income-type*') ? 'active' : ''}}"><a href="{{route('income_type.index')}}"><i class="fas fa-dot-circle"></i> <span> Jenis Pendapatan </span> </a></li>
           <li class="{{Request::is('*expenditure-type*') ? 'active' : ''}}"><a href="{{route('expenditure_type.index')}}"><i class="fas fa-dot-circle"></i> <span> Jenis Pengeluaran </span> </a></li>
+          @endif
 
           {{-- <li class="nav-item dropdown {{Request::is('*expenditure*') && !Request::is('*report*') ? 'active' : ''}}">
             <a  class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-sign-out-alt"></i></i><span>Pengeluaran</span></a>
