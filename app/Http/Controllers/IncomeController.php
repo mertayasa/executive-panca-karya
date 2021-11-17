@@ -17,6 +17,9 @@ use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request as FacadesRequest;
+use Barryvdh\DomPDF\Facade as PDF;
+use App\Http\Requests\IncomePrintRequest;
+use App\Http\Requests\IncomeRPrintRequest;
 
 class IncomeController extends Controller
 {
@@ -223,6 +226,29 @@ class IncomeController extends Controller
     }
 
 
+
+    public function printForm()
+    {
+        return view('income.print_form');
+    }
+
+    public function searchForPrint(IncomePrintRequest $request)
+    {
+        $income_data = Income::whereBetween('date', [$request->start_date, $request->end_date])->where('status', 1)->get();
+        // $income_data = Income::whereBetween('date', ['2021-11-14', '2021-11-17'])->get();
+        // dd($income_data);
+        return view('income.print_form', compact('income_data', 'request'));
+    }
+
+    public function print($start_date, $end_date)
+    {
+        $income_data = Income::whereBetween('date', [$start_date, $end_date])->where('status', 1)->get();
+        $pdf = PDF::loadview('income.export_pdf', ['income_data' => $income_data, 'start_date' => $start_date, 'end_date' => $end_date])->setPaper('a4', 'landscape');
+        return $pdf->download('Pendapatan' . $start_date . '-' . $end_date . '.pdf');
+    }
+
+
+
     // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
     // ─████████████████───██████████████─██████████████─██████████████─██████████─██████──██████─██████████████─██████████████───██████─────────██████████████─
     // ─██░░░░░░░░░░░░██───██░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░░░░░██─██░░░░░░██─██░░██──██░░██─██░░░░░░░░░░██─██░░░░░░░░░░██───██░░██─────────██░░░░░░░░░░██─
@@ -237,6 +263,23 @@ class IncomeController extends Controller
     // ─██████──██████████─██████████████─██████████████─██████████████─██████████─────██████─────██████──██████─████████████████─██████████████─██████████████─
     // ─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 
+    public function printForm_r()
+    {
+        return view('income.receivable.print_form_r');
+    }
+
+    public function searchForPrint_r(IncomeRPrintRequest $request)
+    {
+        $income_data = Income::whereBetween('date', [$request->start_date, $request->end_date])->where('status', 0)->get();
+        return view('income.receivable.print_form_r', compact('income_data', 'request'));
+    }
+
+    public function print_r($start_date, $end_date)
+    {
+        $income_data = Income::whereBetween('date', [$start_date, $end_date])->where('status', 0)->get();
+        $pdf = PDF::loadview('income.receivable.export_pdf_r', ['income_data' => $income_data, 'start_date' => $start_date, 'end_date' => $end_date])->setPaper('a4', 'landscape');
+        return $pdf->download('Piutang' . $start_date . '-' . $end_date . '.pdf');
+    }
 
 
     public function datatableReceivable($filter = null)

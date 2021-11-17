@@ -116,6 +116,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('datatable-receivable/{param?}', [IncomeController::class, 'datatableReceivable'])->name('datatable_receivable');
         Route::get('datatable-receivable-detail/{id_customer}/{param?}', [IncomeController::class, 'datatableReceivableDetail'])->name('datatable_receivable_detail');
         Route::get('datatablePerDay/{param?}', [IncomeController::class, 'datatablePerDay'])->name('datatablePerDay');
+
+        Route::get('print-form', [IncomeController::class, 'printForm'])->name('print_form');
+        Route::get('print/{start_date}/{end_date}', [IncomeController::class, 'print'])->name('print');
+        Route::post('search-for-print', [IncomeController::class, 'searchForPrint'])->name('search_for_print');
     });
 
     Route::group(['prefix' => 'receivable', 'as' => 'receivable.'], function () {
@@ -134,6 +138,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::patch('receivable-pay/{income}', [IncomeController::class, 'payReceivable'])->name('pay_receivable');
         Route::get('datatable/{param?}', [IncomeController::class, 'datatable'])->name('datatable');
         Route::get('datatable-receivable', [IncomeController::class, 'datatableReceivable'])->name('datatable_receivable');
+
+        Route::get('datatable', [IncomeController::class, 'datatable'])->name('datatable');
+        Route::get('print-form_r', [IncomeController::class, 'printForm_r'])->name('print_form_r');
+        Route::get('print_r/{start_date}/{end_date}', [IncomeController::class, 'print_r'])->name('print_r');
+        Route::post('search-for-print_r', [IncomeController::class, 'searchForPrint_r'])->name('search_for_print_r');
     });
 
     Route::group(['prefix' => 'expenditure', 'as' => 'expenditure.'], function () {
@@ -148,6 +157,9 @@ Route::group(['middleware' => 'auth'], function () {
         // });
 
         Route::get('datatable', [ExpenditureController::class, 'datatable'])->name('datatable');
+        Route::get('print-form', [ExpenditureController::class, 'printForm'])->name('print_form');
+        Route::get('print/{start_date}/{end_date}', [ExpenditureController::class, 'print'])->name('print');
+        Route::post('search-for-print', [ExpenditureController::class, 'searchForPrint'])->name('search_for_print');
     });
 
     // Route::group(['prefix' => 'customer','as'=>'customer.', 'middleware' => 'role:admin,employee'], function () {

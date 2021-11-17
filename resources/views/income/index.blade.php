@@ -11,7 +11,8 @@
           <div class="card-header d-flex justify-content-between">
             <h4>Data Pendapatan</h4>
             <div class="right">
-              <button class="btn btn-warning btn-icon icon-left mr-3"><i class="fas fa-print"></i> Print Excel</button>
+              {{-- <button class="btn btn-warning btn-icon icon-left mr-3"><i class="fas fa-print"></i> Print Pendapatan</button> --}}
+              <a href="{{route('income.print_form')}}" class="btn btn-warning"> <i class="fas fa-print"></i> Print Pendapatan</a>
               @if (getRoleName() == 'staff')
                 <a href="{{route('income.create')}}" class="btn btn-primary">Tambah Pendapatan</a>
               @endif

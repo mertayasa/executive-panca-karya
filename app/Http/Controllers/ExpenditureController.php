@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Datatables\ExpenditureDatatable;
 use App\Http\Requests\ExpenditureRequest;
 use ConvertApi\ConvertApi;
+use Barryvdh\DomPDF\Facade as PDF;
+use App\Http\Requests\ExpenditurePrintRequest;
+
 
 use Illuminate\Support\Facades\Auth;
 
@@ -99,5 +102,26 @@ class ExpenditureController extends Controller
     public function destroy(Expenditure $expenditure)
     {
         //
+    }
+
+
+    public function printForm()
+    {
+        return view('expenditure.print_form');
+    }
+
+    public function searchForPrint(ExpenditurePrintRequest $request)
+    {
+        $expenditure_data = Expenditure::whereBetween('date', [$request->start_date, $request->end_date])->get();
+        // $expenditure_data = expenditure::whereBetween('date', ['2021-11-14', '2021-11-17'])->get();
+        // dd($expenditure_data);
+        return view('expenditure.print_form', compact('expenditure_data', 'request'));
+    }
+
+    public function print($start_date, $end_date)
+    {
+        $expenditure_data = Expenditure::whereBetween('date', [$start_date, $end_date])->get();
+        $pdf = PDF::loadview('expenditure.export_pdf', ['expenditure_data' => $expenditure_data, 'start_date' => $start_date, 'end_date' => $end_date])->setPaper('a4', 'landscape');
+        return $pdf->download('Pengeluaran' . $start_date . '-' . $end_date . '.pdf');
     }
 }

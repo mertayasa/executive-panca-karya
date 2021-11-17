@@ -13,7 +13,8 @@ class IncomeFactory extends Factory
 {
     protected $model = Income::class;
 
-    public function definition(){
+    public function definition()
+    {
         $date = \Carbon\Carbon::now();
         $total = $this->faker->numberBetween(10000, 34000);
         $status = (bool)random_int(0, 1);
@@ -26,7 +27,7 @@ class IncomeFactory extends Factory
             'paid_date' => $status == 1 ? Carbon::today() : null,
             // 'receivable_remain' => $status == 0 ? $total : 0,
             'ket' => $this->faker->sentence(),
-            'receiver_name' => $this->faker->name(),
+            // 'receiver_name' => $this->faker->name(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
             'created_by' => User::where('level', 0)->first()->id,
