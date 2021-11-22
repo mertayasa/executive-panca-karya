@@ -1,4 +1,4 @@
-<div class="row" id="income_per_day">
+<div class="row col-12 mr-0 pr-0" id="income_per_day">
     <div class="col-6 col-md-6">
       <div class="card-d">
         <div class="card-header">
@@ -18,7 +18,7 @@
  
   
   {{-- <div  id="expen_per_day"> --}}
-    <div class="col-6 col-md-6" id="expen_per_day" >
+    <div class="col-6 col-md-6 pr-0" id="expen_per_day" >
       <div class="card-d">
         <div class="card-header">
           <div class="row col-12 align-items-center justify-content-between p-0">

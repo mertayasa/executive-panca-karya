@@ -107,7 +107,9 @@
                 </div>
             </div>
             <div class="card-body">
-                @include('income.receivable.receivable_datatable', ['receiavable_count' => formatPrice($dashboard_data['receiavable_count'])])
+            @include('dashboard.chart_staff')
+
+                {{-- @include('income.receivable.receivable_datatable', ['receiavable_count' => formatPrice($dashboard_data['receiavable_count'])]) --}}
             </div>
         </div>
     </div>

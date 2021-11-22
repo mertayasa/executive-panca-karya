@@ -27,15 +27,19 @@ class DashboardController extends Controller
         $receiavable_count = Income::where('status', 0)->sum('total');
         $customer_count = Customer::count();
         $expenditure_count = Expenditure::sum('amount');
+        $income_daily_count = Income::whereDate('date', Carbon::now())->where('status', 1)->sum('total');
+        $expenditure_daily_count = Expenditure::whereDate('date', Carbon::now())->sum('amount');
         // dd($expenditure_count);
         $years = Income::selectRaw('DISTINCT year(date) year')->orderBy('year', 'DESC')->pluck('year', 'year');
 
         return [
             'staff_count' => $staff_count,
             'income_count' => $income_count,
+            'expenditure_count' => $expenditure_count,
+            'income_daily_count' => $income_daily_count,
+            'expenditure_daily_count' => $expenditure_daily_count,
             'receiavable_count' => $receiavable_count,
             'customer_count' => $customer_count,
-            'expenditure_count' => $expenditure_count,
             'years' => $years,
             // 'income_count_day' => $income_count_day
         ];
@@ -45,7 +49,7 @@ class DashboardController extends Controller
     {
         $year = $request->year != 'now' ? $request->year : Carbon::now()->year;
         $months = ['January',  'February',  'March',  'April',  'May',  'June',  'July',  'August',  'September',  'October',  'November',  'December'];
-        $data_income = Income::selectRaw('year(date) year, monthname(date) month, sum(total) data')
+        $data_income = Income::where('status', 1)->selectRaw('year(date) year, monthname(date) month, sum(total) data')
             ->whereYear('date', $year)
             ->groupBy('year', 'month')
             ->orderBy('month', 'DESC')
