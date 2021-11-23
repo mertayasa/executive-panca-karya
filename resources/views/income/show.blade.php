@@ -24,12 +24,12 @@
             
             <table class="table table-bordered table-responsive">
               <tr>
-                <td width="40%">No Nota / Invoice</td>
-                <td width="60%">{{$income->invoice_no}}</td>
+                <td width="40%"> <b> No Nota  </b></td>
+                <td width="60%"><b> {{$income->invoice_no}} </b></td>
               </tr>
               <tr>
-                <td width="40%">Nama Pelanggan</td>
-                <td width="60%">{{$income->customer->name}}</td>
+                <td width="40%"><b> Nama Pelanggan </b></td>
+                <td width="60%"><b> {{$income->customer->name}} </b></td>
               </tr>
               <tr>
                 <td width="40%">Status Pembayaran</td>

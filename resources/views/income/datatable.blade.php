@@ -3,7 +3,7 @@
         <tr>
             <th>No</th>
             <th></th>
-            <th>No Nota / Invoice</th>
+            <th>No Nota </th>
             <th>Tanggal Transaksi</th>
             <th>Pelanggan</th>
             <th>Jenis Pendapatan</th>
