@@ -123,7 +123,7 @@
                       <div class="card-body pt-3">
                           <h5 class="card-title mb-4">Total Pendapatan Bersih</h5>
                           <div class="icon">
-                              {{ formatPrice($dashboard_data['income_count'] - $dashboard_data['receiavable_count'] - $dashboard_data['expenditure_count']) }}
+                              {{ formatPrice($dashboard_data['income_count']  - $dashboard_data['expenditure_count']) }}
                           </div>
                       </div>
                   </div>
