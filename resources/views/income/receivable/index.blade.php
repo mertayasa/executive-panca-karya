@@ -8,15 +8,16 @@
     <div class="row">
       <div class="col-12">
         <div class="card">
-          <div class="card-header d-flex justify-content-between">
-            <h4>Data Piutang</h4>
+          <div class="card-header d-flex justify-content-end">
+            {{-- <h4 class="text-center">Data Piutang</h4> --}}
             <div class="right">
-              <a href="{{route('receivable.print_form_r')}}" class="btn btn-warning"> <i class="fas fa-print"></i> Print Piutang</a>
+              <a href="{{route('receivable.print_form_r')}}" class="btn btn-success"> <i class="fas fa-print"></i> Print Piutang</a>
               {{-- @if (getRoleName() == 'staff')
                 <a href="{{route('receivable.create')}}" class="btn btn-primary">Tambah Piutang</a>
               @endif --}}
             </div>
           </div>
+          <h4 class="text-center">Data Piutang</h4>
           <div class="col-12">
               @include('layouts.flash')
           </div>

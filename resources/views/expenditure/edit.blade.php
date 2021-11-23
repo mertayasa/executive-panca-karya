@@ -20,8 +20,8 @@
             <div class="row ">
               <div class="col-4"></div>
                 <div class="col-4 text-center">
-                   <button class="btn btn-primary ml-10" type="submit">Simpan</button>
                     <a href="{{route('expenditure.index')}}" class="btn btn-danger">Kembali</a>
+                    <button class="btn btn-primary ml-10" type="submit">Simpan</button>
                 </div>
                 <div class="col-4"></div>
             </div>

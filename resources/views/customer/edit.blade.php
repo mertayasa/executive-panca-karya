@@ -19,8 +19,8 @@
             @include('customer.form')
             <div class="row mt-3">
                 <div class="col-12">
-                    <a href="{{route('customer.index')}}" class="btn btn-danger">Kembali</a>
                     <button class="btn btn-primary ml-3" type="submit">Simpan</button>
+                    <a href="{{route('customer.index')}}" class="btn btn-danger">Kembali</a>
                 </div>
             </div>
             {!! Form::close() !!}

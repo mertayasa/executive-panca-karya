@@ -42,12 +42,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-header d-flex justify-content-between">
-                            <h4>Data Pendapatan {{indonesianDate($request->start_date)}} - {{indonesianDate($request->end_date)}}</h4>
+                        <div class="card-header d-flex justify-content-end">
+                            {{-- <h4>Data Pendapatan {{indonesianDate($request->start_date)}} - {{indonesianDate($request->end_date)}}</h4> --}}
                             @if (count($income_data) > 0)
                                 <a href="{{route('income.print', [$request->start_date, $request->end_date])}}" class="btn btn-warning"> <i class="fas fa-print"></i> Cetak Pendapatan</a>
                             @endif
                         </div>
+                        <h4>Data Pendapatan {{indonesianDate($request->start_date)}} - {{indonesianDate($request->end_date)}}</h4>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-stripped">

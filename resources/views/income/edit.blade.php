@@ -18,8 +18,8 @@
             @include('income.form')
             <div class="row px-0 mt-3">
                 <div class="col-12 ">
-                  <button class="btn btn-primary mr-3" type="submit">Simpan</button>
                   <a href="{{route('income.index')}}" class="btn btn-danger">Kembali</a>
+                  <button class="btn btn-primary mr-3" type="submit">Simpan</button>
                 </div>
             </div>
             {!! Form::close() !!}

@@ -48,13 +48,14 @@
     <div class="row">
       <div class="col-12">
         <div class="card">
-          <div class="card-header d-flex justify-content-between">
-            <h4>Daftar Piutang {{ucwords($customer->name)}} </h4>
+          <div class="card-header d-flex justify-content-end">
+            {{-- <h4>Daftar Piutang {{ucwords($customer->name)}} </h4> --}}
             
             @if (getRoleName() == 'staff')
-              <a  class="text-white btn btn-danger" href="{{route('income.full_pay', $customer->id)}}" > Lunas  </a>
+              <a  class="text-white btn btn-warning" style="background-color: rgb(155, 93, 13) ; " href="{{route('income.full_pay', $customer->id)}}" > Bayar Lunas  </a>
             @endif
           </div>
+          <h4 class="text-center">Daftar Piutang {{ucwords($customer->name)}} </h4>
           <div class="card-body">
             @include('income.receivable.receivable_datatable_detail')
             <a href="{{route('receivable.index')}}" class="btn btn-danger">Kembali</a>
