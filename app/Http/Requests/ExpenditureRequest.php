@@ -26,7 +26,7 @@ class ExpenditureRequest extends FormRequest
         return [
             'id_types' => 'required',
             'date' => 'required',
-            'amount' => 'required',
+            'amount' => 'required|gt:0',
             'note' => 'required',
         ];
     }

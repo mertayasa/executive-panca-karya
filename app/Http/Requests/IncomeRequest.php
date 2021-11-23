@@ -25,7 +25,7 @@ class IncomeRequest extends FormRequest
     {
         $rules = [
             'id_income_type' => 'required|exists:income_types,id',
-            'total' => 'required',
+            'total' => 'required|gt:0',
             'ket' => 'nullable'
         ];
 

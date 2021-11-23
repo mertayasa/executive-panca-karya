@@ -15,6 +15,11 @@
     .main-content{
       overflow-x: hidden !important;
     }
+    
+    table, th, td {
+        border: 1px solid rgb(189, 189, 189) !important;
+        border-collapse: collapse !important;
+    }
   </style>
 </head>
 
