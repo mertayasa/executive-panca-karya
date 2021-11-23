@@ -56,7 +56,7 @@ function getGender($gender)
 
 function getRoleName()
 {
-    return Auth::user()->level == 0 ? 'staff' : 'owner';
+    return Auth::user()->level == 0 ? 'staff' : 'pimpinan';
 }
 
 function formatPrice($value)

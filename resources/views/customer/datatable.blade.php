@@ -1,17 +1,17 @@
 <table class="table table-hover table-bordered" width="100%" id="expenseDatatable">
     <thead>
         <tr>
-            <th>No</th>
+            <th class="text-center">No</th>
             <th>Nama</th>
             <th>Alamat</th>
-            <th>No. Telp</th>
+            <th class="text-center">No. Telp</th>
             {{-- <th>Tempat Lahir</th>
             <th>Tgl. Lahir</th>
             <th>Jenis Kelamin</th> --}}
             <th>Kategori</th>
             <th>Status</th>
             @if (getRoleName() == 'staff')
-                <th>Aksi</th>
+                <th class="text-center">Aksi</th>
             @endif
         </tr>
     </thead>
@@ -32,7 +32,8 @@
                     data: 'DT_RowIndex',
                     name: 'no',
                     orderable: false,
-                    searchable: false
+                    searchable: false,
+                    className: "text-center"
                 },
                 {
                     data: 'name',
@@ -46,7 +47,8 @@
                 {
                     data: 'no_telp',
                     name: 'no_telp',
-                    orderable: false
+                    orderable: false,
+                    className: "text-center"
                 },
                 // {
                 //     data: 'place_of_birth',
@@ -78,7 +80,8 @@
                     data: 'action',
                     name: 'action',
                     orderable: false,
-                    searchable: false
+                    searchable: false,
+                    className: "text-center"
                 })
         @endif
 

@@ -17,7 +17,7 @@
 <div class="row mt-3">
     <div class="col-2"></div>
     <div class="col-12  col-md-8">
-        {!! Form::label('expenseAmount', 'Jumlah Pengeluaran ', ['class' => 'mb-1']) !!}
+        {!! Form::label('expenseAmount', 'Jumlah ', ['class' => 'mb-1']) !!}
         {!! Form::number('amount', null, ['class' => 'form-control', 'id' => 'expenseAmount']) !!}
     </div>
      <div class="col-2"></div>
@@ -25,7 +25,7 @@
 <div class="row mt-3">
     <div class="col-2"></div>
     <div class="col-12  col-md-8">
-        {!! Form::label('expenseNote', 'Nota', ['class' => 'mb-1']) !!}
+        {!! Form::label('expenseNote', 'Bukti Transaksi', ['class' => 'mb-1']) !!}
         {!! Form::file('note', ['class' => 'd-block filepond', 'id' => 'expenseNote']) !!}
     </div>
      <div class="col-2"></div>

@@ -21,23 +21,27 @@
        
           <div class="card-body">
             
-            <table class="table  "">
+            <table class="table">
               <tr>
                 <td width="40%">Jenis Pengeluaran</td>
-                <td width="60%">: {{$expenditure->expenditure_type->name}}</td>
+                <td width="60%"> {{$expenditure->expenditure_type->name}}</td>
               </tr>
               <tr>
                 <td width="40%">Tanggal </td>
-                <td width="60%">: {{indonesianDate($expenditure->date)}}</td>
+                <td width="60%"> {{indonesianDate($expenditure->date)}}</td>
               </tr>
               <tr>
                 <td width="40%">Jumlah</td>
-                <td width="60%">: {{formatPrice($expenditure->amount)}}</td>
+                <td width="60%"> {{formatPrice($expenditure->amount)}}</td>
               </tr>
               <tr>
                 <td width="40%">Bukti Transaksi</td>
                 {{-- <td width="60%">{{$expenditure->note}}</td> --}}
-                <td> <img src="{{ asset('images/' . $expenditure->note) }} "class="alt="" style="object-fit: cover !important; width:200px; height:200px"> </td>
+                <td class="pb-2">
+                  <img src="{{ asset('images/' . $expenditure->note) }} " class="border my-2" style="object-fit: cover !important; width:200px; height:200px"> 
+                  <br>
+                  <a href="{{ $note }}" target="_blank">Lihat Bukti Transaksi</a>
+                </td>
               </tr>
              
             </table>

@@ -1,18 +1,18 @@
 <table class="table table-hover table-bordered" width="100%" id="incomeReceivable">
     <thead>
         <tr>
-            <th>No</th>
+            <th class="text-center">No</th>
             <th></th>
-            <th>No Nota / Invoice</th>
+            <th class="text-center">No Nota</th>
             {{-- <th>Pelanggan</th> --}}
             {{-- <th>Penerima</th> --}}
             <th>Jenis Pendapatan</th>
-            <th>Tanggal </th>
+            <th class="text-center">Tanggal Transaksi</th>
             <th>Total Piutang (Rp)</th>
             {{-- <th>Sudah Dibayar (Rp)</th>
             <th>Sisa (Rp)</th> --}}
             <th>Keterangan</th>
-            <th>Aksi</th>
+            <th class="text-center">Aksi</th>
         </tr>
     </thead>
     <tbody></tbody>
@@ -33,7 +33,8 @@
                 data: 'DT_RowIndex',
                 name: 'no',
                 orderable: false,
-                searchable: false
+                searchable: false,
+                className: "text-center"
             },
             {
                 data: 'updated_at',
@@ -43,7 +44,8 @@
             },
             {
                 data: 'invoice_no',
-                name: 'invoice_no'
+                name: 'invoice_no',
+                className: "text-center"
             },
             // {
             //     data: 'customer.name',
@@ -60,7 +62,8 @@
             {
                 data: 'date',
                 name: 'date',
-                orderable: false
+                orderable: false,
+                className: "text-center"
             },
             {
                 data: 'total',
@@ -86,7 +89,8 @@
                 data: 'action',
                 name: 'action',
                 orderable: false,
-                searchable: false
+                searchable: false,
+                className: "text-center"
             }
         ]
 

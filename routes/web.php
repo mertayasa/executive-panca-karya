@@ -164,7 +164,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Route::group(['prefix' => 'customer','as'=>'customer.', 'middleware' => 'role:admin,employee'], function () {
 
-    Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => 'role:owner'], function () {
+    Route::group(['prefix' => 'staff', 'as' => 'staff.', 'middleware' => 'role:pimpinan'], function () {
         Route::get('/', [StaffController::class, 'index'])->name('index');
         Route::get('create', [StaffController::class, 'create'])->name('create');
         Route::post('store', [StaffController::class, 'store'])->name('store');

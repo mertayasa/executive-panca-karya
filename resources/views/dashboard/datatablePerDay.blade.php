@@ -33,7 +33,8 @@
                 },
                 {
                     data: 'date',
-                    name: 'date'
+                    name: 'date',
+                    className: "text-center"
                 },
                 {
                     data: 'total',

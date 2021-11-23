@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
 {
     public function run(){
         $staff_count = User::where('level', 0)->count();
-        $owner_count = User::where('level', 1)->count();
+        $pimpinan_count = User::where('level', 1)->count();
 
         $faker = Faker::create('id_ID');
         
@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
         ];
 
-        $owner = [
+        $pimpinan = [
             'name' => 'Admin',
             'email' => 'admin@demo.com',
             'email_verified_at' => now(),
@@ -51,7 +51,7 @@ class UserSeeder extends Seeder
         }
 
         if($find_admin->count() < 1){
-            $create_owner = User::create($owner);
+            $create_pimpinan = User::create($pimpinan);
         }else{
             $find_admin->password = bcrypt('asdasdasd');
             $find_admin->save();

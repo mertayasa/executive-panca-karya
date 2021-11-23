@@ -97,7 +97,7 @@
         </div>
     </div>
 
-    <div class="col-12 col-md-12 d-flex">
+    {{-- <div class="col-12 col-md-12 d-flex">
         <div class="card flex-fill">
             <div class="card-header">
                 <div class="row col-12 align-items-center justify-content-between p-0">
@@ -106,13 +106,13 @@
                     </div>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body"> --}}
             @include('dashboard.chart_staff')
 
                 {{-- @include('income.receivable.receivable_datatable', ['receiavable_count' => formatPrice($dashboard_data['receiavable_count'])]) --}}
-            </div>
+            {{-- </div>
         </div>
-    </div>
+    </div> --}}
 
     {{-- <div class="col-12 col-md-5 d-flex">
         <div class="card flex-fill">

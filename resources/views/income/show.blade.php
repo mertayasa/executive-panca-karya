@@ -22,7 +22,7 @@
           </div>
           <div class="card-body">
             
-            <table class="table table-bordered table-responsive">
+            <table class="table">
               <tr>
                 <td width="40%"> <b> No Nota  </b></td>
                 <td width="60%"><b> {{$income->invoice_no}} </b></td>

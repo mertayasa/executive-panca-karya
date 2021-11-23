@@ -26,10 +26,16 @@ class ExpenditureDataTable
                 return '<img src="' . asset('images/' . $expenditure->note) . '" alt="" width="100px">';
             })
             ->addColumn('action', function ($expenditure) {
+                $file_name = explode('/', $expenditure->note)[1] ?? '-';
+                $folder = explode('/', $expenditure->note)[0] ?? '-';
+
+                $note =  '<a target="_blank" class="btn btn-danger" href="' . asset('images/' . $folder . '/pdf' . '/' . $file_name . '.pdf') . '">Nota</a>';
+
                 return
                     '<div class="btn-group">' .
                     '<a href="' . route('expenditure.edit', $expenditure->id) . '" class="btn btn-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Edit" style="margin-right: 5px" >Edit</a>' .
                     '<a href="' . route('expenditure.show', $expenditure->id) . '" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="show" style="margin-right: 5px" >Detail</a>' .
+                    // $note.
                     // '<a href="' . route('income.show', $income->id) . '" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Detail" style="margin-right: 5px" ><i class="menu-icon fas fa-info"></i></a>' .
                     // '<a class="btn btn-danger dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Options"> <i class="fas fa-filter"></i></a>
                     //     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">

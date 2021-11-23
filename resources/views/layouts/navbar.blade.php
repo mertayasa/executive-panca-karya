@@ -30,7 +30,7 @@
         <a class="dropdown-item has-icon text-danger" href="{{ route('logout') }}"
             onclick="event.preventDefault();
                           document.getElementById('logout-form').submit();">
-             {{ __('Logout') }}
+             Keluar
         </a>
 
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

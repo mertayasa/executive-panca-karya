@@ -34,7 +34,7 @@ class IncomeReceivableDataTable
             //     return indonesianDateNew($customer->date);
             // })
             ->addColumn('action', function ($customer) {
-                if (getRoleName() == 'owner') {
+                if (getRoleName() == 'pimpinan') {
                     return  '<a href="' . route('income.form_receivable', $customer->id) . '" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Lihat Detail" style="margin-right: 5px">Detail</a>';
                 }
 

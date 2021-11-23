@@ -4,14 +4,14 @@
         <!-- <a href="index.html">PANCA KARYA MANUNGGAL</a> -->
          <img class="mb-2" src="{{asset('images/logo-panca.jpeg')}}" alt="Responsive image" width="100" height="100" style="object-fit: contain;">
          <h3 class="text-center mb-0">{{Auth::user()->name}}</h3>
-         <p class="text-center mb-0">Login sebagai <b> {{Auth::user()->level == 1 ? 'owner' : 'staff'}} </b></p>
+         <p class="text-center mb-0">Login sebagai <b> {{Auth::user()->level == 1 ? 'pimpinan' : 'staff'}} </b></p>
         </div>
         <hr>
      
       <ul class="sidebar-menu mt-3">
-          <li class="{{Request::is('*dashboard*') ? 'active' : ''}}"> <a href="{{route('dashboard.index')}}" class="nav-link"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+          <li class="{{Request::is('*dashboard*') ? 'active' : ''}}"> <a href="{{route('dashboard.index')}}" class="nav-link"><i class="fas fa-tachometer-alt"></i><span>Halaman Utama</span></a></li>
           
-          @if (getRoleName() == 'owner')
+          @if (getRoleName() == 'pimpinan')
             <li class="{{Request::is('*staff*') ? 'active' : ''}}"><a class="nav-link" href="{{route('staff.index')}}"><i class="fas fa-user"></i> <span>Staff</span></a></li>
           @endif
           
@@ -21,7 +21,7 @@
 
           <li class="{{Request::is('*expenditure*') && !Request::is('*expenditure-type*') && !Request::is('*report*') ? 'active' : ''}}"><a href="{{route('expenditure.index')}}"><i class="fas fa-file-alt"></i> <span> Pengeluaran </span> </a></li>
           
-          @if (getRoleName() != 'owner')
+          @if (getRoleName() != 'pimpinan')
           <li class="menu-header">Data Master</li>
           <li class="{{Request::is('*income-type*') ? 'active' : ''}}"><a href="{{route('income_type.index')}}"><i class="fas fa-dot-circle"></i> <span> Jenis Pendapatan </span> </a></li>
           <li class="{{Request::is('*expenditure-type*') ? 'active' : ''}}"><a href="{{route('expenditure_type.index')}}"><i class="fas fa-dot-circle"></i> <span> Jenis Pengeluaran </span> </a></li>

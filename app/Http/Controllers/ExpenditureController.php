@@ -67,7 +67,36 @@ class ExpenditureController extends Controller
     public function show(Expenditure $expenditure)
     {
         $url_referer = request()->headers->get('referer');
-        return view('expenditure.show', compact('expenditure', 'url_referer'));
+        $check_folder = explode('/', $expenditure->note);
+        $raw_file_name = $check_folder[array_key_last($check_folder)];
+
+        if (!file_exists('images/expenditure/pdf/'. $raw_file_name.'.pdf')) {
+            $new_pdf = $this->generatePdf($expenditure->note);
+            $note = asset('images/expenditure/pdf' . '/' . $new_pdf . '.pdf');
+        }else{
+            $note = asset('images/expenditure/pdf' . '/' . $raw_file_name . '.pdf');
+        }
+
+        return view('expenditure.show', compact('expenditure', 'url_referer', 'note'));
+    }
+
+    private function generatePdf($raw_file_dir)
+    {
+        if (!file_exists('images/expenditure/pdf')) {
+            mkdir('images/expenditure/pdf', 0755, true);
+        }
+
+        $check_folder = explode('/', $raw_file_dir);
+        $new_file_name = $check_folder[array_key_last($check_folder)];
+        $safe_name = $new_file_name;
+        // dd($safe_name);
+
+        ConvertApi::setApiSecret(env('CONVERT_API_KEY'));
+        $result = ConvertApi::convert('pdf', ['File' => 'images/'. $raw_file_dir]);
+        $result->getFile()->save(base_path() . '/public/images/expenditure/' . 'pdf/' . $safe_name . '.pdf');
+
+        return $safe_name;
+
     }
 
     public function edit(Expenditure $expenditure)

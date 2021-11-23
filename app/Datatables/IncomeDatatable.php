@@ -27,7 +27,7 @@ class IncomeDataTable
                 return 'Lunas';
             })
             ->addColumn('action', function ($income) {
-                if(getRoleName() == 'owner'){
+                if(getRoleName() == 'pimpinan'){
                     return '<a href="' . route('income.show', $income->id) . '" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Detail" style="margin-right: 5px" >Detail</a>';
                 }
 

@@ -3,7 +3,7 @@
 @section('content')
     <section class="section">
         <div class="section-header justify-content-center">
-            <h1>Dashboard</h1>
+            <h1>Halaman Utama</h1>
         </div>
 
         <div class="row mt-5 ">
@@ -12,7 +12,9 @@
                     <div class="card-custom-img" style="background-color: #343e5f">
                     </div>
                     <div class="card-custom-avatar">
-                        <a href=" {{ route('customer.index') }} "> <span><i class="fa fa-users"></i> </span> </a>
+                        <a href="{{ route('customer.index') }}"> <span>
+                            <center><i class="fas fa-portrait"></i></center>
+                        </span> </a>
                     </div>
                     <div class="card-body pt-3">
                         <h5 class="card-title mb-4">Total Pelanggan</h5>
@@ -23,13 +25,15 @@
                 </div>
             </div>
             
-            @if (getRoleName() == 'owner')
+            @if (getRoleName() == 'pimpinan')
                 <div class="col-md-4 col-sm-6">
                     <div class="card card-custom bg-white border-white border-0">
                         <div class="card-custom-img" style="background-color: #343e5f">
                         </div>
                         <div class="card-custom-avatar">
-                            <a href=" {{ route('customer.index') }} "> <span><i class="fa fa-users"></i> </span> </a>
+                            <a href="{{ route('staff.index') }}"> <span>
+                                <center><i class="fas fa-user"></i></center>
+                            </span> </a>
                         </div>
                         <div class="card-body pt-3">
                             <h5 class="card-title mb-4">Total Staff</h5>
@@ -70,11 +74,11 @@
                         <div class="card-custom-avatar">
                             @if (getRoleName() == 'staff')
                                 <a href=" #expen_per_day "> <span>
-                                        <center><i class="fas fa-wallet"></i></center>
+                                        <center><i class="fas fa-file-alt"></i></center>
                                     </span> </a>
                             @else
                                 <a href=" {{ route('expenditure.index') }} "> <span>
-                                        <center><i class="fas fa-wallet"></i></center>
+                                        <center><i class="fas fa-file-alt"></i></center>
                                     </span> </a>
                             @endif
                         </div>
@@ -93,7 +97,7 @@
                         </div>
                         <div class="card-custom-avatar">
                             <a href="{{ route('receivable.index') }} "> <span>
-                                    <center><i class="fas fa-wallet"></i></center>
+                                    <center><i class="fas fa-receipt"></i></center>
                                 </span> </a>
                         </div>
                         <div class="card-body pt-3">
@@ -147,7 +151,7 @@
                   @endif
               </div>
               <div class="card-body pt-3">
-                  <h5 class="card-title mb-4">Total Pendapatan (Hari Ini)</h5>
+                  <h5 class="card-title mb-4">Total Pendapatan Harian</h5>
                   <div class="icon">
                       {{ formatPrice($dashboard_data['income_daily_count']) }}
                   </div>
@@ -161,16 +165,16 @@
               <div class="card-custom-avatar">
                   @if (getRoleName() == 'staff')
                       <a href=" #expen_per_day "> <span>
-                              <center><i class="fas fa-wallet"></i></center>
+                              <center><i class="fas fa-file-alt"></i></center>
                           </span> </a>
                   @else
                       <a href=" {{ route('expenditure.index') }} "> <span>
-                              <center><i class="fas fa-wallet"></i></center>
+                              <center><i class="fas fa-file-alt"></i></center>
                           </span> </a>
                   @endif
               </div>
               <div class="card-body pt-3">
-                  <h5 class="card-title mb-4">Total Pengeluaran (Hari Ini)</h5>
+                  <h5 class="card-title mb-4">Total Pengeluaran Harian</h5>
                   <div class="icon">
                       {{ formatPrice($dashboard_data['expenditure_daily_count']) }}
                   </div>

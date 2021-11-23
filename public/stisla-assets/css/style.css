@@ -4634,13 +4634,13 @@ a:focus {
     position: absolute;
     top: 10px;
     left: 1.25rem;
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     background-color: white;
 }
 
 .card-custom-avatar span i {
-    font-size: 60px;
+    font-size: 48px;
     margin: 10px;
     padding-top: 5px;
 }

@@ -1,17 +1,17 @@
 <table class="table table-hover table-bordered " width="100%" id="incomeDatatable">
     <thead>
         <tr>
-            <th>No</th>
+            <th class="text-center">No</th>
             <th></th>
-            <th>No Nota </th>
+            <th class="text-center">No Nota </th>
             <th>Tanggal Transaksi</th>
             <th>Pelanggan</th>
             <th>Jenis Pendapatan</th>
             <th class="text-right align-middle">Total (Rp)</th>
             {{-- <th>Penerima</th> --}}
             {{-- <th>Keterangan</th> --}}
-             <th>Tgl Pelunasan</th>
-            <th>Aksi</th>
+             <th class="text-center">Tgl Pelunasan</th>
+            <th class="text-center">Aksi</th>
         </tr>
     </thead>
     <tbody></tbody>
@@ -32,7 +32,8 @@
                 data: 'DT_RowIndex',
                 name: 'no',
                 orderable: false,
-                searchable: false
+                searchable: false,
+                className: "text-center"
             },
             {
                 data: 'updated_at',
@@ -42,12 +43,14 @@
             },
             {
                 data: 'invoice_no',
-                name: 'invoice_no'
+                name: 'invoice_no',
+                className: "text-center"
             },
             {
                 data: 'date',
                 name: 'date',
-                orderable: false
+                orderable: false,
+                className: "text-center"
             },
             {
                 data: 'customer.name',
@@ -65,7 +68,8 @@
             },
               {
                 data: 'paid_date',
-                name: 'paid_date'
+                name: 'paid_date',
+                className: "text-center"
             },
             //   {
             //     data: 'status',
@@ -83,7 +87,8 @@
                 data: 'action',
                 name: 'action',
                 orderable: false,
-                searchable: false
+                searchable: false,
+                className: "text-center"
             }
         ]
 
