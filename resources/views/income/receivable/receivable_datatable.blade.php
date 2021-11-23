@@ -13,6 +13,7 @@
             <th>No</th>
             <th></th>
             <th>Pelanggan</th>
+            <th>Katagori Pelanggan</th>
             {{-- <th>Tanggal </th> --}}
 
             {{-- <th>Total Piutang</th>
@@ -50,6 +51,10 @@
             {
                 data: 'name',
                 name: 'name'
+            },
+            {
+                data: 'category',
+                name: 'category'
             },
             {
                 data: 'total_receivable',

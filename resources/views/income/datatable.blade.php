@@ -1,10 +1,10 @@
-<table class="table table-hover table-bordered" width="100%" id="incomeDatatable">
+<table class="table table-hover table-bordered " width="100%" id="incomeDatatable">
     <thead>
         <tr>
             <th>No</th>
             <th></th>
-            <th>Tanggal Transaksi</th>
             <th>No Nota / Invoice</th>
+            <th>Tanggal Transaksi</th>
             <th>Pelanggan</th>
             <th>Jenis Pendapatan</th>
             <th class="text-right align-middle">Total (Rp)</th>
@@ -41,13 +41,13 @@
                 visible: false,
             },
             {
+                data: 'invoice_no',
+                name: 'invoice_no'
+            },
+            {
                 data: 'date',
                 name: 'date',
                 orderable: false
-            },
-            {
-                data: 'invoice_no',
-                name: 'invoice_no'
             },
             {
                 data: 'customer.name',
@@ -94,7 +94,7 @@
             ajax: url,
             columns: columns,
             order: [
-                [3, "desc"]
+                [2, "desc"]
             ],
             columnDefs: [
                 // { width: 300, targets: 1 },

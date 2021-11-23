@@ -15,6 +15,9 @@ class IncomeReceivableDataTable
             ->addColumn('raw_total_receivable', function ($customer) {
                 return $customer->total_receivable;
             })
+            ->editColumn('category', function ($customer) {
+                return getCategory($customer->category);
+            })
             // ->editColumn('total', function($income){
             //     return formatPrice($income->total);
             // })
@@ -31,7 +34,7 @@ class IncomeReceivableDataTable
             //     return indonesianDateNew($customer->date);
             // })
             ->addColumn('action', function ($customer) {
-                if(getRoleName() == 'owner'){
+                if (getRoleName() == 'owner') {
                     return  '<a href="' . route('income.form_receivable', $customer->id) . '" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Lihat Detail" style="margin-right: 5px">Detail</a>';
                 }
 

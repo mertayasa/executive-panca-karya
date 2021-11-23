@@ -6,7 +6,7 @@
             <th>Jenis Pengeluaran</th>
             <th>Tanggal </th>
             <th class="text-right align-middle">Jumlah Pengeluaran (Rp)</th>
-            <th>Nota</th>
+            {{-- <th>Nota</th> --}}
             {{-- @if(getRoleName() == 'staff') --}}
                 <th>Aksi</th>
             {{-- @endif --}}
@@ -55,10 +55,10 @@
                 orderable: false,
                 className: "text-right"
             },
-            {
-                data: 'note',
-                name: 'note'
-            },
+            // {
+            //     data: 'note',
+            //     name: 'note'
+            // },
                {
                 data: 'action',
                 name: 'action',

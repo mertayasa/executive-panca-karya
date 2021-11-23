@@ -155,7 +155,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::patch('update/{expenditure}', [ExpenditureController::class, 'update'])->name('update');
         Route::delete('destroy/{expenditure}', [ExpenditureController::class, 'destroy'])->name('destroy');
         // });
-
+        Route::get('show/{expenditure}', [ExpenditureController::class, 'show'])->name('show');
         Route::get('datatable', [ExpenditureController::class, 'datatable'])->name('datatable');
         Route::get('print-form', [ExpenditureController::class, 'printForm'])->name('print_form');
         Route::get('print/{start_date}/{end_date}', [ExpenditureController::class, 'print'])->name('print');

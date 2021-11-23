@@ -66,7 +66,8 @@ class ExpenditureController extends Controller
 
     public function show(Expenditure $expenditure)
     {
-        return view('expenditure.show', compact('expenditure'));
+        $url_referer = request()->headers->get('referer');
+        return view('expenditure.show', compact('expenditure', 'url_referer'));
     }
 
     public function edit(Expenditure $expenditure)
