@@ -54,14 +54,14 @@
                                 <table class="table table-stripped">
                                     <thead class="text-center" >
                                         <tr>
-                                            <th>No</th>
-                                            <th>Invoice</th>
+                                            <th class="text-center">No</th>
+                                            <th class="text-center">Invoice</th>
                                             <th>Tanggal Pendapatan</th>
                                             <th>Tanggal Pelunasan </th>
                                             <th>Pelanggan</th>
                                             <th>Jenis Pendapatan</th>
                                             <th >Keterangan</th>
-                                            <th>Total (Rp.)</th>
+                                            <th class="text-right">Total (Rp.)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -70,14 +70,14 @@
                                         @endphp
                                         @forelse ($income_data as $income)
                                             <tr>
-                                                <td>{{$no++}}</td>
-                                                <td>{{$income->invoice_no}}</td>
-                                                <td>{{indonesianDateNew($income->date)}}</td>
-                                                <td>{{indonesianDateNew($income->paid_date)}}</td>
+                                                <td class="text-center">{{$no++}}</td>
+                                                <td class="text-center">{{$income->invoice_no}}</td>
+                                                <td class="text-center">{{indonesianDateNew($income->date)}}</td>
+                                                <td class="text-center">{{indonesianDateNew($income->paid_date)}}</td>
                                                 <td>{{$income->customer->name}}</td>
                                                 <td>{{$income->income_type->name}}</td>
-                                                <td >{{$income->ket}}</td>
-                                                <td class="text-right">{{$income->total}}</td>
+                                                <td>{{$income->ket}}</td>
+                                                <td class="text-right">{{formatPriceRaw($income->total)}}</td>
                                                 {{-- <td>
                                                     <ol class="pl-3">
                                                         @foreach ($income->income_log as $log)

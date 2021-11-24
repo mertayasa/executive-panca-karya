@@ -55,9 +55,9 @@
                                     <thead class="text-center">
                                         <tr>
                                             <th style="text-align: center">No</th>
-                                            <th>Tanggal Pengeluaran</th>
+                                            <th class="text-center">Tanggal Pengeluaran</th>
                                             <th>Jenis Pengeluaran</th>
-                                            <th>Total (Rp.)</th>
+                                            <th class="text-right">Total (Rp.)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -67,7 +67,7 @@
                                         @forelse ($expenditure_data as $expenditure)
                                             <tr>
                                                 <td style="text-align: center">{{$no++}}</td>
-                                                <td>{{indonesianDate($expenditure->date)}}</td>
+                                                <td class="text-center">{{indonesianDate($expenditure->date)}}</td>
                                                 <td>{{$expenditure->expenditure_type->name}}</td>
                                                 <td class="text-right">{{$expenditure->amount}}</td>
                                             </tr>

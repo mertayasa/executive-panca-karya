@@ -53,12 +53,12 @@
                                 <table class="table table-stripped">
                                     <thead>
                                         <tr>
-                                            <th>No</th>
-                                            <th>Invoice</th>
-                                            <th>Tanggal Pendapatan</th>
-                                            <th>Jenis Pendapatan</th>
-                                            <th >Keterangan</th>
-                                            <th>Total (Rp.)</th>
+                                            <th class="text-center">No</th>
+                                            <th class="text-center">Invoice</th>
+                                            <th class="text-center">Tanggal Pendapatan</th>
+                                            <th class="text-center">Jenis Pendapatan</th>
+                                            <th class="text-center" >Keterangan</th>
+                                            <th class="text-right">Total (Rp.)</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -67,12 +67,12 @@
                                         @endphp
                                         @forelse ($income_data as $income)
                                             <tr>
-                                                <td>{{$no++}}</td>
-                                                <td>{{$income->invoice_no}}</td>
-                                                <td>{{indonesianDateNew($income->date)}}</td>
+                                                <td class="text-center" >{{$no++}}</td>
+                                                <td class="text-center" >{{$income->invoice_no}}</td>
+                                                <td class="text-center" >{{indonesianDateNew($income->date)}}</td>
                                                 <td>{{$income->income_type->name}}</td>
                                                 <td >{{$income->ket}}</td>
-                                                <td>{{$income->total}}</td>
+                                                <td class="text-right">{{formatPriceRaw($income->total)}}</td>
                                             </tr>
                                         @empty
                                             <tr>

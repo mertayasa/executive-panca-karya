@@ -38,10 +38,10 @@
                     <tr>
                         <td style="text-align: center">{{$no++}}</td>
                         <td style=" text-align: center;">{{$income->invoice_no}}</td>
-                        <td>{{indonesianDate($income->date)}}</td>
+                        <td style="text-align: center">{{indonesianDate($income->date)}}</td>
                         <td>{{$income->income_type->name}}</td>
                         <td>{{$income->ket}}</td>
-                        <td>{{$income->total}}</td>
+                        <td style=" text-align: right;">{{formatPriceRaw($income->total)}}</td>
                     </tr>
                 @empty
                     <tr>
