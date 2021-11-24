@@ -1,14 +1,14 @@
 <table class="table table-hover table-striped" width="100%" id="expenseDatatable">
     <thead class="text-center">
         <tr>
-            <th>No</th>
-            <th>Nama</th>
-            <th>Tanggal Lahir</th>
-            <th>Jenis Kelamin</th>
-            <th>Telepon</th>
-            <th>Email</th>
-            <th>Alamat</th>
-            <th>Aksi</th>
+            <th class="text-center">No</th>
+            <th class="text-center">Nama</th>
+            <th class="text-center">Tanggal Lahir</th>
+            <th class="text-center">Jenis Kelamin</th>
+            <th class="text-center">Telepon</th>
+            <th class="text-center">Email</th>
+            <th class="text-center">Alamat</th>
+            <th class="text-center">Aksi</th>
         </tr>
     </thead>
     <tbody></tbody>
@@ -33,7 +33,8 @@
                     data: 'DT_RowIndex',
                     name: 'no',
                     orderable: false,
-                    searchable: false
+                    searchable: false,
+                    className: 'text-center'
                 },
                 {
                     data: 'user.name',
@@ -41,7 +42,8 @@
                 },
                 {
                     data: 'date',
-                    name: 'date'
+                    name: 'date',
+                    className: 'text-center'
                 },
                 // {
                 //     data: 'age',
@@ -58,7 +60,8 @@
                 {
                     data: 'telp',
                     name: 'telp',
-                    orderable: false
+                    orderable: false,
+                    className: 'text-center'
                 },
                 {
                     data: 'user.email',
@@ -74,7 +77,8 @@
                     data: 'action',
                     name: 'action',
                     orderable: false,
-                    searchable: false
+                    searchable: false,
+                    className: 'text-center'
                 }
             ],
             order: [

@@ -1,10 +1,10 @@
 <table class="table table-hover table-striped" width="100%" id="expenseDatatable">
     <thead class="text-center">
         <tr>
-            <th>No</th>
-            <th>Jenis Pendapatan</th>
+            <th class="text-center">No</th>
+            <th class="text-center">Jenis Pendapatan</th>
             @if(getRoleName() == 'staff')
-                <th>Aksi</th>
+                <th class="text-center">Aksi</th>
             @endif
         </tr>
     </thead>
@@ -26,7 +26,8 @@
                 data: 'DT_RowIndex',
                 name: 'no',
                 orderable: false,
-                searchable: false
+                searchable: false,
+                className: 'text-center'
             },
             {
                 data: 'name',
@@ -40,6 +41,7 @@
                     name: 'action',
                     orderable: false,
                     searchable: false,
+                    className: 'text-center'
                     
                 })
         @endif
