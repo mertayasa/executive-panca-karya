@@ -3,7 +3,7 @@
 @endif
 
 <table class="table table-hover table-bordered" width="100%" id="incomeReceivable">
-    <thead>
+    <thead class="text-center">
         <tr>
             {{-- <th>Jenis Pendapatan</th> --}}
             {{-- <th>Penerima</th> --}}
@@ -18,7 +18,7 @@
 
             {{-- <th>Total Piutang</th>
             <th>Sudah Dibayar</th> --}}
-            <th class="text-right align-middle">Sisa Piutang (Rp)</th>
+            <th class="text-center">Sisa Piutang (Rp)</th>
             <th></th>
             <th class="text-center">Aksi</th>
         </tr>

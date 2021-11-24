@@ -14,7 +14,7 @@
              <img class="img-fluid" src="{{asset('images/login.jpg')}}" alt="Responsive image">
           </div>
           <div class="col-sm-6">
-        <div class="card-header"><h4>Login</h4></div>
+        <div class="card-header"><h4>Masuk</h4></div>
         <div class="card-body">
           <form method="POST" action="{{ route('login') }}" >
           @csrf
@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
               <div class="d-block">
-                  <label for="password" class="control-label">Password</label>
+                  <label for="password" class="control-label">Kata Sandi</label>
               </div>
               <input id="password" type="password" class="form-control" @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
@@ -45,13 +45,13 @@
             <div class="form-group">
               <div class="custom-control custom-checkbox">
                 <input type="checkbox" name="remember"  id="remember" {{ old('remember') ? 'checked' : '' }}>
-                <label class="form-check-label" for="remember-me">Remember Me</label>
+                <label class="form-check-label" for="remember-me">Ingat Saya</label>
               </div>
             </div>
 
             <div class="form-group">
               <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                Login
+                Masuk
               </button>
             </div>
           </form>

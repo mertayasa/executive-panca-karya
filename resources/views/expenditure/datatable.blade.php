@@ -1,11 +1,11 @@
 <table class="table table-hover table-bordered" width="100%" id="expenseDatatable">
-    <thead>
+    <thead class="text-center">
         <tr>
             <th class="text-center">No</th>
             <th></th>
             <th>Jenis Pengeluaran</th>
             <th class="text-center">Tanggal </th>
-            <th class="text-right align-middle">Jumlah Pengeluaran (Rp)</th>
+            <th class=" text-center">Jumlah Pengeluaran (Rp)</th>
             {{-- <th>Nota</th> --}}
             {{-- @if(getRoleName() == 'staff') --}}
             <th class="text-center">Aksi</th>
