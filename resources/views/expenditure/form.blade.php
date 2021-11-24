@@ -48,12 +48,14 @@
 
                 @if(Request::is('*/create'))
                     options = {
+                        labelIdle: '<span class="filepond--label-action">Cari berkas di manajer file</span>',
                         acceptedFileTypes: ['image/png', 'image/jng', 'image/jpeg'],
                         maxFileSize: '500KB'
                     }
                 @else
                     imageUrl = "{{asset('images/'.$expenditure->note)}}"
                     options = {
+                        labelIdle: '<span class="filepond--label-action">Cari berkas di manajer file</span>',
                         acceptedFileTypes: ['image/png', 'image/jng', 'image/jpeg'],
                         maxFileSize: '500KB',
                         files: [{
