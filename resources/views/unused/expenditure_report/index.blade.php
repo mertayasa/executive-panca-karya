@@ -12,7 +12,7 @@
               @include('layouts.flash')
           </div>
           <div class="card-body">
-            <button class="btn btn-warning btn-icon icon-left float-right"><i class="fas fa-print"></i> Print Report</button>
+            <button class="btn btn-warning btn-icon icon-left float-right"><i class="fas fa-print"></i> Cetak Report</button>
         <section class="section mt-lg-5">
           <div class="section-body">
             <div class="invoice">

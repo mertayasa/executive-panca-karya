@@ -11,7 +11,7 @@
           <div class="card-header d-flex justify-content-end">
             {{-- <h4 class="text-center">Data Piutang</h4> --}}
             <div class="right">
-              <a href="{{route('receivable.print_form_r')}}" class="btn btn-success"> <i class="fas fa-print"></i> Print Piutang</a>
+              <a href="{{route('receivable.print_form_r')}}" class="btn btn-success"> <i class="fas fa-print"></i> Cetak Piutang</a>
               {{-- @if (getRoleName() == 'staff')
                 <a href="{{route('receivable.create')}}" class="btn btn-primary">Tambah Piutang</a>
               @endif --}}
@@ -50,7 +50,7 @@
 
     function fullPay(url, customerName, remaining){
       Swal.fire({
-          title: "Warning",
+          title:  "Peringatan",
           text: `Yakin melunasi hutang ${customerName} senilai ${remaining} ?`,
           icon: 'warning',
           showCancelButton: true,

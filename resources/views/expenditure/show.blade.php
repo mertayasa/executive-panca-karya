@@ -11,7 +11,7 @@
           <div class="card-header d-flex justify-content-between">
             <h4>Detail Pengeluaran</h4>
             {{-- <div class="right">
-              <button class="btn btn-warning btn-icon icon-left mr-3"><i class="fas fa-print"></i> Print Excel</button>
+              <button class="btn btn-warning btn-icon icon-left mr-3"><i class="fas fa-print"></i> Cetak Excel</button>
               @if (getRoleName() == 'staff')
                 <a href="{{route('expenditure.create')}}" class="btn btn-primary">Tambah Pendapatan</a>
               @endif

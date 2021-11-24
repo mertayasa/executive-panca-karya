@@ -17,7 +17,7 @@
                 {!! Form::select('filter_month', $monthly, $month_selected, ['class' => 'form-control', 'onchange' => 'updateTable(this.value)']) !!}
               </div>
               <div class="col-12 col-md-6 mt-3 mt-md-0">
-                <button class="btn btn-warning btn-icon icon-left float-right float-md-left py-1 py-md-2"><i class="fas fa-print"></i> Print Excel</button>
+                <button class="btn btn-warning btn-icon icon-left float-right float-md-left py-1 py-md-2"><i class="fas fa-print"></i> Cetak Excel</button>
               </div>
             </div>
         <section class="section mt-lg-5">

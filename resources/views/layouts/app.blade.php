@@ -58,8 +58,8 @@
   <script>
     function deleteModel(deleteUrl, tableId){
         Swal.fire({
-            title: "Warning",
-            text: "Yakin menghapus data karyawan?",
+            title:  "Peringatan",
+            text: "Yakin menghapus data ?",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#169b6b',

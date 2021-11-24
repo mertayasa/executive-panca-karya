@@ -69,7 +69,7 @@
                                                 <td style="text-align: center">{{$no++}}</td>
                                                 <td class="text-center">{{indonesianDate($expenditure->date)}}</td>
                                                 <td>{{$expenditure->expenditure_type->name}}</td>
-                                                <td class="text-right">{{$expenditure->amount}}</td>
+                                                <td class="text-right">{{formatPriceRaw($expenditure->amount)}}</td>
                                             </tr>
                                         @empty
                                             <tr>

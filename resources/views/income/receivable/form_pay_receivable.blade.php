@@ -105,7 +105,7 @@
 
     function fullPay(url, customerName, remaining){
       Swal.fire({
-          title: "Warning",
+          title:  "Peringatan",
           text: `Yakin melunasi hutang ${customerName} senilai ${remaining} ?`,
           icon: 'warning',
           showCancelButton: true,
