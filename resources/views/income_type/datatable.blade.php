@@ -1,5 +1,5 @@
 <table class="table table-hover table-striped" width="100%" id="expenseDatatable">
-    <thead>
+    <thead class="text-center">
         <tr>
             <th>No</th>
             <th>Jenis Pendapatan</th>
@@ -39,7 +39,8 @@
                     data: 'action',
                     name: 'action',
                     orderable: false,
-                    searchable: false
+                    searchable: false,
+                    
                 })
         @endif
 

@@ -52,7 +52,7 @@
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-stripped">
-                                    <thead>
+                                    <thead class="text-center">
                                         <tr>
                                             <th style="text-align: center">No</th>
                                             <th>Tanggal Pengeluaran</th>
@@ -69,7 +69,7 @@
                                                 <td style="text-align: center">{{$no++}}</td>
                                                 <td>{{indonesianDate($expenditure->date)}}</td>
                                                 <td>{{$expenditure->expenditure_type->name}}</td>
-                                                <td>{{$expenditure->amount}}</td>
+                                                <td class="text-right">{{$expenditure->amount}}</td>
                                             </tr>
                                         @empty
                                             <tr>

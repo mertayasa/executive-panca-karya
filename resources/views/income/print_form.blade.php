@@ -48,11 +48,11 @@
                                 <a href="{{route('income.print', [$request->start_date, $request->end_date])}}" class="btn btn-warning"> <i class="fas fa-print"></i> Cetak Pendapatan</a>
                             @endif
                         </div>
-                        <h4>Data Pendapatan {{indonesianDate($request->start_date)}} - {{indonesianDate($request->end_date)}}</h4>
+                        <h4 class="text-center">Data Pendapatan {{indonesianDate($request->start_date)}} - {{indonesianDate($request->end_date)}}</h4>
                         <div class="card-body">
-                            <div class="table-responsive">
+                            {{-- <div class="table-responsive"> --}}
                                 <table class="table table-stripped">
-                                    <thead>
+                                    <thead class="text-center" >
                                         <tr>
                                             <th>No</th>
                                             <th>Invoice</th>
@@ -77,7 +77,7 @@
                                                 <td>{{$income->customer->name}}</td>
                                                 <td>{{$income->income_type->name}}</td>
                                                 <td >{{$income->ket}}</td>
-                                                <td>{{$income->total}}</td>
+                                                <td class="text-right">{{$income->total}}</td>
                                                 {{-- <td>
                                                     <ol class="pl-3">
                                                         @foreach ($income->income_log as $log)
