@@ -31,9 +31,9 @@
             <thead>
                 <tr>
                     <th style="text-align: center">No</th>
-                    <th>Tanggal Pengeluaran</th>
-                    <th>Jenis Pengeluaran</th>
-                    <th>Total (Rp.)</th>
+                    <th style=" text-align: center;">Tanggal Pengeluaran</th>
+                    <th style=" text-align: center;">Jenis Pengeluaran</th>
+                    <th style=" text-align: center;">Total (Rp.)</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,7 +45,7 @@
                         <td style="text-align: center">{{$no++}}</td>
                         <td>{{indonesianDate($expenditure->date)}}</td>
                         <td>{{$expenditure->expenditure_type->name}}</td>
-                        <td>{{$expenditure->amount}}</td>
+                        <td style=" text-align: right;">{{$expenditure->amount}}</td>
                     </tr>
                 @empty
                     <tr>

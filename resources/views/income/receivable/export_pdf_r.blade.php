@@ -23,11 +23,11 @@
             <thead>
                 <tr>
                     <th style="text-align: center">No</th>
-                    <th>Invoice</th>
-                    <th>Tanggal Pendapatan </th>
-                    <th>Jenis Pendapatan </th>
-                    <th>Keterangan</th>
-                    <th>Total (Rp.)</th>
+                    <th style=" text-align: center;">Invoice</th>
+                    <th style=" text-align: center;">Tanggal Pendapatan </th>
+                    <th style=" text-align: center;">Jenis Pendapatan </th>
+                    <th style=" text-align: center;">Keterangan</th>
+                    <th style=" text-align: center;">Total (Rp.)</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,7 +37,7 @@
                 @forelse ($income_data as $income)
                     <tr>
                         <td style="text-align: center">{{$no++}}</td>
-                        <td>{{$income->invoice_no}}</td>
+                        <td style=" text-align: center;">{{$income->invoice_no}}</td>
                         <td>{{indonesianDate($income->date)}}</td>
                         <td>{{$income->income_type->name}}</td>
                         <td>{{$income->ket}}</td>

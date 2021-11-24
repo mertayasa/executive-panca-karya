@@ -28,16 +28,16 @@
     <div class="container">
         <h3><b>Data Pendapatan Tanggal {{indonesianDate($start_date)}} -  {{indonesianDate($end_date)}} </b></h3>
         <table>
-            <thead>
+            <thead  style=" text-align: center;">
                 <tr>
                     <th style="text-align: center">No</th>
-                    <th>Invoice</th>
-                    <th>Tanggal Pendapatan</th>
-                    <th>Tanggal Pelunasan</th>
-                    <th>Pelanggan</th>
-                    <th>Jenis Pendapatan</th>
-                    <th>Keterangan</th>
-                    <th>Total (Rp.)</th>
+                    <th style=" text-align: center;" >Invoice</th>
+                    <th style=" text-align: center;">Tanggal Pendapatan</th>
+                    <th style=" text-align: center;">Tanggal Pelunasan</th>
+                    <th style=" text-align: center;">Pelanggan</th>
+                    <th style=" text-align: center;">Jenis Pendapatan</th>
+                    <th style=" text-align: center;">Keterangan</th>
+                    <th style=" text-align: center;">Total (Rp.)</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,7 +47,7 @@
                 @forelse ($income_data as $income)
                     <tr>
                         <td style="text-align: center">{{$no++}}</td>
-                        <td>{{$income->invoice_no}}</td>
+                        <td style=" text-align: center;" >{{$income->invoice_no}}</td>
                         <td>{{indonesianDate($income->date)}}</td>
                         <td>{{indonesianDate($income->paid_date)}}</td>
                         <td>{{$income->customer->name}}</td>
@@ -92,6 +92,7 @@
             font-style: sans-serif;
             border-collapse: collapse;
         }
+      
 
         table, th, td{
             border: 1px solid black;
