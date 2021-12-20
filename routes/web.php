@@ -49,7 +49,8 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(['prefix' => 'profile', 'as' => 'profile.'], function () {
-        Route::get('edit', [UserController::class, 'edit'])->name('edit');
+        Route::get('{user}', [UserController::class, 'edit'])->name('edit');
+        Route::patch('update/{user}', [UserController::class, 'update'])->name('update');
     });
 
     Route::group(['prefix' => 'customer', 'as' => 'customer.'], function () {

@@ -27,6 +27,7 @@
         {{-- <a href="{{route('profile.edit')}}" class="dropdown-item has-icon text-white">
           Profile
         </a> --}}
+        <a class="dropdown-item has-icon text-white" href="{{ route('profile.edit', Auth::id()) }}">Profil</a>
         <a class="dropdown-item has-icon text-danger" href="{{ route('logout') }}"
             onclick="event.preventDefault();
                           document.getElementById('logout-form').submit();">

@@ -6,12 +6,13 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header d-flex justify-content-between">
-            <h4>Edit Profile</h4>
+            <h4>Edit Profil</h4>
             {{-- <a href="{{route('patient.create')}}" class="btn btn-primary">Tambah Registrasi</a> --}}
           </div>
           <div class="card-body">
             @include('layouts.flash')
-            {!! Form::open(['route' => 'customer.store']) !!}
+            @include('layouts.error_message')
+            {!! Form::model($user, ['route' => ['profile.update', $user->id], 'method' => 'patch']) !!}
             @include('profile.form')
             <div class="row mt-3" >
                 <div class="col-12" style="margin-top: 20px">

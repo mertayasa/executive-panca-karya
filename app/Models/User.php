@@ -43,6 +43,23 @@ class User extends Authenticatable
     ];
 
     public function staff(){
-        return $this->hasMany('App\Models\Staff', 'id_user');
+        return $this->hasOne('App\Models\Staff', 'id_user');
     }
+
+    public function getDateAttribute(){
+        return $this->staff->date;
+    }
+
+    public function getAddressAttribute(){
+        return $this->staff->address;
+    }
+
+    public function getGenderAttribute(){
+        return $this->staff->gender;
+    }
+
+    public function getTelpAttribute(){
+        return $this->staff->telp;
+    }
+
 }

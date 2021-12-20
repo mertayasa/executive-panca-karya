@@ -9,6 +9,14 @@ class Staff extends Model{
 
     use HasFactory;
 
+    protected $fillable = [
+        'id_user',
+        'date',
+        'gender',
+        'telp',
+        'address',
+    ];
+
     public $with = [
         'user'
     ];
